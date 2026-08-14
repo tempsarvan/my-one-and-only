@@ -1,5 +1,5 @@
 /**
- * 💖 Anniversary Web App Configuration - Cream & Dusty Rose Theme
+ * 💖 Anniversary Web App Configuration - Cream & Dusty Rose 3D Flower Theme
  */
 
 const ANNIVERSARY_CONFIG = {
@@ -17,9 +17,9 @@ const ANNIVERSARY_CONFIG = {
   // Names & Hero Titles
   partnerName: "My Favorite Person",
   heroTitle: "For My Favorite Person, <br><span>My Favorite Chapter.</span>",
-  heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness",
+  heroSubtitle: "Scroll to uncurl our 3D rose and reveal each falling petal chapter...",
 
-  // Timeline Stories (Scrapbook Cards)
+  // Timeline Stories (Displayed ON the falling 3D petals themselves!)
   timeline: [
     {
       monthNum: 1,

@@ -1,47 +1,31 @@
 /**
- * 💖 MY ONE AND ONLY - SOFT CREAM & DUSTY ROSE APPLICATION SCRIPT
- * Features: IntersectionObserver Scrollytelling Timeline, 3D Flip Cards,
- * Playful Dodging "No" Button, "Yes" Full-Screen Heart Explosion, Live Timers.
+ * 💖 MY ONE AND ONLY - 3D SCROLL FLOWER & FALLING PETAL TILE CARDS
+ * Features: Three.js 3D Blooming Rose, Scroll-Driven Petal Unfurling & Falling,
+ * Dynamic Fallen Petal Card Display Overlay, 3D Flip Cards, Playful Dodging No Button.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeader();
   initSpotifyWidget();
   initHeartParticles();
+  init3DFlowerScroll();
 
   // Timers
   initLiveTimer();
   initNextChapterTimer();
 
   // Render Content
-  renderTimeline();
   renderReasonsFlipCards();
   renderEnvelopes();
   renderCoupons();
 
   // Interactive Handlers
-  setupScrollytellingObserver();
   setupProposalInteractions();
   setupModalListeners();
 });
 
 /* --------------------------------------------------------------------------
-   1. Header Text & Spotify Widget
+   1. Spotify Player Widget
    -------------------------------------------------------------------------- */
-function initHeader() {
-  if (typeof ANNIVERSARY_CONFIG !== 'undefined') {
-    const heroTitle = document.getElementById('hero-title');
-    const heroSubtitle = document.getElementById('hero-subtitle');
-    
-    if (heroTitle && ANNIVERSARY_CONFIG.heroTitle) {
-      heroTitle.innerHTML = "For My Favorite Person, <br><span>My Favorite Chapter.</span>";
-    }
-    if (heroSubtitle && ANNIVERSARY_CONFIG.heroSubtitle) {
-      heroSubtitle.textContent = ANNIVERSARY_CONFIG.heroSubtitle;
-    }
-  }
-}
-
 function initSpotifyWidget() {
   const widget = document.getElementById('spotify-widget');
   const toggleBtn = document.getElementById('spotify-toggle-btn');
@@ -69,7 +53,186 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Live Relationship Timer & Next Chapter Countdown
+   2. Three.js 3D Blooming Rose & Scroll-Driven Falling Petals
+   -------------------------------------------------------------------------- */
+function init3DFlowerScroll() {
+  const canvas = document.getElementById('flower-canvas-3d');
+  const scrollContainer = document.getElementById('flower-scroll-container');
+  const heroOverlay = document.getElementById('hero-overlay');
+  const cardDisplay = document.getElementById('fallen-petal-card-display');
+
+  if (!canvas || !scrollContainer || typeof THREE === 'undefined') return;
+
+  // Scene, Camera, Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 0.5, 11);
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Lighting Setup
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
+  scene.add(ambientLight);
+
+  const roseLight = new THREE.DirectionalLight(0xd4a5a5, 1.2);
+  roseLight.position.set(5, 8, 5);
+  scene.add(roseLight);
+
+  const goldLight = new THREE.PointLight(0xffe082, 1.4, 25);
+  goldLight.position.set(-5, -2, 4);
+  scene.add(goldLight);
+
+  // Group for the 3D Flower
+  const flowerGroup = new THREE.Group();
+  scene.add(flowerGroup);
+
+  // Stem
+  const stemMat = new THREE.MeshStandardMaterial({ color: 0x4a5d4e, roughness: 0.6 });
+  const stemGeo = new THREE.CylinderGeometry(0.12, 0.15, 6, 16);
+  const stem = new THREE.Mesh(stemGeo, stemMat);
+  stem.position.y = -3.4;
+  flowerGroup.add(stem);
+
+  // Bud Center
+  const centerMat = new THREE.MeshStandardMaterial({ color: 0xe6b89c, roughness: 0.3, emissive: 0xd4a5a5, emissiveIntensity: 0.3 });
+  const centerGeo = new THREE.SphereGeometry(0.5, 32, 32);
+  const centerNode = new THREE.Mesh(centerGeo, centerMat);
+  centerNode.position.y = -0.2;
+  flowerGroup.add(centerNode);
+
+  // 5 Petals
+  const petals = [];
+  const petalCount = 5;
+  const petalMat = new THREE.MeshStandardMaterial({
+    color: 0xd4a5a5,
+    roughness: 0.35,
+    metalness: 0.1,
+    side: THREE.DoubleSide
+  });
+
+  function createPetalGeometry() {
+    const geom = new THREE.SphereGeometry(1.6, 24, 24, 0, Math.PI * 0.75, 0, Math.PI * 0.65);
+    geom.scale(1, 1.25, 0.35);
+    return geom;
+  }
+
+  for (let i = 0; i < petalCount; i++) {
+    const pivot = new THREE.Group();
+    pivot.position.set(0, -0.2, 0);
+
+    const petalMesh = new THREE.Mesh(createPetalGeometry(), petalMat);
+    petalMesh.position.set(0, 0.8, 0.5);
+
+    const angle = (i / petalCount) * Math.PI * 2;
+    pivot.rotation.y = angle;
+    pivot.rotation.x = 0.85; // closed bud initial state
+
+    pivot.add(petalMesh);
+    flowerGroup.add(pivot);
+
+    petals.push({
+      pivot: pivot,
+      mesh: petalMesh,
+      baseAngleY: angle,
+      monthIndex: i
+    });
+  }
+
+  flowerGroup.position.set(0, 0, 0);
+
+  // Resize Listener
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // Scroll Progress Logic
+  let scrollProgress = 0;
+
+  function updateScroll() {
+    const rect = scrollContainer.getBoundingClientRect();
+    const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    const currentScroll = Math.max(0, -rect.top);
+    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
+
+    // 1. Hero Overlay Opacity
+    if (heroOverlay) {
+      const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
+      heroOverlay.style.opacity = heroOpacity;
+    }
+
+    // 2. Petal Unfurling & Falling Stages (0.2 to 1.0)
+    if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
+      let activeMonthIndex = -1;
+
+      if (scrollProgress >= 0.2 && scrollProgress < 0.36) activeMonthIndex = 0;
+      else if (scrollProgress >= 0.36 && scrollProgress < 0.52) activeMonthIndex = 1;
+      else if (scrollProgress >= 0.52 && scrollProgress < 0.68) activeMonthIndex = 2;
+      else if (scrollProgress >= 0.68 && scrollProgress < 0.84) activeMonthIndex = 3;
+      else if (scrollProgress >= 0.84) activeMonthIndex = 4;
+
+      if (activeMonthIndex >= 0 && cardDisplay) {
+        const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
+        document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
+        document.getElementById('petal-card-title').textContent = data.title;
+        document.getElementById('petal-card-date').textContent = data.date;
+        document.getElementById('petal-card-text').textContent = data.story;
+        document.getElementById('petal-card-img').src = data.image;
+
+        cardDisplay.classList.add('active');
+
+        // Click fallen petal card to open modal
+        cardDisplay.onclick = () => {
+          triggerConfetti();
+          openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
+        };
+      } else if (cardDisplay) {
+        cardDisplay.classList.remove('active');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateScroll);
+  updateScroll();
+
+  // Animation Loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Idle rotation
+    flowerGroup.rotation.y += 0.003;
+
+    // Petal position mapping driven by scrollProgress
+    petals.forEach((p, i) => {
+      const petalStageStart = 0.2 + (i * 0.16);
+
+      if (scrollProgress < 0.2) {
+        // Phase 1: Uncurling from closed rosebud to bloom
+        const unfurlAngle = 0.85 - (scrollProgress * 4.25);
+        p.pivot.rotation.x = unfurlAngle;
+        p.pivot.position.set(0, -0.2, 0);
+      } else if (scrollProgress >= petalStageStart) {
+        // Phase 2: Petal i detaches and falls gracefully
+        const fallFactor = (scrollProgress - petalStageStart) / 0.16;
+        p.pivot.position.y = -0.2 - (fallFactor * 4);
+        p.pivot.position.x = Math.sin(Date.now() * 0.002 + i) * 0.6;
+        p.pivot.rotation.z = Math.cos(Date.now() * 0.0015 + i) * 0.3;
+      }
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+/* --------------------------------------------------------------------------
+   3. Live Relationship Timers
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -128,63 +291,8 @@ function initNextChapterTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Scrollytelling IntersectionObserver (Blur-in & Slide-Up Reveal)
+   4. Render 3D Flip Cards, Envelopes & Coupons
    -------------------------------------------------------------------------- */
-function setupScrollytellingObserver() {
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -80px 0px',
-    threshold: 0.15
-  };
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.timeline-card').forEach((card) => {
-    observer.observe(card);
-  });
-}
-
-/* --------------------------------------------------------------------------
-   4. Render Timeline, 3D Flip Cards, Envelopes & Coupons
-   -------------------------------------------------------------------------- */
-function renderTimeline() {
-  const container = document.getElementById('timeline-grid');
-  if (!container || typeof ANNIVERSARY_CONFIG === 'undefined') return;
-
-  container.innerHTML = '';
-
-  ANNIVERSARY_CONFIG.timeline.forEach((item) => {
-    const card = document.createElement('div');
-    card.className = 'timeline-card';
-    card.innerHTML = `
-      <div class="card-img-wrapper">
-        <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
-        <span class="card-badge">Chapter 0${item.monthNum}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-date">${item.date}</div>
-        <h3 class="card-title">${item.title}</h3>
-        <div class="card-subtitle">${item.subtitle}</div>
-        <p class="card-text">${item.story}</p>
-      </div>
-    `;
-
-    card.addEventListener('click', () => {
-      triggerConfetti();
-      openModal('💖', item.title, `${item.subtitle}\n(${item.date})\n\n${item.story}`);
-    });
-
-    container.appendChild(card);
-  });
-}
-
 function renderReasonsFlipCards() {
   const container = document.getElementById('reasons-flip-grid');
   if (!container || typeof ANNIVERSARY_CONFIG === 'undefined') return;
@@ -336,7 +444,7 @@ function setupProposalInteractions() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Particle Canvas & Confetti Helpers
+   6. Canvas Heart Background Particles & Confetti
    -------------------------------------------------------------------------- */
 function initHeartParticles() {
   const canvas = document.getElementById('particle-canvas');
