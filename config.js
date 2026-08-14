@@ -4,9 +4,15 @@
  */
 
 const ANNIVERSARY_CONFIG = {
-  // Relationship Start Date (Year, Month [0-11], Day, Hour, Minute)
-  // March 15, 2026 represents 5 months from August 15, 2026
+  // Relationship Start Date (March 15, 2026 represents 5 months from August 15, 2026)
   startDate: new Date(2026, 2, 15, 0, 0, 0),
+
+  // Next Milestone Date: September 15th, 2026
+  nextChapterDate: new Date(2026, 8, 15, 0, 0, 0),
+
+  // Spotify Player Configuration (Lana Del Rey)
+  spotifyPlaylistUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6XceWOW8XFb?utm_source=generator&theme=0",
+  spotifyTrackName: "Lana Del Rey - Young and Beautiful",
 
   // Names & Main Title
   partnerName: "My Dearest",

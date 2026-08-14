@@ -1,40 +1,35 @@
 /**
- * 💖 MY ONE AND ONLY - 5TH MONTH ANNIVERSARY APPLICATION SCRIPT
- * Features: Floating Particle Canvas, Live Counter, Story Timeline,
- * "Open When..." Envelope Modals, Coupon Redemption with Confetti, Reason Generator.
+ * 💖 MY ONE AND ONLY - ULTRA-PREMIUM 5TH MONTH ANNIVERSARY APP SCRIPT
+ * Features: Three.js Scroll-Driven 3D Flower Unraveling & Petal Drop,
+ * Top-Right Lana Del Rey Glass Spotify Widget, Sept 15 Countdown, Live Timer,
+ * Envelopes, Coupons, and Heart Reason Generator.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Header Text from Config
+  // Initialize Header Text & Spotify Widget
   initHeader();
+  initSpotifyWidget();
 
-  // Initialize Canvas Heart Particle Effect
+  // Initialize Canvas Heart Background & 3D Flower Unraveling
   initHeartParticles();
+  init3DFlower();
 
-  // Initialize Live Relationship Timer
+  // Initialize Live Timers (5-Month Timer & Next Sept 15th Countdown)
   initLiveTimer();
+  initNextChapterTimer();
 
-  // Render Story Timeline Cards
+  // Render Core Sections
   renderTimeline();
-
-  // Render "Open When..." Envelopes
   renderEnvelopes();
-
-  // Render Redeemable Coupons
   renderCoupons();
 
-  // Setup Reasons Why I Love You Generator
+  // Setup Interaction Handlers
   setupReasonGenerator();
-
-  // Setup Modal Listeners
   setupModalListeners();
-
-  // Setup Audio Control
-  setupAudioPlayer();
 });
 
 /* --------------------------------------------------------------------------
-   1. Header Text Initialization
+   1. Header & Top-Right Spotify Widget
    -------------------------------------------------------------------------- */
 function initHeader() {
   if (typeof ANNIVERSARY_CONFIG !== 'undefined') {
@@ -46,8 +41,174 @@ function initHeader() {
   }
 }
 
+function initSpotifyWidget() {
+  const widget = document.getElementById('spotify-widget');
+  const toggleBtn = document.getElementById('spotify-toggle-btn');
+
+  if (!widget || !toggleBtn) return;
+
+  toggleBtn.addEventListener('click', () => {
+    widget.classList.toggle('collapsed');
+    const arrow = toggleBtn.querySelector('.btn-toggle-spotify');
+    if (arrow) {
+      arrow.textContent = widget.classList.contains('collapsed') ? '▲' : '▼';
+    }
+  });
+}
+
 /* --------------------------------------------------------------------------
-   2. Live Relationship Timer
+   2. Three.js 3D Scroll-Driven Blooming Rose & Petal Drop Scene
+   -------------------------------------------------------------------------- */
+function init3DFlower() {
+  const canvas = document.getElementById('flower-canvas');
+  const trackSection = document.getElementById('flower-track-section');
+  if (!canvas || !trackSection || typeof THREE === 'undefined') return;
+
+  // Scene, Camera, Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 1, 12);
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+  scene.add(ambientLight);
+
+  const mainLight = new THREE.DirectionalLight(0xff758f, 1.2);
+  mainLight.position.set(5, 10, 7);
+  scene.add(mainLight);
+
+  const goldLight = new THREE.PointLight(0xffe082, 1.5, 20);
+  goldLight.position.set(-4, -2, 5);
+  scene.add(goldLight);
+
+  // Group for the 3D Flower
+  const flowerGroup = new THREE.Group();
+  scene.add(flowerGroup);
+
+  // 1. Stem
+  const stemMat = new THREE.MeshStandardMaterial({ color: 0x1b4332, roughness: 0.6 });
+  const stemGeo = new THREE.CylinderGeometry(0.12, 0.15, 6, 16);
+  const stem = new THREE.Mesh(stemGeo, stemMat);
+  stem.position.y = -3.5;
+  flowerGroup.add(stem);
+
+  // 2. Center Bud Receptacle
+  const centerMat = new THREE.MeshStandardMaterial({ 
+    color: 0xffe082, 
+    emissive: 0xffb703,
+    emissiveIntensity: 0.4,
+    roughness: 0.3 
+  });
+  const centerGeo = new THREE.SphereGeometry(0.5, 32, 32);
+  const centerNode = new THREE.Mesh(centerGeo, centerMat);
+  centerNode.position.y = -0.3;
+  flowerGroup.add(centerNode);
+
+  // 3. Create 5 Distinct Rose Petals
+  const petals = [];
+  const petalCount = 5;
+  const petalMat = new THREE.MeshStandardMaterial({
+    color: 0xff4d6d,
+    roughness: 0.35,
+    metalness: 0.1,
+    side: THREE.DoubleSide
+  });
+
+  // Create curved petal geometry
+  function createPetalGeometry() {
+    const geom = new THREE.SphereGeometry(1.6, 24, 24, 0, Math.PI * 0.7, 0, Math.PI * 0.6);
+    geom.scale(1, 1.3, 0.3);
+    return geom;
+  }
+
+  for (let i = 0; i < petalCount; i++) {
+    const petalPivot = new THREE.Group();
+    petalPivot.position.set(0, -0.2, 0);
+
+    const petalMesh = new THREE.Mesh(createPetalGeometry(), petalMat);
+    // Offset petal relative to pivot
+    petalMesh.position.set(0, 0.8, 0.5);
+
+    // Initial closed rosebud angle
+    const angle = (i / petalCount) * Math.PI * 2;
+    petalPivot.rotation.y = angle;
+    petalPivot.rotation.x = 0.8; // Tightly closed
+
+    petalPivot.add(petalMesh);
+    flowerGroup.add(petalPivot);
+
+    petals.push({
+      pivot: petalPivot,
+      mesh: petalMesh,
+      baseAngleY: angle,
+      floatY: 0,
+      floatX: 0,
+      isDetached: false
+    });
+  }
+
+  // Position Flower Group
+  flowerGroup.position.set(0, 0.5, 0);
+
+  // Responsive Resize
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // Scroll Progress Listener
+  let scrollProgress = 0;
+
+  function updateScrollProgress() {
+    const rect = trackSection.getBoundingClientRect();
+    const totalScrollable = trackSection.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    const currentScroll = Math.max(0, -rect.top);
+    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
+  }
+
+  window.addEventListener('scroll', updateScrollProgress);
+  updateScrollProgress();
+
+  // Render & Animation Loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Smooth flower idle rotation
+    flowerGroup.rotation.y += 0.005;
+
+    // Unfurling math driven by scrollProgress (0 to 1)
+    petals.forEach((p, index) => {
+      if (scrollProgress < 0.75) {
+        // Phase 1: Uncurling & blooming in place
+        p.isDetached = false;
+        const unfurlAngle = 0.8 - (scrollProgress * 1.1); // opens from 0.8 rad down to -0.3 rad
+        p.pivot.rotation.x = unfurlAngle;
+        p.pivot.position.set(0, -0.2, 0);
+      } else {
+        // Phase 2: Petals detach and float down
+        p.isDetached = true;
+        const detachFactor = (scrollProgress - 0.75) / 0.25; // 0 to 1
+        p.pivot.position.y = -0.2 - (detachFactor * (3 + index * 1.5));
+        p.pivot.position.x = Math.sin(Date.now() * 0.002 + index) * 0.8;
+        p.pivot.rotation.z = Math.cos(Date.now() * 0.0015 + index) * 0.4;
+      }
+    });
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+}
+
+/* --------------------------------------------------------------------------
+   3. Live Relationship Timers (5-Month Timer & Sept 15th Countdown)
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -77,8 +238,36 @@ function initLiveTimer() {
   setInterval(updateTimer, 1000);
 }
 
+function initNextChapterTimer() {
+  const daysEl = document.getElementById('next-days');
+  const hoursEl = document.getElementById('next-hours');
+  const minutesEl = document.getElementById('next-minutes');
+  const secondsEl = document.getElementById('next-seconds');
+
+  if (!daysEl || typeof ANNIVERSARY_CONFIG === 'undefined') return;
+
+  function updateNextTimer() {
+    const now = new Date();
+    const target = ANNIVERSARY_CONFIG.nextChapterDate;
+    const diff = Math.max(0, target - now);
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minutesEl.textContent = String(minutes).padStart(2, '0');
+    secondsEl.textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateNextTimer();
+  setInterval(updateNextTimer, 1000);
+}
+
 /* --------------------------------------------------------------------------
-   3. Floating Canvas Particles (Hearts & Stars)
+   4. Floating Canvas Particles
    -------------------------------------------------------------------------- */
 function initHeartParticles() {
   const canvas = document.getElementById('particle-canvas');
@@ -94,7 +283,7 @@ function initHeartParticles() {
   });
 
   const particles = [];
-  const particleCount = 40;
+  const particleCount = 45;
 
   class Particle {
     constructor() {
@@ -130,30 +319,13 @@ function initHeartParticles() {
       ctx.globalAlpha = this.opacity;
       ctx.fillStyle = this.color;
 
-      // Draw Heart Shape
       ctx.beginPath();
       const topCurveHeight = this.size * 0.3;
       ctx.moveTo(0, topCurveHeight);
-      ctx.bezierCurveTo(
-        0, 0, 
-        -this.size / 2, 0, 
-        -this.size / 2, topCurveHeight
-      );
-      ctx.bezierCurveTo(
-        -this.size / 2, (this.size + topCurveHeight) / 2, 
-        0, this.size, 
-        0, this.size
-      );
-      ctx.bezierCurveTo(
-        0, this.size, 
-        this.size / 2, (this.size + topCurveHeight) / 2, 
-        this.size / 2, topCurveHeight
-      );
-      ctx.bezierCurveTo(
-        this.size / 2, 0, 
-        0, 0, 
-        0, topCurveHeight
-      );
+      ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+      ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+      ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+      ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
       ctx.closePath();
       ctx.fill();
       ctx.restore();
@@ -177,7 +349,7 @@ function initHeartParticles() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Render Story Timeline
+   5. Render Timeline, Envelopes & Coupons
    -------------------------------------------------------------------------- */
 function renderTimeline() {
   const container = document.getElementById('timeline-grid');
@@ -191,7 +363,7 @@ function renderTimeline() {
     card.innerHTML = `
       <div class="card-img-wrapper">
         <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
-        <span class="card-badge">Month 0${item.monthNum}</span>
+        <span class="card-badge">Petal 0${item.monthNum} • Month 0${item.monthNum}</span>
       </div>
       <div class="card-body">
         <div class="card-date">${item.date}</div>
@@ -201,19 +373,15 @@ function renderTimeline() {
       </div>
     `;
 
-    // Click card to open full memory modal
     card.addEventListener('click', () => {
       triggerConfetti();
-      openModal('💖', item.title, `${item.subtitle}\n(${item.date})\n\n${item.story}`);
+      openModal('🌹', item.title, `${item.subtitle}\n(${item.date})\n\n${item.story}`);
     });
 
     container.appendChild(card);
   });
 }
 
-/* --------------------------------------------------------------------------
-   5. Render "Open When..." Envelopes
-   -------------------------------------------------------------------------- */
 function renderEnvelopes() {
   const container = document.getElementById('envelopes-grid');
   if (!container || typeof ANNIVERSARY_CONFIG === 'undefined') return;
@@ -238,9 +406,6 @@ function renderEnvelopes() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   6. Render Love Coupons
-   -------------------------------------------------------------------------- */
 function renderCoupons() {
   const container = document.getElementById('coupons-grid');
   if (!container || typeof ANNIVERSARY_CONFIG === 'undefined') return;
@@ -290,7 +455,7 @@ function renderCoupons() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Reasons Why I Love You Generator
+   6. Reasons Generator & Modals
    -------------------------------------------------------------------------- */
 function setupReasonGenerator() {
   const btn = document.getElementById('btn-generate-reason');
@@ -316,9 +481,6 @@ function setupReasonGenerator() {
   });
 }
 
-/* --------------------------------------------------------------------------
-   8. Modal Handlers
-   -------------------------------------------------------------------------- */
 function setupModalListeners() {
   const overlay = document.getElementById('modal-overlay');
   const closeBtn = document.getElementById('modal-close');
@@ -358,39 +520,11 @@ function closeModal() {
   if (overlay) overlay.classList.remove('active');
 }
 
-/* --------------------------------------------------------------------------
-   9. Audio Player setup
-   -------------------------------------------------------------------------- */
-function setupAudioPlayer() {
-  const toggleBtn = document.getElementById('audio-toggle');
-  const audio = document.getElementById('bg-audio');
-
-  if (!toggleBtn || !audio) return;
-
-  toggleBtn.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play().then(() => {
-        toggleBtn.classList.add('playing');
-        toggleBtn.textContent = '🎶';
-      }).catch((err) => {
-        console.log('Audio playback prevented:', err);
-      });
-    } else {
-      audio.pause();
-      toggleBtn.classList.remove('playing');
-      toggleBtn.textContent = '🎵';
-    }
-  });
-}
-
-/* --------------------------------------------------------------------------
-   10. Confetti Burst Helper
-   -------------------------------------------------------------------------- */
 function triggerConfetti() {
   if (typeof confetti === 'function') {
     confetti({
-      particleCount: 70,
-      spread: 70,
+      particleCount: 75,
+      spread: 75,
       origin: { y: 0.6 },
       colors: ['#ff4d6d', '#ff758f', '#ffe082', '#ffffff']
     });

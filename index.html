@@ -3,38 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My One & Only - Happy 5th Month Anniversary! 💖</title>
-  <meta name="description" content="A personalized 5-month anniversary web application celebrating our journey together.">
+  <title>My One & Only - 5th Month Anniversary Experience 💖</title>
+  <meta name="description" content="An ultra-premium 5-month anniversary web experience featuring a 3D blooming rose, Lana Del Rey Spotify soundtrack, and interactive journey.">
   
-  <!-- Google Fonts: Playfair Display & Outfit -->
+  <!-- Google Fonts: Cormorant Garamond (Serif) & Outfit (Sans-Serif) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- Floating Particle Canvas Background -->
+  <!-- Background Particle Canvas -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Audio Toggle Button -->
-  <button id="audio-toggle" class="audio-fab" aria-label="Toggle Romantic Ambient Music" title="Toggle Music">🎵</button>
-  <audio id="bg-audio" loop preload="auto">
-    <!-- Ambient royalty free soft piano audio -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-romantic-piano-112677.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Top-Right Spotify Player Widget (Lana Del Rey - Glass Classic UI) -->
+  <div class="spotify-widget-fixed" id="spotify-widget">
+    <div class="spotify-widget-header" id="spotify-toggle-btn">
+      <div class="spotify-info">
+        <div class="vinyl-disc">🎵</div>
+        <div class="spotify-title-text">
+          <span class="spotify-artist">Lana Del Rey</span>
+          <span class="spotify-sub">Anniversary Playlist</span>
+        </div>
+      </div>
+      <button class="btn-toggle-spotify" aria-label="Toggle Spotify Player">▼</button>
+    </div>
+    <div class="spotify-iframe-container" id="spotify-container">
+      <iframe 
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6XceWOW8XFb?utm_source=generator&theme=0" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
 
-  <!-- Main App Container -->
-  <div class="container">
-
-    <!-- Hero Section & Live Counter -->
-    <section class="hero-section" id="hero">
-      <div class="hero-content">
-        <div class="badge">✨ 5 Months of Pure Happiness ✨</div>
-        <h1 class="hero-title" id="hero-title">Happy 5-Month Anniversary! 💖</h1>
-        <p class="hero-subtitle" id="hero-subtitle">5 Months of Laughs, Late Night Calls & Endless Happiness</p>
+  <!-- 3D Scroll-Driven Blooming Flower Track Section -->
+  <div class="flower-track-section" id="flower-track-section">
+    <div class="flower-sticky-viewport">
+      <canvas id="flower-canvas"></canvas>
+      <div class="flower-overlay-content">
+        <div class="badge">✨ 5 Months Together ✨</div>
+        <h1 class="flower-hero-title" id="hero-title">Happy 5-Month Anniversary! 💖</h1>
+        <p class="flower-hero-sub" id="hero-subtitle">5 Months of Laughs, Late Night Calls & Endless Happiness</p>
+        <div class="scroll-indicator">
+          <span>🌹 Scroll down to unravel our flower</span>
+        </div>
 
         <!-- Live Relationship Counter -->
         <div class="timer-container">
@@ -58,17 +74,52 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- Timeline Section ("Our 5-Month Journey") -->
+  <!-- Main Content Container -->
+  <div class="container">
+
+    <!-- Timeline Section ("Our 5-Month Journey Revealed by Petals") -->
     <section id="timeline">
       <div class="section-title">
-        <div class="badge">📖 Our Story</div>
+        <div class="badge">🌹 Petal Journey</div>
         <h2>Our 5-Month Journey 💖</h2>
-        <p>A look back at each month that brought us closer together</p>
+        <p>Each unraveled petal reveals a month in our story together</p>
       </div>
       <div class="timeline-grid" id="timeline-grid">
-        <!-- Rendered dynamically via JavaScript from config.js -->
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Next Chapter Milestone Countdown Section (September 15th) -->
+    <section id="next-chapter">
+      <div class="section-title">
+        <div class="badge">⏳ The Journey Continues</div>
+        <h2>Countdown to Our Next Chapter ✨</h2>
+        <p>Counting down to September 15th — that's when our next milestone begins!</p>
+      </div>
+      <div class="next-chapter-card">
+        <h3 class="next-chapter-title">September 15th Milestone</h3>
+        <p class="next-chapter-sub">That's when our next chapter begins... ✨</p>
+        <div class="timer-grid">
+          <div class="timer-card">
+            <div class="timer-value" id="next-days">00</div>
+            <div class="timer-label">Days</div>
+          </div>
+          <div class="timer-card">
+            <div class="timer-value" id="next-hours">00</div>
+            <div class="timer-label">Hours</div>
+          </div>
+          <div class="timer-card">
+            <div class="timer-value" id="next-minutes">00</div>
+            <div class="timer-label">Minutes</div>
+          </div>
+          <div class="timer-card">
+            <div class="timer-value" id="next-seconds">00</div>
+            <div class="timer-label">Seconds</div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -80,7 +131,7 @@
         <p>Tap an envelope whenever you need these words the most</p>
       </div>
       <div class="envelopes-grid" id="envelopes-grid">
-        <!-- Rendered dynamically via JavaScript from config.js -->
+        <!-- Rendered dynamically via JavaScript -->
       </div>
     </section>
 
@@ -92,7 +143,7 @@
         <p>Click redeem anytime you'd like to use one of your coupons!</p>
       </div>
       <div class="coupons-grid" id="coupons-grid">
-        <!-- Rendered dynamically via JavaScript from config.js -->
+        <!-- Rendered dynamically via JavaScript -->
       </div>
     </section>
 
@@ -120,7 +171,7 @@
 
   </div>
 
-  <!-- Reusable Modal Dialog Overlay for Letters & Memory Reading -->
+  <!-- Reusable Modal Dialog Overlay for Letters & Story Reading -->
   <div class="modal-overlay" id="modal-overlay">
     <div class="modal-box" role="dialog" aria-modal="true">
       <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
@@ -132,7 +183,8 @@
     </div>
   </div>
 
-  <!-- Canvas Confetti CDN -->
+  <!-- External Libraries: Three.js for 3D Flower & Canvas Confetti CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   
   <!-- Config & Main App Scripts -->

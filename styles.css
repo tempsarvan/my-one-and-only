@@ -1,35 +1,37 @@
 /* ==========================================================================
-   💖 MY ONE AND ONLY - 5TH MONTH ANNIVERSARY APP STYLESHEET
-   Aesthetics: Romantic Dark Mode, Rose & Champagne Gold, Glassmorphism, Animations
+   💖 MY ONE AND ONLY - ULTRA-PREMIUM 5TH MONTH ANNIVERSARY APP STYLESHEET
+   Features: Glass Spotify Player, 3D Scroll Flower Track, Luxury Typography,
+   Petal Reveal Journey, Next Chapter September 15th Countdown.
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. Design Tokens & Root Variables
    -------------------------------------------------------------------------- */
 :root {
-  --bg-dark: #0b0512;
-  --bg-gradient: linear-gradient(135deg, #0b0512 0%, #1c0a2a 35%, #2c0b36 70%, #12041d 100%);
+  --bg-dark: #07030b;
+  --bg-gradient: linear-gradient(135deg, #07030b 0%, #160724 35%, #270830 70%, #0e0317 100%);
   --rose-primary: #ff4d6d;
   --rose-light: #ff758f;
   --rose-deep: #c9184a;
+  --rose-velvet: #800f2f;
   --champagne: #ffe082;
-  --champagne-glow: rgba(255, 224, 130, 0.4);
-  --text-main: #f8f9fa;
-  --text-muted: #d0c7d7;
+  --champagne-glow: rgba(255, 224, 130, 0.5);
+  --text-main: #faf9fb;
+  --text-muted: #d5c8dc;
   --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-hover: rgba(255, 255, 255, 0.09);
-  --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-hover: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --radius-lg: 24px;
-  --radius-md: 16px;
-  --radius-sm: 10px;
-  --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --------------------------------------------------------------------------
-   2. Reset & General Setup
+   2. Reset & Base Layout
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -53,13 +55,16 @@ body {
   position: relative;
 }
 
-/* Background Canvas for Floating Hearts */
-#particle-canvas {
+/* Film-grain texture overlay */
+body::after {
+  content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
   pointer-events: none;
   z-index: 1;
 }
@@ -73,129 +78,245 @@ body {
 }
 
 section {
-  padding: 80px 0;
+  padding: 90px 0;
 }
 
 /* Typography Utilities */
 h1, h2, h3, .serif-font {
   font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .section-title {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .section-title h2 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: var(--text-main);
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #ffffff 30%, var(--rose-light) 100%);
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--rose-light) 70%, var(--champagne) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.25));
 }
 
 .section-title p {
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 300;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 16px;
+  padding: 6px 18px;
   border-radius: 50px;
   background: rgba(255, 77, 109, 0.15);
-  border: 1px solid rgba(255, 77, 109, 0.3);
+  border: 1px solid rgba(255, 77, 109, 0.35);
   color: var(--rose-light);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   margin-bottom: 16px;
 }
 
 /* --------------------------------------------------------------------------
-   3. Audio Control Floating Button
+   3. Top-Right Spotify Player (Glass & Classic UI)
    -------------------------------------------------------------------------- */
-.audio-fab {
+.spotify-widget-fixed {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 99;
-  background: rgba(255, 77, 109, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--rose-light);
-  color: #fff;
-  width: 54px;
-  height: 54px;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: 320px;
+  background: rgba(13, 7, 20, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 77, 109, 0.2);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.spotify-widget-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.spotify-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vinyl-disc {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
+  background: radial-gradient(circle, #333 30%, #111 70%, #000 100%);
+  border: 2px solid var(--champagne);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 0.75rem;
+  animation: spin-vinyl 4s linear infinite;
+  box-shadow: 0 0 10px var(--champagne-glow);
+}
+
+@keyframes spin-vinyl {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spotify-title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.spotify-artist {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--rose-light);
+  letter-spacing: 0.5px;
+}
+
+.spotify-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.btn-toggle-spotify {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-  transition: var(--transition-smooth);
+  padding: 4px;
+  transition: color 0.2s;
 }
 
-.audio-fab:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
+.btn-toggle-spotify:hover {
+  color: var(--champagne);
 }
 
-.audio-fab.playing {
-  animation: pulse-ring 2s infinite;
+.spotify-iframe-container {
+  padding: 8px;
+  max-height: 160px;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  overflow: hidden;
 }
 
-@keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.6); }
-  70% { box-shadow: 0 0 0 16px rgba(255, 77, 109, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+.spotify-widget-fixed.collapsed .spotify-iframe-container {
+  max-height: 0;
+  padding: 0;
+  opacity: 0;
+}
+
+.spotify-iframe-container iframe {
+  width: 100%;
+  height: 152px;
+  border: none;
+  border-radius: var(--radius-sm);
 }
 
 /* --------------------------------------------------------------------------
-   4. Hero Section & Live Counter
+   4. 3D Scroll-Driven Blooming Flower Track
    -------------------------------------------------------------------------- */
-.hero-section {
-  min-height: 90vh;
+.flower-track-section {
+  position: relative;
+  height: 250vh; /* Scroll length for uncurling animation */
+}
+
+.flower-sticky-viewport {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+}
+
+#flower-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.flower-overlay-content {
+  position: relative;
+  z-index: 3;
   text-align: center;
-  padding-top: 60px;
+  max-width: 750px;
+  padding: 0 20px;
+  pointer-events: none;
 }
 
-.hero-content {
-  max-width: 800px;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  line-height: 1.2;
+.flower-hero-title {
+  font-size: 4rem;
+  line-height: 1.1;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #ffffff 20%, var(--rose-light) 60%, var(--champagne) 100%);
+  background: linear-gradient(135deg, #ffffff 10%, var(--rose-light) 50%, var(--champagne) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.3));
+  filter: drop-shadow(0 6px 20px rgba(255, 77, 109, 0.4));
 }
 
-.hero-subtitle {
-  font-size: 1.25rem;
+.flower-hero-sub {
+  font-size: 1.3rem;
   color: var(--text-muted);
-  margin-bottom: 40px;
+  font-weight: 300;
+  margin-bottom: 30px;
 }
 
-/* Timer Grid */
+.scroll-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 24px;
+  background: rgba(13, 7, 20, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--rose-light);
+  border-radius: 50px;
+  color: var(--rose-light);
+  font-size: 0.95rem;
+  font-weight: 500;
+  animation: bounce-slow 2s infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+/* --------------------------------------------------------------------------
+   5. Live Relationship Timer Cards
+   -------------------------------------------------------------------------- */
 .timer-container {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: 36px 24px;
+  padding: 36px 28px;
   box-shadow: var(--glass-shadow);
-  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .timer-grid {
@@ -205,10 +326,10 @@ h1, h2, h3, .serif-font {
 }
 
 .timer-card {
-  background: rgba(13, 7, 20, 0.5);
+  background: rgba(11, 5, 18, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 20px 12px;
+  padding: 22px 12px;
   text-align: center;
   transition: var(--transition-smooth);
 }
@@ -216,21 +337,21 @@ h1, h2, h3, .serif-font {
 .timer-card:hover {
   border-color: var(--rose-light);
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+  box-shadow: 0 12px 25px rgba(255, 77, 109, 0.25);
 }
 
 .timer-value {
   font-family: var(--font-serif);
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 700;
   color: var(--champagne);
   line-height: 1;
   margin-bottom: 6px;
-  text-shadow: 0 0 10px var(--champagne-glow);
+  text-shadow: 0 0 15px var(--champagne-glow);
 }
 
 .timer-label {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -238,12 +359,12 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   5. Timeline Section ("Our 5-Month Journey")
+   6. Petal Reveal Timeline Section
    -------------------------------------------------------------------------- */
 .timeline-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 28px;
+  gap: 32px;
 }
 
 .timeline-card {
@@ -257,18 +378,19 @@ h1, h2, h3, .serif-font {
   box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .timeline-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255, 77, 109, 0.4);
-  box-shadow: 0 20px 40px rgba(255, 77, 109, 0.2);
+  transform: translateY(-10px);
+  border-color: rgba(255, 77, 109, 0.5);
+  box-shadow: 0 25px 45px rgba(255, 77, 109, 0.25);
 }
 
 .card-img-wrapper {
   position: relative;
   width: 100%;
-  height: 220px;
+  height: 240px;
   overflow: hidden;
 }
 
@@ -287,18 +409,18 @@ h1, h2, h3, .serif-font {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(13, 7, 20, 0.75);
+  background: rgba(13, 7, 20, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--rose-light);
-  color: var(--rose-light);
+  border: 1px solid var(--champagne);
+  color: var(--champagne);
   font-size: 0.8rem;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 4px 14px;
   border-radius: 50px;
 }
 
 .card-body {
-  padding: 24px;
+  padding: 26px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -312,7 +434,7 @@ h1, h2, h3, .serif-font {
 }
 
 .card-title {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: var(--text-main);
   margin-bottom: 8px;
 }
@@ -327,11 +449,39 @@ h1, h2, h3, .serif-font {
 .card-text {
   font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* --------------------------------------------------------------------------
-   6. "Open When..." Sealed Digital Envelopes
+   7. "Next Chapter" Milestone Countdown (September 15th)
+   -------------------------------------------------------------------------- */
+.next-chapter-card {
+  background: linear-gradient(145deg, rgba(255, 77, 109, 0.12), rgba(13, 7, 20, 0.7));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--champagne);
+  border-radius: var(--radius-lg);
+  padding: 44px 32px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 224, 130, 0.2);
+  margin-top: 20px;
+}
+
+.next-chapter-title {
+  font-size: 2.5rem;
+  color: var(--champagne);
+  margin-bottom: 10px;
+}
+
+.next-chapter-sub {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* --------------------------------------------------------------------------
+   8. Envelopes & Coupons
    -------------------------------------------------------------------------- */
 .envelopes-grid {
   display: grid;
@@ -342,37 +492,18 @@ h1, h2, h3, .serif-font {
 .envelope-card {
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 32px 24px;
   text-align: center;
   cursor: pointer;
   transition: var(--transition-smooth);
-  position: relative;
-  overflow: hidden;
-}
-
-.envelope-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--rose-primary), var(--champagne));
-  opacity: 0;
-  transition: opacity 0.3s;
 }
 
 .envelope-card:hover {
   transform: translateY(-6px) scale(1.02);
   border-color: var(--rose-light);
   box-shadow: 0 15px 30px rgba(255, 77, 109, 0.25);
-}
-
-.envelope-card:hover::before {
-  opacity: 1;
 }
 
 .env-icon {
@@ -397,9 +528,6 @@ h1, h2, h3, .serif-font {
   color: var(--text-muted);
 }
 
-/* --------------------------------------------------------------------------
-   7. Love Coupons Section
-   -------------------------------------------------------------------------- */
 .coupons-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -416,7 +544,6 @@ h1, h2, h3, .serif-font {
   flex-direction: column;
   justify-content: space-between;
   transition: var(--transition-smooth);
-  position: relative;
 }
 
 .coupon-card:hover {
@@ -490,14 +617,13 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   8. Reasons Why I Love You Generator
+   9. Reasons Why I Love You Generator
    -------------------------------------------------------------------------- */
 .reasons-container {
-  max-width: 650px;
+  max-width: 680px;
   margin: 0 auto;
   background: var(--glass-bg);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 40px 30px;
@@ -511,13 +637,13 @@ h1, h2, h3, .serif-font {
   align-items: center;
   justify-content: center;
   font-family: var(--font-serif);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   color: var(--champagne);
   margin-bottom: 28px;
   padding: 20px;
   border-radius: var(--radius-md);
-  background: rgba(13, 7, 20, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(11, 5, 18, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: var(--transition-smooth);
 }
 
@@ -525,7 +651,7 @@ h1, h2, h3, .serif-font {
   background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
   color: white;
   border: none;
-  padding: 14px 32px;
+  padding: 14px 34px;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
@@ -553,7 +679,7 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   9. Footer
+   10. Footer & Modals
    -------------------------------------------------------------------------- */
 footer {
   text-align: center;
@@ -567,19 +693,15 @@ footer p span {
   color: var(--rose-light);
 }
 
-/* --------------------------------------------------------------------------
-   10. Modal System (Envelope Reader & Popups)
-   -------------------------------------------------------------------------- */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(11, 5, 18, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 1000;
+  background: rgba(7, 3, 11, 0.88);
+  backdrop-filter: blur(14px);
+  z-index: 1050;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -597,14 +719,14 @@ footer p span {
 .modal-box {
   background: #fdf8f5;
   color: #2b1e1a;
-  max-width: 550px;
+  max-width: 560px;
   width: 100%;
   border-radius: var(--radius-lg);
-  padding: 40px 32px;
+  padding: 42px 32px;
   position: relative;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
   transform: translateY(30px) scale(0.95);
-  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   border: 4px double #e8c5b0;
 }
 
@@ -636,7 +758,7 @@ footer p span {
 
 .modal-title {
   font-family: var(--font-serif);
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   text-align: center;
   color: var(--rose-deep);
   margin-bottom: 20px;
@@ -649,45 +771,25 @@ footer p span {
   white-space: pre-line;
   max-height: 60vh;
   overflow-y: auto;
-  padding-right: 8px;
 }
 
-/* Custom Scrollbar for Modal Body */
-.modal-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-body::-webkit-scrollbar-thumb {
-  background: #e8c5b0;
-  border-radius: 10px;
-}
-
-/* --------------------------------------------------------------------------
-   11. Mobile Responsiveness
-   -------------------------------------------------------------------------- */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.4rem;
+  .spotify-widget-fixed {
+    top: 10px;
+    right: 10px;
+    width: 280px;
   }
   
+  .flower-hero-title {
+    font-size: 2.6rem;
+  }
+
   .timer-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
   }
 
   .timer-value {
     font-size: 2.2rem;
-  }
-
-  .section-title h2 {
-    font-size: 2rem;
-  }
-
-  .timeline-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .modal-box {
-    padding: 28px 20px;
   }
 }
