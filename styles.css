@@ -1,0 +1,693 @@
+/* ==========================================================================
+   💖 MY ONE AND ONLY - 5TH MONTH ANNIVERSARY APP STYLESHEET
+   Aesthetics: Romantic Dark Mode, Rose & Champagne Gold, Glassmorphism, Animations
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Root Variables
+   -------------------------------------------------------------------------- */
+:root {
+  --bg-dark: #0b0512;
+  --bg-gradient: linear-gradient(135deg, #0b0512 0%, #1c0a2a 35%, #2c0b36 70%, #12041d 100%);
+  --rose-primary: #ff4d6d;
+  --rose-light: #ff758f;
+  --rose-deep: #c9184a;
+  --champagne: #ffe082;
+  --champagne-glow: rgba(255, 224, 130, 0.4);
+  --text-main: #f8f9fa;
+  --text-muted: #d0c7d7;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-hover: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & General Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Background Canvas for Floating Hearts */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+section {
+  padding: 80px 0;
+}
+
+/* Typography Utilities */
+h1, h2, h3, .serif-font {
+  font-family: var(--font-serif);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  color: var(--text-main);
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff 30%, var(--rose-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  background: rgba(255, 77, 109, 0.15);
+  border: 1px solid rgba(255, 77, 109, 0.3);
+  color: var(--rose-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Audio Control Floating Button
+   -------------------------------------------------------------------------- */
+.audio-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99;
+  background: rgba(255, 77, 109, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--rose-light);
+  color: #fff;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.audio-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
+}
+
+.audio-fab.playing {
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.6); }
+  70% { box-shadow: 0 0 0 16px rgba(255, 77, 109, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+}
+
+/* --------------------------------------------------------------------------
+   4. Hero Section & Live Counter
+   -------------------------------------------------------------------------- */
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 60px;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #ffffff 20%, var(--rose-light) 60%, var(--champagne) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.3));
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+}
+
+/* Timer Grid */
+.timer-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  box-shadow: var(--glass-shadow);
+  margin-bottom: 30px;
+}
+
+.timer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.timer-card {
+  background: rgba(13, 7, 20, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 20px 12px;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.timer-card:hover {
+  border-color: var(--rose-light);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
+}
+
+.timer-value {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--champagne);
+  line-height: 1;
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px var(--champagne-glow);
+}
+
+.timer-label {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   5. Timeline Section ("Our 5-Month Journey")
+   -------------------------------------------------------------------------- */
+.timeline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.timeline-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 77, 109, 0.4);
+  box-shadow: 0 20px 40px rgba(255, 77, 109, 0.2);
+}
+
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.timeline-card:hover .card-img {
+  transform: scale(1.08);
+}
+
+.card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(13, 7, 20, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--rose-light);
+  color: var(--rose-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 50px;
+}
+
+.card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: var(--champagne);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.card-subtitle {
+  font-size: 0.95rem;
+  color: var(--rose-light);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.card-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. "Open When..." Sealed Digital Envelopes
+   -------------------------------------------------------------------------- */
+.envelopes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.envelope-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.envelope-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose-primary), var(--champagne));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.envelope-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--rose-light);
+  box-shadow: 0 15px 30px rgba(255, 77, 109, 0.25);
+}
+
+.envelope-card:hover::before {
+  opacity: 1;
+}
+
+.env-icon {
+  font-size: 3.2rem;
+  margin-bottom: 16px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.envelope-card:hover .env-icon {
+  transform: scale(1.15) rotate(6deg);
+}
+
+.env-title {
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.env-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   7. Love Coupons Section
+   -------------------------------------------------------------------------- */
+.coupons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.coupon-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 77, 109, 0.08));
+  backdrop-filter: blur(14px);
+  border: 1px dashed var(--rose-light);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.coupon-card:hover {
+  border-style: solid;
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(255, 77, 109, 0.2);
+}
+
+.coupon-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.coupon-icon {
+  font-size: 2.2rem;
+}
+
+.coupon-tag {
+  font-size: 0.75rem;
+  background: rgba(255, 224, 130, 0.15);
+  color: var(--champagne);
+  border: 1px solid var(--champagne);
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.coupon-title {
+  font-size: 1.25rem;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.coupon-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.btn-redeem {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 6px 16px rgba(255, 77, 109, 0.4);
+}
+
+.btn-redeem:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 10px 24px rgba(255, 77, 109, 0.6);
+}
+
+.btn-redeem:disabled, .coupon-card.redeemed .btn-redeem {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.coupon-card.redeemed {
+  opacity: 0.8;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   8. Reasons Why I Love You Generator
+   -------------------------------------------------------------------------- */
+.reasons-container {
+  max-width: 650px;
+  margin: 0 auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: var(--glass-shadow);
+}
+
+.reason-card {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--champagne);
+  margin-bottom: 28px;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  background: rgba(13, 7, 20, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: var(--transition-smooth);
+}
+
+.btn-heart-generate {
+  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.btn-heart-generate:hover {
+  transform: scale(1.06);
+  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
+}
+
+.btn-heart-generate span {
+  font-size: 1.3rem;
+  animation: heart-beat 1.5s infinite;
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* --------------------------------------------------------------------------
+   9. Footer
+   -------------------------------------------------------------------------- */
+footer {
+  text-align: center;
+  padding: 50px 0 30px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+footer p span {
+  color: var(--rose-light);
+}
+
+/* --------------------------------------------------------------------------
+   10. Modal System (Envelope Reader & Popups)
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(11, 5, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: #fdf8f5;
+  color: #2b1e1a;
+  max-width: 550px;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  padding: 40px 32px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 4px double #e8c5b0;
+}
+
+.modal-overlay.active .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #8c6a5e;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--rose-deep);
+}
+
+.modal-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  text-align: center;
+  color: var(--rose-deep);
+  margin-bottom: 20px;
+}
+
+.modal-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #4a3832;
+  white-space: pre-line;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Custom Scrollbar for Modal Body */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #e8c5b0;
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   11. Mobile Responsiveness
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.4rem;
+  }
+  
+  .timer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .timer-value {
+    font-size: 2.2rem;
+  }
+
+  .section-title h2 {
+    font-size: 2rem;
+  }
+
+  .timeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-box {
+    padding: 28px 20px;
+  }
+}

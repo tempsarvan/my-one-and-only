@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My One & Only - Happy 5th Month Anniversary! 💖</title>
+  <meta name="description" content="A personalized 5-month anniversary web application celebrating our journey together.">
+  
+  <!-- Google Fonts: Playfair Display & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Particle Canvas Background -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Audio Toggle Button -->
+  <button id="audio-toggle" class="audio-fab" aria-label="Toggle Romantic Ambient Music" title="Toggle Music">🎵</button>
+  <audio id="bg-audio" loop preload="auto">
+    <!-- Ambient royalty free soft piano audio -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-romantic-piano-112677.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Main App Container -->
+  <div class="container">
+
+    <!-- Hero Section & Live Counter -->
+    <section class="hero-section" id="hero">
+      <div class="hero-content">
+        <div class="badge">✨ 5 Months of Pure Happiness ✨</div>
+        <h1 class="hero-title" id="hero-title">Happy 5-Month Anniversary! 💖</h1>
+        <p class="hero-subtitle" id="hero-subtitle">5 Months of Laughs, Late Night Calls & Endless Happiness</p>
+
+        <!-- Live Relationship Counter -->
+        <div class="timer-container">
+          <div class="timer-grid">
+            <div class="timer-card">
+              <div class="timer-value" id="timer-days">00</div>
+              <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-card">
+              <div class="timer-value" id="timer-hours">00</div>
+              <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-card">
+              <div class="timer-value" id="timer-minutes">00</div>
+              <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-card">
+              <div class="timer-value" id="timer-seconds">00</div>
+              <div class="timer-label">Seconds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section ("Our 5-Month Journey") -->
+    <section id="timeline">
+      <div class="section-title">
+        <div class="badge">📖 Our Story</div>
+        <h2>Our 5-Month Journey 💖</h2>
+        <p>A look back at each month that brought us closer together</p>
+      </div>
+      <div class="timeline-grid" id="timeline-grid">
+        <!-- Rendered dynamically via JavaScript from config.js -->
+      </div>
+    </section>
+
+    <!-- "Open When..." Digital Sealed Envelopes -->
+    <section id="envelopes">
+      <div class="section-title">
+        <div class="badge">✉️ Sealed Letters</div>
+        <h2>"Open When..." Envelopes 💌</h2>
+        <p>Tap an envelope whenever you need these words the most</p>
+      </div>
+      <div class="envelopes-grid" id="envelopes-grid">
+        <!-- Rendered dynamically via JavaScript from config.js -->
+      </div>
+    </section>
+
+    <!-- Redeemable Love Coupons -->
+    <section id="coupons">
+      <div class="section-title">
+        <div class="badge">🎟️ Special Treats</div>
+        <h2>Redeemable Love Coupons 💖</h2>
+        <p>Click redeem anytime you'd like to use one of your coupons!</p>
+      </div>
+      <div class="coupons-grid" id="coupons-grid">
+        <!-- Rendered dynamically via JavaScript from config.js -->
+      </div>
+    </section>
+
+    <!-- Reasons Why I Love You Generator -->
+    <section id="reasons">
+      <div class="section-title">
+        <div class="badge">💓 From My Heart</div>
+        <h2>Reasons Why I Love You ✨</h2>
+        <p>Tap the heart to generate a sweet reason!</p>
+      </div>
+      <div class="reasons-container">
+        <div class="reason-card" id="reason-display">
+          Tap the heart button below to reveal a reason... 💖
+        </div>
+        <button class="btn-heart-generate" id="btn-generate-reason">
+          <span>💖</span> Click for a Reason <span>💖</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>Made with all my love for my <span>One & Only</span> • Happy 5th Month Anniversary! 🥂</p>
+    </footer>
+
+  </div>
+
+  <!-- Reusable Modal Dialog Overlay for Letters & Memory Reading -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-icon" id="modal-icon">💌</div>
+      <h3 class="modal-title" id="modal-title">Envelope Title</h3>
+      <div class="modal-body" id="modal-body">
+        Letter content will appear here...
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Config & Main App Scripts -->
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
