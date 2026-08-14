@@ -45,6 +45,17 @@ function initHeader() {
 function initSpotifyWidget() {
   const widget = document.getElementById('spotify-widget');
   const toggleBtn = document.getElementById('spotify-toggle-btn');
+  const artistLabel = document.getElementById('spotify-artist-label');
+  const iframe = document.getElementById('spotify-iframe');
+
+  if (typeof ANNIVERSARY_CONFIG !== 'undefined') {
+    if (artistLabel && ANNIVERSARY_CONFIG.spotifyArtistName) {
+      artistLabel.textContent = ANNIVERSARY_CONFIG.spotifyArtistName;
+    }
+    if (iframe && ANNIVERSARY_CONFIG.spotifyPlaylistUrl) {
+      iframe.src = ANNIVERSARY_CONFIG.spotifyPlaylistUrl;
+    }
+  }
 
   if (!widget || !toggleBtn) return;
 
@@ -287,13 +298,12 @@ function setupProposalInteractions() {
 
   if (!btnYes || !btnNo || !container) return;
 
-  // Playful dodging physics for the "No" button
   function dodgeButton() {
     const containerRect = container.getBoundingClientRect();
     const btnRect = btnNo.getBoundingClientRect();
 
     const maxLeft = containerRect.width - btnRect.width - 20;
-    const maxTop = 150; // allow dodging vertically
+    const maxTop = 150;
 
     const randomLeft = Math.floor(Math.random() * maxLeft) - (maxLeft / 2);
     const randomTop = Math.floor(Math.random() * maxTop) - (maxTop / 2);
@@ -315,7 +325,6 @@ function setupProposalInteractions() {
     dodgeButton();
   });
 
-  // "Yes" button handler: Full-screen heart particle cascade & modal
   btnYes.addEventListener('click', () => {
     triggerMassiveHeartCascade();
     openModal(

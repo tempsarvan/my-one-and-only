@@ -9,14 +9,15 @@ const ANNIVERSARY_CONFIG = {
   // Next Milestone Date: September 15th, 2026
   nextChapterDate: new Date(2026, 8, 15, 0, 0, 0),
 
-  // Spotify Player Configuration (Lana Del Rey)
-  spotifyPlaylistUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6XceWOW8XFb?utm_source=generator&theme=0",
-  spotifyTrackName: "Lana Del Rey - Young and Beautiful",
+  // Spotify Player Configuration (The Weeknd Playlist)
+  spotifyPlaylistUrl: "https://open.spotify.com/embed/playlist/5gFyFkogxMCbcOOhsm54ME?utm_source=generator&theme=0",
+  spotifyArtistName: "The Weeknd",
+  spotifyTrackName: "The Weeknd Playlist",
 
   // Names & Hero Titles
   partnerName: "My Favorite Person",
-  heroTitle: "For My Favorite Person, My Favorite Chapter.",
-  heroSubtitle: "Celebrating 5 Months of Laughs, Late Night Calls & Endless Happiness",
+  heroTitle: "For My Favorite Person, <br><span>My Favorite Chapter.</span>",
+  heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness",
 
   // Timeline Stories (Scrapbook Cards)
   timeline: [

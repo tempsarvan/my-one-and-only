@@ -19,21 +19,22 @@
   <!-- Floating Heart & Dust Canvas Background -->
   <canvas id="particle-canvas"></canvas>
 
-  <!-- Top-Right Spotify Player Widget (Lana Del Rey) -->
+  <!-- Top-Right Spotify Player Widget (The Weeknd Playlist) -->
   <div class="spotify-widget-fixed" id="spotify-widget">
     <div class="spotify-widget-header" id="spotify-toggle-btn">
       <div class="spotify-info">
         <div class="vinyl-disc">🎵</div>
         <div class="spotify-title-text">
-          <span class="spotify-artist">Lana Del Rey</span>
-          <span class="spotify-sub">Anniversary Playlist</span>
+          <span class="spotify-artist" id="spotify-artist-label">The Weeknd</span>
+          <span class="spotify-sub" id="spotify-track-label">Anniversary Playlist</span>
         </div>
       </div>
       <button class="btn-toggle-spotify" aria-label="Toggle Spotify Player">▼</button>
     </div>
     <div class="spotify-iframe-container" id="spotify-container">
       <iframe 
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6XceWOW8XFb?utm_source=generator&theme=0" 
+        id="spotify-iframe"
+        src="https://open.spotify.com/embed/playlist/5gFyFkogxMCbcOOhsm54ME?utm_source=generator&theme=0" 
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
         loading="lazy">
       </iframe>
