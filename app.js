@@ -1,43 +1,44 @@
 /**
- * 💖 MY ONE AND ONLY - ULTRA-PREMIUM 5TH MONTH ANNIVERSARY APP SCRIPT
- * Features: Three.js Scroll-Driven 3D Flower Unraveling & Petal Drop,
- * Top-Right Lana Del Rey Glass Spotify Widget, Sept 15 Countdown, Live Timer,
- * Envelopes, Coupons, and Heart Reason Generator.
+ * 💖 MY ONE AND ONLY - SOFT CREAM & DUSTY ROSE APPLICATION SCRIPT
+ * Features: IntersectionObserver Scrollytelling Timeline, 3D Flip Cards,
+ * Playful Dodging "No" Button, "Yes" Full-Screen Heart Explosion, Live Timers.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Header Text & Spotify Widget
   initHeader();
   initSpotifyWidget();
-
-  // Initialize Canvas Heart Background & 3D Flower Unraveling
   initHeartParticles();
-  init3DFlower();
 
-  // Initialize Live Timers (5-Month Timer & Next Sept 15th Countdown)
+  // Timers
   initLiveTimer();
   initNextChapterTimer();
 
-  // Render Core Sections
+  // Render Content
   renderTimeline();
+  renderReasonsFlipCards();
   renderEnvelopes();
   renderCoupons();
 
-  // Setup Interaction Handlers
-  setupReasonGenerator();
+  // Interactive Handlers
+  setupScrollytellingObserver();
+  setupProposalInteractions();
   setupModalListeners();
 });
 
 /* --------------------------------------------------------------------------
-   1. Header & Top-Right Spotify Widget
+   1. Header Text & Spotify Widget
    -------------------------------------------------------------------------- */
 function initHeader() {
   if (typeof ANNIVERSARY_CONFIG !== 'undefined') {
     const heroTitle = document.getElementById('hero-title');
     const heroSubtitle = document.getElementById('hero-subtitle');
     
-    if (heroTitle) heroTitle.textContent = ANNIVERSARY_CONFIG.anniversaryTitle;
-    if (heroSubtitle) heroSubtitle.textContent = ANNIVERSARY_CONFIG.heroSubtitle;
+    if (heroTitle && ANNIVERSARY_CONFIG.heroTitle) {
+      heroTitle.innerHTML = "For My Favorite Person, <br><span>My Favorite Chapter.</span>";
+    }
+    if (heroSubtitle && ANNIVERSARY_CONFIG.heroSubtitle) {
+      heroSubtitle.textContent = ANNIVERSARY_CONFIG.heroSubtitle;
+    }
   }
 }
 
@@ -57,158 +58,7 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Three.js 3D Scroll-Driven Blooming Rose & Petal Drop Scene
-   -------------------------------------------------------------------------- */
-function init3DFlower() {
-  const canvas = document.getElementById('flower-canvas');
-  const trackSection = document.getElementById('flower-track-section');
-  if (!canvas || !trackSection || typeof THREE === 'undefined') return;
-
-  // Scene, Camera, Renderer
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 1, 12);
-
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-  scene.add(ambientLight);
-
-  const mainLight = new THREE.DirectionalLight(0xff758f, 1.2);
-  mainLight.position.set(5, 10, 7);
-  scene.add(mainLight);
-
-  const goldLight = new THREE.PointLight(0xffe082, 1.5, 20);
-  goldLight.position.set(-4, -2, 5);
-  scene.add(goldLight);
-
-  // Group for the 3D Flower
-  const flowerGroup = new THREE.Group();
-  scene.add(flowerGroup);
-
-  // 1. Stem
-  const stemMat = new THREE.MeshStandardMaterial({ color: 0x1b4332, roughness: 0.6 });
-  const stemGeo = new THREE.CylinderGeometry(0.12, 0.15, 6, 16);
-  const stem = new THREE.Mesh(stemGeo, stemMat);
-  stem.position.y = -3.5;
-  flowerGroup.add(stem);
-
-  // 2. Center Bud Receptacle
-  const centerMat = new THREE.MeshStandardMaterial({ 
-    color: 0xffe082, 
-    emissive: 0xffb703,
-    emissiveIntensity: 0.4,
-    roughness: 0.3 
-  });
-  const centerGeo = new THREE.SphereGeometry(0.5, 32, 32);
-  const centerNode = new THREE.Mesh(centerGeo, centerMat);
-  centerNode.position.y = -0.3;
-  flowerGroup.add(centerNode);
-
-  // 3. Create 5 Distinct Rose Petals
-  const petals = [];
-  const petalCount = 5;
-  const petalMat = new THREE.MeshStandardMaterial({
-    color: 0xff4d6d,
-    roughness: 0.35,
-    metalness: 0.1,
-    side: THREE.DoubleSide
-  });
-
-  // Create curved petal geometry
-  function createPetalGeometry() {
-    const geom = new THREE.SphereGeometry(1.6, 24, 24, 0, Math.PI * 0.7, 0, Math.PI * 0.6);
-    geom.scale(1, 1.3, 0.3);
-    return geom;
-  }
-
-  for (let i = 0; i < petalCount; i++) {
-    const petalPivot = new THREE.Group();
-    petalPivot.position.set(0, -0.2, 0);
-
-    const petalMesh = new THREE.Mesh(createPetalGeometry(), petalMat);
-    // Offset petal relative to pivot
-    petalMesh.position.set(0, 0.8, 0.5);
-
-    // Initial closed rosebud angle
-    const angle = (i / petalCount) * Math.PI * 2;
-    petalPivot.rotation.y = angle;
-    petalPivot.rotation.x = 0.8; // Tightly closed
-
-    petalPivot.add(petalMesh);
-    flowerGroup.add(petalPivot);
-
-    petals.push({
-      pivot: petalPivot,
-      mesh: petalMesh,
-      baseAngleY: angle,
-      floatY: 0,
-      floatX: 0,
-      isDetached: false
-    });
-  }
-
-  // Position Flower Group
-  flowerGroup.position.set(0, 0.5, 0);
-
-  // Responsive Resize
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
-
-  // Scroll Progress Listener
-  let scrollProgress = 0;
-
-  function updateScrollProgress() {
-    const rect = trackSection.getBoundingClientRect();
-    const totalScrollable = trackSection.offsetHeight - window.innerHeight;
-    if (totalScrollable <= 0) return;
-
-    const currentScroll = Math.max(0, -rect.top);
-    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
-  }
-
-  window.addEventListener('scroll', updateScrollProgress);
-  updateScrollProgress();
-
-  // Render & Animation Loop
-  function animate() {
-    requestAnimationFrame(animate);
-
-    // Smooth flower idle rotation
-    flowerGroup.rotation.y += 0.005;
-
-    // Unfurling math driven by scrollProgress (0 to 1)
-    petals.forEach((p, index) => {
-      if (scrollProgress < 0.75) {
-        // Phase 1: Uncurling & blooming in place
-        p.isDetached = false;
-        const unfurlAngle = 0.8 - (scrollProgress * 1.1); // opens from 0.8 rad down to -0.3 rad
-        p.pivot.rotation.x = unfurlAngle;
-        p.pivot.position.set(0, -0.2, 0);
-      } else {
-        // Phase 2: Petals detach and float down
-        p.isDetached = true;
-        const detachFactor = (scrollProgress - 0.75) / 0.25; // 0 to 1
-        p.pivot.position.y = -0.2 - (detachFactor * (3 + index * 1.5));
-        p.pivot.position.x = Math.sin(Date.now() * 0.002 + index) * 0.8;
-        p.pivot.rotation.z = Math.cos(Date.now() * 0.0015 + index) * 0.4;
-      }
-    });
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
-}
-
-/* --------------------------------------------------------------------------
-   3. Live Relationship Timers (5-Month Timer & Sept 15th Countdown)
+   2. Live Relationship Timer & Next Chapter Countdown
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -267,89 +117,31 @@ function initNextChapterTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Floating Canvas Particles
+   3. Scrollytelling IntersectionObserver (Blur-in & Slide-Up Reveal)
    -------------------------------------------------------------------------- */
-function initHeartParticles() {
-  const canvas = document.getElementById('particle-canvas');
-  if (!canvas) return;
+function setupScrollytellingObserver() {
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -80px 0px',
+    threshold: 0.15
+  };
 
-  const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
-
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-
-  const particles = [];
-  const particleCount = 45;
-
-  class Particle {
-    constructor() {
-      this.reset();
-    }
-
-    reset() {
-      this.x = Math.random() * width;
-      this.y = height + Math.random() * 100;
-      this.size = Math.random() * 14 + 8;
-      this.speedY = Math.random() * 1.2 + 0.4;
-      this.speedX = Math.sin(Math.random() * Math.PI) * 0.6;
-      this.opacity = Math.random() * 0.5 + 0.2;
-      this.color = Math.random() > 0.3 ? '#ff4d6d' : '#ffe082';
-      this.rotation = Math.random() * Math.PI * 2;
-      this.rotSpeed = (Math.random() - 0.5) * 0.02;
-    }
-
-    update() {
-      this.y -= this.speedY;
-      this.x += this.speedX;
-      this.rotation += this.rotSpeed;
-
-      if (this.y < -30) {
-        this.reset();
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
       }
-    }
-
-    draw() {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.rotate(this.rotation);
-      ctx.globalAlpha = this.opacity;
-      ctx.fillStyle = this.color;
-
-      ctx.beginPath();
-      const topCurveHeight = this.size * 0.3;
-      ctx.moveTo(0, topCurveHeight);
-      ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
-      ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
-      ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
-      ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    particles.forEach((p) => {
-      p.update();
-      p.draw();
     });
-    requestAnimationFrame(animate);
-  }
+  }, observerOptions);
 
-  animate();
+  document.querySelectorAll('.timeline-card').forEach((card) => {
+    observer.observe(card);
+  });
 }
 
 /* --------------------------------------------------------------------------
-   5. Render Timeline, Envelopes & Coupons
+   4. Render Timeline, 3D Flip Cards, Envelopes & Coupons
    -------------------------------------------------------------------------- */
 function renderTimeline() {
   const container = document.getElementById('timeline-grid');
@@ -363,7 +155,7 @@ function renderTimeline() {
     card.innerHTML = `
       <div class="card-img-wrapper">
         <img src="${item.image}" alt="${item.title}" class="card-img" loading="lazy">
-        <span class="card-badge">Petal 0${item.monthNum} • Month 0${item.monthNum}</span>
+        <span class="card-badge">Chapter 0${item.monthNum}</span>
       </div>
       <div class="card-body">
         <div class="card-date">${item.date}</div>
@@ -375,10 +167,41 @@ function renderTimeline() {
 
     card.addEventListener('click', () => {
       triggerConfetti();
-      openModal('🌹', item.title, `${item.subtitle}\n(${item.date})\n\n${item.story}`);
+      openModal('💖', item.title, `${item.subtitle}\n(${item.date})\n\n${item.story}`);
     });
 
     container.appendChild(card);
+  });
+}
+
+function renderReasonsFlipCards() {
+  const container = document.getElementById('reasons-flip-grid');
+  if (!container || typeof ANNIVERSARY_CONFIG === 'undefined') return;
+
+  container.innerHTML = '';
+
+  ANNIVERSARY_CONFIG.flipCards.forEach((cardData) => {
+    const flipContainer = document.createElement('div');
+    flipContainer.className = 'flip-card-container';
+    flipContainer.innerHTML = `
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <div class="flip-card-icon">💌</div>
+          <h4 class="flip-card-title">${cardData.frontTitle}</h4>
+          <span class="flip-card-sub">${cardData.frontSubtitle}</span>
+        </div>
+        <div class="flip-card-back">
+          <p>"${cardData.backNote}"</p>
+        </div>
+      </div>
+    `;
+
+    flipContainer.addEventListener('click', () => {
+      flipContainer.classList.toggle('flipped');
+      triggerConfetti();
+    });
+
+    container.appendChild(flipContainer);
   });
 }
 
@@ -455,32 +278,172 @@ function renderCoupons() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Reasons Generator & Modals
+   5. Playful Interactive Dodging "No" Button & "Yes" Explosion
    -------------------------------------------------------------------------- */
-function setupReasonGenerator() {
-  const btn = document.getElementById('btn-generate-reason');
-  const display = document.getElementById('reason-display');
+function setupProposalInteractions() {
+  const btnYes = document.getElementById('btn-yes');
+  const btnNo = document.getElementById('btn-no');
+  const container = document.getElementById('proposal-btn-container');
 
-  if (!btn || !display || typeof ANNIVERSARY_CONFIG === 'undefined') return;
+  if (!btnYes || !btnNo || !container) return;
 
-  btn.addEventListener('click', () => {
-    const reasons = ANNIVERSARY_CONFIG.reasons;
-    const randomIndex = Math.floor(Math.random() * reasons.length);
-    const selectedReason = reasons[randomIndex];
+  // Playful dodging physics for the "No" button
+  function dodgeButton() {
+    const containerRect = container.getBoundingClientRect();
+    const btnRect = btnNo.getBoundingClientRect();
 
-    display.style.opacity = '0';
-    display.style.transform = 'scale(0.95)';
+    const maxLeft = containerRect.width - btnRect.width - 20;
+    const maxTop = 150; // allow dodging vertically
 
-    setTimeout(() => {
-      display.textContent = `"${selectedReason}" 💖`;
-      display.style.opacity = '1';
-      display.style.transform = 'scale(1)';
-    }, 200);
+    const randomLeft = Math.floor(Math.random() * maxLeft) - (maxLeft / 2);
+    const randomTop = Math.floor(Math.random() * maxTop) - (maxTop / 2);
 
-    triggerConfetti();
+    btnNo.style.position = 'relative';
+    btnNo.style.left = `${randomLeft}px`;
+    btnNo.style.top = `${randomTop}px`;
+  }
+
+  btnNo.addEventListener('mouseover', dodgeButton);
+  btnNo.addEventListener('mouseenter', dodgeButton);
+  btnNo.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    dodgeButton();
+  });
+
+  btnNo.addEventListener('click', (e) => {
+    e.preventDefault();
+    dodgeButton();
+  });
+
+  // "Yes" button handler: Full-screen heart particle cascade & modal
+  btnYes.addEventListener('click', () => {
+    triggerMassiveHeartCascade();
+    openModal(
+      '💖',
+      'YAY! You Said Yes! 🎉',
+      `You are officially my favorite person forever and ever!\n\nThank you for making these past 5 months so incredibly sweet, magical, and unforgettable.\n\nI love you with all my heart! 💕✨`
+    );
   });
 }
 
+/* --------------------------------------------------------------------------
+   6. Particle Canvas & Confetti Helpers
+   -------------------------------------------------------------------------- */
+function initHeartParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const particles = [];
+  const particleCount = 35;
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + Math.random() * 100;
+      this.size = Math.random() * 12 + 6;
+      this.speedY = Math.random() * 1.0 + 0.3;
+      this.speedX = Math.sin(Math.random() * Math.PI) * 0.5;
+      this.opacity = Math.random() * 0.4 + 0.15;
+      this.color = Math.random() > 0.4 ? '#D4A5A5' : '#B87373';
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.015;
+    }
+
+    update() {
+      this.y -= this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotSpeed;
+
+      if (this.y < -30) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
+
+      ctx.beginPath();
+      const topCurveHeight = this.size * 0.3;
+      ctx.moveTo(0, topCurveHeight);
+      ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+      ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+      ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+      ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+function triggerConfetti() {
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 65,
+      spread: 65,
+      origin: { y: 0.6 },
+      colors: ['#D4A5A5', '#B87373', '#8C5252', '#F5E8E8']
+    });
+  }
+}
+
+function triggerMassiveHeartCascade() {
+  if (typeof confetti === 'function') {
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 2000 };
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+      const particleCount = 50 * (timeLeft / duration);
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#D4A5A5', '#B87373', '#8C5252'] });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#D4A5A5', '#B87373', '#F5E8E8'] });
+    }, 250);
+  }
+}
+
+function randomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+/* --------------------------------------------------------------------------
+   7. Modal Listeners
+   -------------------------------------------------------------------------- */
 function setupModalListeners() {
   const overlay = document.getElementById('modal-overlay');
   const closeBtn = document.getElementById('modal-close');
@@ -518,15 +481,4 @@ function openModal(icon, title, body) {
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   if (overlay) overlay.classList.remove('active');
-}
-
-function triggerConfetti() {
-  if (typeof confetti === 'function') {
-    confetti({
-      particleCount: 75,
-      spread: 75,
-      origin: { y: 0.6 },
-      colors: ['#ff4d6d', '#ff758f', '#ffe082', '#ffffff']
-    });
-  }
 }

@@ -1,6 +1,5 @@
 /**
- * 💖 Anniversary Web App Configuration
- * You can edit any text, dates, or stories below to personalize your gift!
+ * 💖 Anniversary Web App Configuration - Cream & Dusty Rose Theme
  */
 
 const ANNIVERSARY_CONFIG = {
@@ -14,25 +13,24 @@ const ANNIVERSARY_CONFIG = {
   spotifyPlaylistUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DX6XceWOW8XFb?utm_source=generator&theme=0",
   spotifyTrackName: "Lana Del Rey - Young and Beautiful",
 
-  // Names & Main Title
-  partnerName: "My Dearest",
-  yourName: "Always Yours",
-  anniversaryTitle: "Happy 5-Month Anniversary! 💖",
-  heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness",
+  // Names & Hero Titles
+  partnerName: "My Favorite Person",
+  heroTitle: "For My Favorite Person, My Favorite Chapter.",
+  heroSubtitle: "Celebrating 5 Months of Laughs, Late Night Calls & Endless Happiness",
 
-  // Timeline Stories (Month 1 to Month 5)
+  // Timeline Stories (Scrapbook Cards)
   timeline: [
     {
       monthNum: 1,
-      title: "Month 1: Where It All Started",
+      title: "Month 1: The Spark & First Conversations",
       date: "March 15 - April 15",
-      subtitle: "The Butterflies & First Sparks",
+      subtitle: "Butterflies, Late Night Chats & Coffee",
       image: "./assets/month1.png",
-      story: "Everything felt so magical from the very first day. We started talking and couldn't stop. Every notification from you brought the biggest smile to my face, and coffee dates & long chats quickly became my favorite part of every day."
+      story: "Everything felt so magical from the very first day. We started talking and couldn't stop. Every notification from you brought the biggest smile to my face, and long chats quickly became my favorite part of every single day."
     },
     {
       monthNum: 2,
-      title: "Month 2: Stargazing & Secret Jokes",
+      title: "Month 2: Stargazing & Inside Jokes",
       date: "April 15 - May 15",
       subtitle: "Finding My Favorite Person",
       image: "./assets/month2.png",
@@ -42,7 +40,7 @@ const ANNIVERSARY_CONFIG = {
       monthNum: 3,
       title: "Month 3: Playlists & Shared Moments",
       date: "May 15 - June 15",
-      subtitle: "Soundtrack to Our Days",
+      subtitle: "The Soundtrack to Our Days",
       image: "./assets/month3.png",
       story: "Sharing songs, recommending movies, and laughing until our stomachs hurt. Month three proved that no matter how busy or hard the days got, one call with you made everything peaceful and right again."
     },
@@ -60,7 +58,41 @@ const ANNIVERSARY_CONFIG = {
       date: "July 15 - August 15",
       subtitle: "To Us & To Forever",
       image: "./assets/month5.png",
-      story: "Five wonderful months together, and my heart still skips a beat whenever I see your name on my phone screen. Thank you for being my comfort, my joy, and my one and only. Here's to many more months and years together!"
+      story: "Five wonderful months together, and my heart still skips a beat whenever I see your name on my phone screen. Thank you for being my comfort, my joy, and my favorite person. Here's to many more chapters together!"
+    }
+  ],
+
+  // 3D Flip Cards: Reasons I Love You Notes
+  flipCards: [
+    {
+      frontTitle: "Reason #1",
+      frontSubtitle: "Your Smile",
+      backNote: "Your smile is my absolute favorite sight in the world. It brightens up even my darkest days instantly! ✨"
+    },
+    {
+      frontTitle: "Reason #2",
+      frontSubtitle: "Your Voice",
+      backNote: "Hearing your voice on the phone makes all my stress melt away. It's my favorite sound in the universe. 📞"
+    },
+    {
+      frontTitle: "Reason #3",
+      frontSubtitle: "Inside Jokes",
+      backNote: "The silly jokes only we understand, and laughing until our cheeks hurt together! 😂"
+    },
+    {
+      frontTitle: "Reason #4",
+      frontSubtitle: "Your Warm Heart",
+      backNote: "How caring, empathetic, and kind you are to everyone around you. You inspire me every day. 🌸"
+    },
+    {
+      frontTitle: "Reason #5",
+      frontSubtitle: "Small Details",
+      backNote: "How you remember tiny things I told you weeks ago. It shows how deeply you listen and care. 💌"
+    },
+    {
+      frontTitle: "Reason #6",
+      frontSubtitle: "Simply You",
+      backNote: "Because you are my best friend, my comfort, and my favorite person all wrapped into one. 💖"
     }
   ],
 
@@ -130,24 +162,5 @@ const ANNIVERSARY_CONFIG = {
       icon: "🤗",
       tag: "Care & Warmth"
     }
-  ],
-
-  // Reasons Why I Love You Generator
-  reasons: [
-    "The way your laugh instantly brightens up my worst days.",
-    "How cute and sweet you look when you're excited about something small.",
-    "Your kindness, empathy, and warm heart.",
-    "The way you make me feel safe, understood, and truly valued.",
-    "How you remember the smallest details about the things I tell you.",
-    "Your voice—it's my favorite sound in the world.",
-    "The way you care about people around you.",
-    "How we can talk for hours without ever running out of things to say.",
-    "The cute silly expressions you make when you're thinking.",
-    "Because you make ordinary moments feel like extraordinary memories.",
-    "How you make my heart flutter every time you say my name.",
-    "Your endless support and encouragement.",
-    "Because you are my best friend and my love all in one.",
-    "The comfort of knowing I have you in my life.",
-    "Simply because you are YOU, and nobody else could ever compare."
   ]
 };

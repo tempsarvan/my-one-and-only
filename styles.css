@@ -1,37 +1,37 @@
 /* ==========================================================================
-   💖 MY ONE AND ONLY - ULTRA-PREMIUM 5TH MONTH ANNIVERSARY APP STYLESHEET
-   Features: Glass Spotify Player, 3D Scroll Flower Track, Luxury Typography,
-   Petal Reveal Journey, Next Chapter September 15th Countdown.
+   💖 MY ONE AND ONLY - SOFT CREAM & DUSTY ROSE SCROLLYTELLING STYLESHEET
+   Palette: Soft Cream (#FDFBF7), Dusty Rose (#D4A5A5, #B87373, #8C5252)
+   Typography: 'Playfair Display' (Serif) & 'Plus Jakarta Sans' (Sans-Serif)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    1. Design Tokens & Root Variables
    -------------------------------------------------------------------------- */
 :root {
-  --bg-dark: #07030b;
-  --bg-gradient: linear-gradient(135deg, #07030b 0%, #160724 35%, #270830 70%, #0e0317 100%);
-  --rose-primary: #ff4d6d;
-  --rose-light: #ff758f;
-  --rose-deep: #c9184a;
-  --rose-velvet: #800f2f;
-  --champagne: #ffe082;
-  --champagne-glow: rgba(255, 224, 130, 0.5);
-  --text-main: #faf9fb;
-  --text-muted: #d5c8dc;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.14);
-  --glass-hover: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
-  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --radius-lg: 28px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
+  --bg-cream: #FDFBF7;
+  --bg-card: #FFFFFF;
+  --bg-card-soft: #F9F4EE;
+  --rose-dusty: #D4A5A5;
+  --rose-accent: #B87373;
+  --rose-dark: #8C5252;
+  --rose-soft: #F5E8E8;
+  --rose-glow: rgba(212, 165, 165, 0.4);
+  --gold-warm: #E6B89C;
+  --text-espresso: #2B2A2A;
+  --text-muted: #736262;
+  --border-light: rgba(212, 165, 165, 0.3);
+  --shadow-soft: 0 15px 35px rgba(140, 82, 82, 0.08);
+  --shadow-hover: 0 22px 45px rgba(140, 82, 82, 0.15);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
   --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --------------------------------------------------------------------------
-   2. Reset & Base Layout
+   2. Reset & Base Setup
    -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -45,9 +45,8 @@ html {
 }
 
 body {
-  background: var(--bg-gradient);
-  background-attachment: fixed;
-  color: var(--text-main);
+  background-color: var(--bg-cream);
+  color: var(--text-espresso);
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
@@ -55,22 +54,19 @@ body {
   position: relative;
 }
 
-/* Film-grain texture overlay */
-body::after {
-  content: '';
+/* Background Particle Canvas */
+#particle-canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
-  background-size: 24px 24px;
   pointer-events: none;
   z-index: 1;
 }
 
 .container {
-  max-width: 1140px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px;
   position: relative;
@@ -78,7 +74,7 @@ body::after {
 }
 
 section {
-  padding: 90px 0;
+  padding: 100px 0;
 }
 
 /* Typography Utilities */
@@ -94,19 +90,15 @@ h1, h2, h3, .serif-font {
 }
 
 .section-title h2 {
-  font-size: 3rem;
-  color: var(--text-main);
-  margin-bottom: 14px;
-  background: linear-gradient(135deg, #ffffff 30%, var(--rose-light) 70%, var(--champagne) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.25));
+  font-size: 2.8rem;
+  color: var(--text-espresso);
+  margin-bottom: 12px;
 }
 
 .section-title p {
   color: var(--text-muted);
-  font-size: 1.15rem;
-  font-weight: 300;
+  font-size: 1.1rem;
+  font-weight: 400;
 }
 
 .badge {
@@ -115,31 +107,31 @@ h1, h2, h3, .serif-font {
   gap: 8px;
   padding: 6px 18px;
   border-radius: 50px;
-  background: rgba(255, 77, 109, 0.15);
-  border: 1px solid rgba(255, 77, 109, 0.35);
-  color: var(--rose-light);
-  font-size: 0.88rem;
-  font-weight: 500;
+  background: var(--rose-soft);
+  border: 1px solid var(--rose-dusty);
+  color: var(--rose-dark);
+  font-size: 0.85rem;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 16px;
 }
 
 /* --------------------------------------------------------------------------
-   3. Top-Right Spotify Player (Glass & Classic UI)
+   3. Top-Right Spotify Player (Cream Glass UI)
    -------------------------------------------------------------------------- */
 .spotify-widget-fixed {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 1000;
-  width: 320px;
-  background: rgba(13, 7, 20, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+  width: 310px;
+  background: rgba(255, 251, 247, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 77, 109, 0.2);
+  box-shadow: 0 12px 30px rgba(140, 82, 82, 0.12);
   transition: var(--transition-smooth);
   overflow: hidden;
 }
@@ -149,8 +141,8 @@ h1, h2, h3, .serif-font {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.04);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(245, 232, 232, 0.5);
+  border-bottom: 1px solid var(--border-light);
   cursor: pointer;
 }
 
@@ -165,13 +157,12 @@ h1, h2, h3, .serif-font {
   height: 32px;
   border-radius: 50%;
   background: radial-gradient(circle, #333 30%, #111 70%, #000 100%);
-  border: 2px solid var(--champagne);
+  border: 2px solid var(--rose-dusty);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.75rem;
   animation: spin-vinyl 4s linear infinite;
-  box-shadow: 0 0 10px var(--champagne-glow);
 }
 
 @keyframes spin-vinyl {
@@ -179,16 +170,10 @@ h1, h2, h3, .serif-font {
   100% { transform: rotate(360deg); }
 }
 
-.spotify-title-text {
-  display: flex;
-  flex-direction: column;
-}
-
 .spotify-artist {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: var(--rose-light);
-  letter-spacing: 0.5px;
+  color: var(--rose-dark);
 }
 
 .spotify-sub {
@@ -200,14 +185,8 @@ h1, h2, h3, .serif-font {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
-  padding: 4px;
-  transition: color 0.2s;
-}
-
-.btn-toggle-spotify:hover {
-  color: var(--champagne);
 }
 
 .spotify-iframe-container {
@@ -231,92 +210,66 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   4. 3D Scroll-Driven Blooming Flower Track
+   4. Hero Section with 3D Glowing SVG Rose & Live Timer
    -------------------------------------------------------------------------- */
-.flower-track-section {
-  position: relative;
-  height: 250vh; /* Scroll length for uncurling animation */
-}
-
-.flower-sticky-viewport {
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
+.hero-section {
+  min-height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  z-index: 2;
+  text-align: center;
+  padding-top: 60px;
 }
 
-#flower-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-content {
+  max-width: 820px;
+}
+
+/* Floating 3D Glowing Rose Container */
+.glowing-rose-wrapper {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 24px;
+  position: relative;
+  animation: float-rose 3.5s ease-in-out infinite;
+}
+
+@keyframes float-rose {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.glowing-rose-svg {
   width: 100%;
   height: 100%;
-  z-index: 1;
+  filter: drop-shadow(0 10px 20px rgba(184, 115, 115, 0.4));
 }
 
-.flower-overlay-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  max-width: 750px;
-  padding: 0 20px;
-  pointer-events: none;
-}
-
-.flower-hero-title {
-  font-size: 4rem;
-  line-height: 1.1;
+.hero-title {
+  font-size: 3.4rem;
+  line-height: 1.18;
+  color: var(--text-espresso);
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #ffffff 10%, var(--rose-light) 50%, var(--champagne) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 20px rgba(255, 77, 109, 0.4));
 }
 
-.flower-hero-sub {
-  font-size: 1.3rem;
+.hero-title span {
+  color: var(--rose-accent);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
   color: var(--text-muted);
-  font-weight: 300;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 
-.scroll-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 24px;
-  background: rgba(13, 7, 20, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--rose-light);
-  border-radius: 50px;
-  color: var(--rose-light);
-  font-size: 0.95rem;
-  font-weight: 500;
-  animation: bounce-slow 2s infinite;
-}
-
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(8px); }
-}
-
-/* --------------------------------------------------------------------------
-   5. Live Relationship Timer Cards
-   -------------------------------------------------------------------------- */
+/* Live Relationship Timer Grid */
 .timer-container {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 36px 28px;
-  box-shadow: var(--glass-shadow);
-  margin-top: 30px;
+  box-shadow: var(--shadow-soft);
 }
 
 .timer-grid {
@@ -326,72 +279,81 @@ h1, h2, h3, .serif-font {
 }
 
 .timer-card {
-  background: rgba(11, 5, 18, 0.65);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card-soft);
+  border: 1px solid rgba(212, 165, 165, 0.2);
   border-radius: var(--radius-md);
-  padding: 22px 12px;
+  padding: 20px 12px;
   text-align: center;
   transition: var(--transition-smooth);
 }
 
 .timer-card:hover {
-  border-color: var(--rose-light);
+  border-color: var(--rose-dusty);
   transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(255, 77, 109, 0.25);
+  box-shadow: var(--shadow-hover);
 }
 
 .timer-value {
   font-family: var(--font-serif);
-  font-size: 3rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: var(--champagne);
+  color: var(--rose-dark);
   line-height: 1;
   margin-bottom: 6px;
-  text-shadow: 0 0 15px var(--champagne-glow);
 }
 
 .timer-label {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* --------------------------------------------------------------------------
-   6. Petal Reveal Timeline Section
+   5. Scrollytelling Memory Timeline (Blur & Slide-Up Reveal)
    -------------------------------------------------------------------------- */
 .timeline-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .timeline-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  grid-template-columns: 300px 1fr;
   transition: var(--transition-smooth);
-  box-shadow: var(--glass-shadow);
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  
+  /* Initial state for Scroll Animation */
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(50px);
+}
+
+/* In-View State triggered by JavaScript IntersectionObserver */
+.timeline-card.in-view {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
 }
 
 .timeline-card:hover {
-  transform: translateY(-10px);
-  border-color: rgba(255, 77, 109, 0.5);
-  box-shadow: 0 25px 45px rgba(255, 77, 109, 0.25);
+  border-color: var(--rose-dusty);
+  box-shadow: var(--shadow-hover);
 }
 
 .card-img-wrapper {
   position: relative;
   width: 100%;
-  height: 240px;
-  overflow: hidden;
+  height: 100%;
+  min-height: 220px;
 }
 
 .card-img {
@@ -402,46 +364,46 @@ h1, h2, h3, .serif-font {
 }
 
 .timeline-card:hover .card-img {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 .card-badge {
   position: absolute;
   top: 14px;
   left: 14px;
-  background: rgba(13, 7, 20, 0.85);
+  background: rgba(253, 251, 247, 0.9);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--champagne);
-  color: var(--champagne);
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 4px 14px;
+  border: 1px solid var(--rose-dusty);
+  color: var(--rose-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
   border-radius: 50px;
 }
 
 .card-body {
-  padding: 26px;
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  justify-content: center;
 }
 
 .card-date {
   font-size: 0.85rem;
-  color: var(--champagne);
-  font-weight: 500;
+  color: var(--rose-accent);
+  font-weight: 600;
   margin-bottom: 6px;
 }
 
 .card-title {
   font-size: 1.5rem;
-  color: var(--text-main);
+  color: var(--text-espresso);
   margin-bottom: 8px;
 }
 
 .card-subtitle {
   font-size: 0.95rem;
-  color: var(--rose-light);
+  color: var(--rose-dark);
   margin-bottom: 12px;
   font-weight: 500;
 }
@@ -449,50 +411,196 @@ h1, h2, h3, .serif-font {
 .card-text {
   font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 /* --------------------------------------------------------------------------
-   7. "Next Chapter" Milestone Countdown (September 15th)
+   6. 3D Flip "Reasons I Love You" Grid
+   -------------------------------------------------------------------------- */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.flip-card-container {
+  perspective: 1000px;
+  height: 220px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.flip-card-container.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-light);
+}
+
+.flip-card-front {
+  background: var(--bg-card);
+  color: var(--text-espresso);
+}
+
+.flip-card-front:hover {
+  border-color: var(--rose-dusty);
+  box-shadow: var(--shadow-hover);
+}
+
+.flip-card-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.flip-card-title {
+  font-size: 1.3rem;
+  color: var(--rose-dark);
+  margin-bottom: 4px;
+}
+
+.flip-card-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, var(--rose-soft), #FDFBF7);
+  color: var(--text-espresso);
+  transform: rotateY(180deg);
+  border-color: var(--rose-dusty);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   7. Playful Interactive Proposal Section ("Will You Keep Being My Favorite Person?")
+   -------------------------------------------------------------------------- */
+.proposal-section {
+  text-align: center;
+}
+
+.proposal-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 2px solid var(--rose-dusty);
+  border-radius: var(--radius-lg);
+  padding: 50px 36px;
+  box-shadow: var(--shadow-hover);
+  position: relative;
+}
+
+.proposal-title {
+  font-size: 2.4rem;
+  color: var(--rose-dark);
+  margin-bottom: 16px;
+}
+
+.proposal-desc {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+
+.proposal-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  min-height: 65px;
+  position: relative;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
+  color: white;
+  border: none;
+  padding: 16px 42px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(184, 115, 115, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.btn-yes:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 35px rgba(184, 115, 115, 0.6);
+}
+
+.btn-no {
+  background: var(--bg-card-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: top 0.25s ease, left 0.25s ease, transform 0.2s;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   8. Countdown to September 15th
    -------------------------------------------------------------------------- */
 .next-chapter-card {
-  background: linear-gradient(145deg, rgba(255, 77, 109, 0.12), rgba(13, 7, 20, 0.7));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--champagne);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 44px 32px;
+  padding: 40px 32px;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 224, 130, 0.2);
+  box-shadow: var(--shadow-soft);
   margin-top: 20px;
 }
 
 .next-chapter-title {
-  font-size: 2.5rem;
-  color: var(--champagne);
-  margin-bottom: 10px;
+  font-size: 2.2rem;
+  color: var(--rose-dark);
+  margin-bottom: 8px;
 }
 
 .next-chapter-sub {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   color: var(--text-muted);
-  margin-bottom: 30px;
-  font-weight: 300;
+  margin-bottom: 28px;
 }
 
 /* --------------------------------------------------------------------------
-   8. Envelopes & Coupons
+   9. Envelopes & Coupons
    -------------------------------------------------------------------------- */
 .envelopes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
 }
 
 .envelope-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(14px);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 32px 24px;
   text-align: center;
@@ -501,16 +609,16 @@ h1, h2, h3, .serif-font {
 }
 
 .envelope-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  border-color: var(--rose-light);
-  box-shadow: 0 15px 30px rgba(255, 77, 109, 0.25);
+  transform: translateY(-6px);
+  border-color: var(--rose-dusty);
+  box-shadow: var(--shadow-hover);
 }
 
 .env-icon {
-  font-size: 3.2rem;
-  margin-bottom: 16px;
+  font-size: 3rem;
+  margin-bottom: 14px;
   display: inline-block;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s;
 }
 
 .envelope-card:hover .env-icon {
@@ -518,9 +626,9 @@ h1, h2, h3, .serif-font {
 }
 
 .env-title {
-  font-size: 1.2rem;
-  color: var(--text-main);
-  margin-bottom: 8px;
+  font-size: 1.15rem;
+  color: var(--text-espresso);
+  margin-bottom: 6px;
 }
 
 .env-subtitle {
@@ -530,16 +638,15 @@ h1, h2, h3, .serif-font {
 
 .coupons-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
 }
 
 .coupon-card {
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 77, 109, 0.08));
-  backdrop-filter: blur(14px);
-  border: 1px dashed var(--rose-light);
+  background: var(--bg-card);
+  border: 1px dashed var(--rose-dusty);
   border-radius: var(--radius-md);
-  padding: 28px 20px;
+  padding: 26px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -549,148 +656,75 @@ h1, h2, h3, .serif-font {
 .coupon-card:hover {
   border-style: solid;
   transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(255, 77, 109, 0.2);
+  box-shadow: var(--shadow-hover);
 }
 
 .coupon-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .coupon-icon {
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
 
 .coupon-tag {
   font-size: 0.75rem;
-  background: rgba(255, 224, 130, 0.15);
-  color: var(--champagne);
-  border: 1px solid var(--champagne);
+  background: var(--rose-soft);
+  color: var(--rose-dark);
+  border: 1px solid var(--rose-dusty);
   padding: 3px 10px;
   border-radius: 50px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .coupon-title {
-  font-size: 1.25rem;
-  color: var(--text-main);
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: var(--text-espresso);
+  margin-bottom: 6px;
 }
 
 .coupon-desc {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .btn-redeem {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
+  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
   color: #fff;
   border: none;
   border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   cursor: pointer;
   transition: var(--transition-smooth);
-  box-shadow: 0 6px 16px rgba(255, 77, 109, 0.4);
-}
-
-.btn-redeem:hover:not(:disabled) {
-  transform: scale(1.02);
-  box-shadow: 0 10px 24px rgba(255, 77, 109, 0.6);
 }
 
 .btn-redeem:disabled, .coupon-card.redeemed .btn-redeem {
-  background: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.5);
+  background: #E5DCD6;
+  color: #A09088;
   cursor: not-allowed;
-  box-shadow: none;
-}
-
-.coupon-card.redeemed {
-  opacity: 0.8;
-  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* --------------------------------------------------------------------------
-   9. Reasons Why I Love You Generator
-   -------------------------------------------------------------------------- */
-.reasons-container {
-  max-width: 680px;
-  margin: 0 auto;
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 40px 30px;
-  text-align: center;
-  box-shadow: var(--glass-shadow);
-}
-
-.reason-card {
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 1.45rem;
-  color: var(--champagne);
-  margin-bottom: 28px;
-  padding: 20px;
-  border-radius: var(--radius-md);
-  background: rgba(11, 5, 18, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: var(--transition-smooth);
-}
-
-.btn-heart-generate {
-  background: linear-gradient(135deg, var(--rose-primary), var(--rose-deep));
-  color: white;
-  border: none;
-  padding: 14px 34px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border-radius: 50px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
-  transition: var(--transition-smooth);
-}
-
-.btn-heart-generate:hover {
-  transform: scale(1.06);
-  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.6);
-}
-
-.btn-heart-generate span {
-  font-size: 1.3rem;
-  animation: heart-beat 1.5s infinite;
-}
-
-@keyframes heart-beat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.25); }
-}
-
-/* --------------------------------------------------------------------------
-   10. Footer & Modals
+   10. Modals & Footer
    -------------------------------------------------------------------------- */
 footer {
   text-align: center;
   padding: 50px 0 30px;
   color: var(--text-muted);
   font-size: 0.95rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-light);
 }
 
 footer p span {
-  color: var(--rose-light);
+  color: var(--rose-dark);
+  font-weight: 600;
 }
 
 .modal-overlay {
@@ -699,8 +733,8 @@ footer p span {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(7, 3, 11, 0.88);
-  backdrop-filter: blur(14px);
+  background: rgba(43, 42, 42, 0.5);
+  backdrop-filter: blur(10px);
   z-index: 1050;
   display: flex;
   align-items: center;
@@ -717,17 +751,17 @@ footer p span {
 }
 
 .modal-box {
-  background: #fdf8f5;
-  color: #2b1e1a;
-  max-width: 560px;
+  background: #FDFBF7;
+  color: #2B2A2A;
+  max-width: 540px;
   width: 100%;
   border-radius: var(--radius-lg);
-  padding: 42px 32px;
+  padding: 40px 32px;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
-  transform: translateY(30px) scale(0.95);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px) scale(0.96);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 4px double #e8c5b0;
+  border: 2px solid var(--rose-dusty);
 }
 
 .modal-overlay.active .modal-box {
@@ -741,13 +775,8 @@ footer p span {
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: #8c6a5e;
+  color: var(--text-muted);
   cursor: pointer;
-  transition: color 0.2s;
-}
-
-.modal-close:hover {
-  color: var(--rose-deep);
 }
 
 .modal-icon {
@@ -758,38 +787,35 @@ footer p span {
 
 .modal-title {
   font-family: var(--font-serif);
-  font-size: 1.85rem;
+  font-size: 1.8rem;
   text-align: center;
-  color: var(--rose-deep);
-  margin-bottom: 20px;
+  color: var(--rose-dark);
+  margin-bottom: 18px;
 }
 
 .modal-body {
   font-size: 1.05rem;
   line-height: 1.8;
-  color: #4a3832;
+  color: var(--text-muted);
   white-space: pre-line;
   max-height: 60vh;
   overflow-y: auto;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .spotify-widget-fixed {
-    top: 10px;
-    right: 10px;
-    width: 280px;
+  .hero-title {
+    font-size: 2.3rem;
   }
-  
-  .flower-hero-title {
-    font-size: 2.6rem;
+
+  .timeline-card {
+    grid-template-columns: 1fr;
+  }
+
+  .card-img-wrapper {
+    height: 200px;
   }
 
   .timer-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .timer-value {
-    font-size: 2.2rem;
   }
 }
