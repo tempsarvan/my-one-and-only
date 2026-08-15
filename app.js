@@ -1,11 +1,13 @@
 /**
- * 💖 MY ONE AND ONLY - SHIVI & SARVAN 5-GAME ARCADE & REAL ROSE SCROLL
+ * 💖 MY ONE AND ONLY - SHIVI & SARVAN 3D PARAMETRIC ROSE & 5-GAME ARCADE
+ * Features: Three.js Parametric 3D Rose Geometry Engine with PBR Velvet Shading,
+ * Scroll-Driven 3D Petal Unfurling & Detachment Physics.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpotifyWidget();
   initHeartParticles();
-  initRealRoseScroll();
+  init3DRoseEngine();
 
   // Timers
   initLiveTimer();
@@ -58,7 +60,296 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Arcade Tabs Navigation Handler
+   2. Three.js Parametric 3D WebGL Rose Geometry Engine
+   -------------------------------------------------------------------------- */
+function init3DRoseEngine() {
+  const canvas = document.getElementById('flower-canvas-3d');
+  const scrollContainer = document.getElementById('flower-scroll-container');
+  const heroOverlay = document.getElementById('hero-overlay');
+  const cardDisplay = document.getElementById('fallen-petal-card-display');
+
+  if (!canvas || !scrollContainer || typeof THREE === 'undefined') return;
+
+  // Scene, Camera & Renderer
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 1.2, 7.5);
+
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Lighting System
+  const ambientLight = new THREE.AmbientLight(0xFFF0F3, 0.85);
+  scene.add(ambientLight);
+
+  const keyLight = new THREE.DirectionalLight(0xFFFFFF, 1.2);
+  keyLight.position.set(5, 8, 5);
+  scene.add(keyLight);
+
+  const warmPointLight = new THREE.PointLight(0xFFE082, 1.5, 20);
+  warmPointLight.position.set(-3, 2, 4);
+  scene.add(warmPointLight);
+
+  const fillLight = new THREE.DirectionalLight(0xD4A5A5, 0.6);
+  fillLight.position.set(-5, -4, -2);
+  scene.add(fillLight);
+
+  // Helper Function: Create Curved 3D Rose Petal Geometry
+  function createCurvedPetalGeometry(width = 1.6, height = 2.2, widthSegments = 16, heightSegments = 16) {
+    const geo = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
+    const pos = geo.attributes.position;
+
+    for (let i = 0; i < pos.count; i++) {
+      const u = (pos.getX(i) / width) + 0.5; // 0 to 1
+      const v = (pos.getY(i) / height) + 0.5; // 0 to 1
+
+      // Cupping Z-displacement (petal bowl curvature)
+      const cupZ = -0.35 * Math.sin(u * Math.PI) * Math.sin(v * Math.PI);
+      
+      // Edge flare curl
+      const edgeCurl = 0.12 * Math.pow(v, 1.5) * Math.cos((u - 0.5) * Math.PI * 2);
+      
+      // Tapering top
+      const taperX = (1 - 0.2 * Math.pow(v, 2));
+
+      pos.setX(i, pos.getX(i) * taperX);
+      pos.setZ(i, cupZ + edgeCurl);
+    }
+
+    geo.computeVertexNormals();
+    return geo;
+  }
+
+  // PBR Velvet Rose Materials
+  const petalMaterialDark = new THREE.MeshStandardMaterial({
+    color: 0xC9184A,
+    roughness: 0.38,
+    metalness: 0.04,
+    side: THREE.DoubleSide
+  });
+
+  const petalMaterialMid = new THREE.MeshStandardMaterial({
+    color: 0xE63946,
+    roughness: 0.35,
+    metalness: 0.05,
+    side: THREE.DoubleSide
+  });
+
+  const petalMaterialOuter = new THREE.MeshStandardMaterial({
+    color: 0xFF4D6D,
+    roughness: 0.32,
+    metalness: 0.05,
+    side: THREE.DoubleSide
+  });
+
+  const stemMaterial = new THREE.MeshStandardMaterial({
+    color: 0x2D5A27,
+    roughness: 0.6,
+    metalness: 0.1
+  });
+
+  // Construct 3D Rose Master Group
+  const roseGroup = new THREE.Group();
+  scene.add(roseGroup);
+
+  // Stem & Sepals
+  const stemGeo = new THREE.CylinderGeometry(0.12, 0.15, 4.5, 16);
+  const stemMesh = new THREE.Mesh(stemGeo, stemMaterial);
+  stemMesh.position.y = -2.6;
+  roseGroup.add(stemMesh);
+
+  // Petal Storage Arrays
+  const innerPetals = [];
+  const midPetals = [];
+  const outerPetals = [];
+  const fallingPetals = [];
+
+  // 1. Inner Bud Layer (6 Petals)
+  const innerCount = 6;
+  for (let i = 0; i < innerCount; i++) {
+    const pivot = new THREE.Group();
+    const geo = createCurvedPetalGeometry(1.1, 1.6);
+    const mesh = new THREE.Mesh(geo, petalMaterialDark);
+    mesh.position.y = 0.8;
+    pivot.add(mesh);
+
+    pivot.rotation.y = (i * Math.PI * 2) / innerCount;
+    pivot.rotation.x = 0.22 + (i * 0.02);
+
+    roseGroup.add(pivot);
+    innerPetals.push({ pivot, baseAngleX: pivot.rotation.x });
+  }
+
+  // 2. Mid Layer (6 Petals)
+  const midCount = 6;
+  for (let i = 0; i < midCount; i++) {
+    const pivot = new THREE.Group();
+    const geo = createCurvedPetalGeometry(1.5, 2.0);
+    const mesh = new THREE.Mesh(geo, petalMaterialMid);
+    mesh.position.y = 1.0;
+    pivot.add(mesh);
+
+    pivot.rotation.y = (i * Math.PI * 2) / midCount + (Math.PI / 6);
+    pivot.rotation.x = 0.45;
+
+    roseGroup.add(pivot);
+    midPetals.push({ pivot, baseAngleX: pivot.rotation.x });
+  }
+
+  // 3. Outer Blooming Layer (6 Petals)
+  const outerCount = 6;
+  for (let i = 0; i < outerCount; i++) {
+    const pivot = new THREE.Group();
+    const geo = createCurvedPetalGeometry(1.8, 2.4);
+    const mesh = new THREE.Mesh(geo, petalMaterialOuter);
+    mesh.position.y = 1.2;
+    pivot.add(mesh);
+
+    pivot.rotation.y = (i * Math.PI * 2) / outerCount;
+    pivot.rotation.x = 0.75;
+
+    roseGroup.add(pivot);
+    outerPetals.push({ pivot, baseAngleX: pivot.rotation.x });
+  }
+
+  // 4. 5 Detachable Falling Moment Petals
+  const fallingCount = 5;
+  for (let i = 0; i < fallingCount; i++) {
+    const pivot = new THREE.Group();
+    const geo = createCurvedPetalGeometry(2.0, 2.5);
+    const mesh = new THREE.Mesh(geo, petalMaterialOuter);
+    mesh.position.y = 1.3;
+    pivot.add(mesh);
+
+    pivot.rotation.y = (i * Math.PI * 2) / fallingCount + (Math.PI / 10);
+    pivot.rotation.x = 0.95;
+
+    roseGroup.add(pivot);
+
+    fallingPetals.push({
+      pivot: pivot,
+      mesh: mesh,
+      baseAngleX: 0.95,
+      baseAngleY: pivot.rotation.y,
+      detached: false,
+      monthIndex: i
+    });
+  }
+
+  // Position Rose Group
+  roseGroup.position.set(0, -0.2, 0);
+  roseGroup.rotation.x = 0.35;
+
+  // Scroll Tracking & Animation Physics
+  let scrollProgress = 0;
+
+  function updateScroll() {
+    const rect = scrollContainer.getBoundingClientRect();
+    const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    const currentScroll = Math.max(0, -rect.top);
+    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
+
+    // Hero Overlay Fade Out
+    if (heroOverlay) {
+      const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.22));
+      heroOverlay.style.opacity = heroOpacity;
+    }
+
+    // 1. Rose Unfurling Rotation
+    roseGroup.rotation.y = scrollProgress * Math.PI * 1.2;
+    roseGroup.rotation.x = 0.35 + scrollProgress * 0.25;
+
+    // 2. Uncurl Petals in 3D Space
+    const bloomFactor = Math.min(1, scrollProgress / 0.35);
+
+    innerPetals.forEach((p) => {
+      p.pivot.rotation.x = p.baseAngleX + (bloomFactor * 0.35);
+    });
+
+    midPetals.forEach((p) => {
+      p.pivot.rotation.x = p.baseAngleX + (bloomFactor * 0.55);
+    });
+
+    outerPetals.forEach((p) => {
+      p.pivot.rotation.x = p.baseAngleX + (bloomFactor * 0.75);
+    });
+
+    // 3. Fall Physics & Detachment for 5 Moment Petals
+    fallingPetals.forEach((p, i) => {
+      const fallStartThreshold = 0.22 + (i * 0.15);
+
+      if (scrollProgress >= fallStartThreshold) {
+        const fallRatio = Math.min(1, (scrollProgress - fallStartThreshold) / 0.15);
+
+        // Detach and Float down in 3D Space
+        p.pivot.position.y = - (fallRatio * 8);
+        p.pivot.position.x = Math.sin((Date.now() * 0.002) + i) * 1.5;
+        p.pivot.rotation.z += 0.01;
+        p.pivot.rotation.x = p.baseAngleX + (fallRatio * 1.5);
+      } else {
+        p.pivot.position.y = 0;
+        p.pivot.position.x = 0;
+        p.pivot.rotation.x = p.baseAngleX + (bloomFactor * 0.85);
+      }
+    });
+
+    // 4. Sync Active Month Card Display
+    if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
+      let activeMonthIndex = -1;
+
+      if (scrollProgress >= 0.22 && scrollProgress < 0.37) activeMonthIndex = 0;
+      else if (scrollProgress >= 0.37 && scrollProgress < 0.52) activeMonthIndex = 1;
+      else if (scrollProgress >= 0.52 && scrollProgress < 0.67) activeMonthIndex = 2;
+      else if (scrollProgress >= 0.67 && scrollProgress < 0.82) activeMonthIndex = 3;
+      else if (scrollProgress >= 0.82) activeMonthIndex = 4;
+
+      if (activeMonthIndex >= 0 && cardDisplay) {
+        const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
+        document.getElementById('petal-card-badge').textContent = `Fallen 3D Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
+        document.getElementById('petal-card-title').textContent = data.title;
+        document.getElementById('petal-card-date').textContent = data.date;
+        document.getElementById('petal-card-text').textContent = data.story;
+        document.getElementById('petal-card-img').src = data.image;
+
+        cardDisplay.classList.add('active');
+
+        cardDisplay.onclick = () => {
+          triggerConfetti();
+          openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
+        };
+      } else if (cardDisplay) {
+        cardDisplay.classList.remove('active');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateScroll);
+  updateScroll();
+
+  // Render Loop
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Subtle gentle ambient float
+    roseGroup.position.y = -0.2 + Math.sin(Date.now() * 0.0015) * 0.08;
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   3. Arcade Tabs Navigation Handler
    -------------------------------------------------------------------------- */
 function initArcadeTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -86,7 +377,7 @@ function initArcadeTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Game 1: Co-Op Scratch Builder with "Sarvan Cursor"
+   4. Game 1: Co-Op Scratch Builder with "Sarvan Cursor"
    -------------------------------------------------------------------------- */
 function initCoopBuilder() {
   const cells = document.querySelectorAll('.coop-cell');
@@ -154,7 +445,7 @@ function initCoopBuilder() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
+   5. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
    -------------------------------------------------------------------------- */
 function initQuizGame() {
   const titleEl = document.getElementById('quiz-question-title');
@@ -225,7 +516,7 @@ function initQuizGame() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Game 3: Catch Sarvan's Heart Canvas Arcade
+   6. Game 3: Catch Sarvan's Heart Canvas Arcade
    -------------------------------------------------------------------------- */
 function initCatchGame() {
   const canvas = document.getElementById('catch-canvas');
@@ -309,7 +600,7 @@ function initCatchGame() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Game 4: Memory Match Card Game
+   7. Game 4: Memory Match Card Game
    -------------------------------------------------------------------------- */
 function initMemoryGame() {
   const grid = document.getElementById('memory-grid');
@@ -358,131 +649,6 @@ function initMemoryGame() {
     });
 
     grid.appendChild(card);
-  });
-}
-
-/* --------------------------------------------------------------------------
-   7. Three.js Real Rose Scroll Engine
-   -------------------------------------------------------------------------- */
-function initRealRoseScroll() {
-  const canvas = document.getElementById('flower-canvas-3d');
-  const scrollContainer = document.getElementById('flower-scroll-container');
-  const heroOverlay = document.getElementById('hero-overlay');
-  const cardDisplay = document.getElementById('fallen-petal-card-display');
-
-  if (!canvas || !scrollContainer || typeof THREE === 'undefined') return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0, 10);
-
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
-  scene.add(ambientLight);
-
-  const textureLoader = new THREE.TextureLoader();
-  const petalTextureUrl = (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.realPetalImage) ? ANNIVERSARY_CONFIG.realPetalImage : './assets/real_petal.png';
-
-  textureLoader.load(petalTextureUrl, (texture) => {
-    const petalCount = 5;
-    const petals = [];
-
-    const petalGeo = new THREE.PlaneGeometry(2.2, 2.2);
-    const petalMat = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      side: THREE.DoubleSide
-    });
-
-    for (let i = 0; i < petalCount; i++) {
-      const mesh = new THREE.Mesh(petalGeo, petalMat);
-      mesh.position.set((Math.random() - 0.5) * 3, 2 + i * 0.5, (Math.random() - 0.5) * 2);
-      mesh.rotation.z = Math.random() * Math.PI * 2;
-      scene.add(mesh);
-
-      petals.push({
-        mesh: mesh,
-        baseX: (i - 2) * 1.8,
-        monthIndex: i
-      });
-    }
-
-    let scrollProgress = 0;
-
-    function updateScroll() {
-      const rect = scrollContainer.getBoundingClientRect();
-      const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) return;
-
-      const currentScroll = Math.max(0, -rect.top);
-      scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
-
-      if (heroOverlay) {
-        const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
-        heroOverlay.style.opacity = heroOpacity;
-      }
-
-      if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
-        let activeMonthIndex = -1;
-
-        if (scrollProgress >= 0.2 && scrollProgress < 0.36) activeMonthIndex = 0;
-        else if (scrollProgress >= 0.36 && scrollProgress < 0.52) activeMonthIndex = 1;
-        else if (scrollProgress >= 0.52 && scrollProgress < 0.68) activeMonthIndex = 2;
-        else if (scrollProgress >= 0.68 && scrollProgress < 0.84) activeMonthIndex = 3;
-        else if (scrollProgress >= 0.84) activeMonthIndex = 4;
-
-        if (activeMonthIndex >= 0 && cardDisplay) {
-          const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
-          document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
-          document.getElementById('petal-card-title').textContent = data.title;
-          document.getElementById('petal-card-date').textContent = data.date;
-          document.getElementById('petal-card-text').textContent = data.story;
-          document.getElementById('petal-card-img').src = data.image;
-
-          cardDisplay.classList.add('active');
-
-          cardDisplay.onclick = () => {
-            triggerConfetti();
-            openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
-          };
-        } else if (cardDisplay) {
-          cardDisplay.classList.remove('active');
-        }
-      }
-    }
-
-    window.addEventListener('scroll', updateScroll);
-    updateScroll();
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      petals.forEach((p, i) => {
-        const petalStageStart = 0.2 + (i * 0.16);
-
-        if (scrollProgress >= petalStageStart) {
-          const fallFactor = (scrollProgress - petalStageStart) / 0.16;
-          p.mesh.position.y = 3 - (fallFactor * 6);
-          p.mesh.position.x = p.baseX + Math.sin(Date.now() * 0.002 + i) * 0.5;
-          p.mesh.rotation.z += 0.005;
-        } else {
-          p.mesh.position.y = 4 + i;
-        }
-      });
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  });
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
   });
 }
 
