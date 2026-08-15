@@ -1,10 +1,13 @@
 /**
- * 💖 MY ONE AND ONLY - SHIVI & SARVAN SCRATCH CODING UI & REAL ROSE SCROLL
+ * 💖 MY ONE AND ONLY - TOKYO HANABI NIGHT SKY & REAL ROSE SCROLL
+ * Features: Interactive Canvas Fireworks Engine, Floating Sky Lanterns,
+ * Scratch Block Builder, 3D Real Rose Scroll, 5 Arcade Games.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpotifyWidget();
   initHeartParticles();
+  initFireworksEngine();
   initRealRoseScroll();
 
   // Timers
@@ -58,7 +61,176 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Arcade Tabs Navigation Handler
+   2. Interactive Tokyo Fireworks Particle Engine (Hanabi Engine)
+   -------------------------------------------------------------------------- */
+let launchFireworkBurst = function(x, y) {};
+
+function initFireworksEngine() {
+  const canvas = document.getElementById('fireworks-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = window.innerWidth);
+  let height = (canvas.height = window.innerHeight);
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  const fireworks = [];
+  const particles = [];
+  const colors = ['#E0A96D', '#FF758F', '#D4A5A5', '#FFF0F3', '#FFD166', '#06D6A0'];
+
+  class Firework {
+    constructor(startX, startY, targetX, targetY) {
+      this.x = startX;
+      this.y = startY;
+      this.startX = startX;
+      this.startY = startY;
+      this.targetX = targetX;
+      this.targetY = targetY;
+      this.distanceToTarget = Math.hypot(targetX - startX, targetY - startY);
+      this.distanceTraveled = 0;
+      this.coordinates = [];
+      this.coordinateCount = 3;
+
+      while (this.coordinateCount--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+
+      this.angle = Math.atan2(targetY - startY, targetX - startX);
+      this.speed = 3.5;
+      this.acceleration = 1.05;
+      this.brightness = Math.random() * 30 + 70;
+      this.targetRadius = 1;
+    }
+
+    update(index) {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
+
+      if (this.targetRadius < 8) {
+        this.targetRadius += 0.3;
+      } else {
+        this.targetRadius = 1;
+      }
+
+      this.speed *= this.acceleration;
+      const vx = Math.cos(this.angle) * this.speed;
+      const vy = Math.sin(this.angle) * this.speed;
+      this.distanceTraveled = Math.hypot(this.x + vx - this.startX, this.y + vy - this.startY);
+
+      if (this.distanceTraveled >= this.distanceToTarget) {
+        createParticles(this.targetX, this.targetY);
+        fireworks.splice(index, 1);
+      } else {
+        this.x += vx;
+        this.y += vy;
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+      ctx.lineTo(this.x, this.y);
+      ctx.strokeStyle = `hsl(${Math.random() * 360}, 100%, ${this.brightness}%)`;
+      ctx.stroke();
+    }
+  }
+
+  class Particle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.coordinates = [];
+      this.coordinateCount = 5;
+
+      while (this.coordinateCount--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+
+      this.angle = Math.random() * Math.PI * 2;
+      this.speed = Math.random() * 10 + 1;
+      this.friction = 0.95;
+      this.gravity = 0.98;
+      this.hue = Math.floor(Math.random() * 360);
+      this.brightness = Math.random() * 30 + 70;
+      this.alpha = 1;
+      this.decay = Math.random() * 0.018 + 0.012;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    update(index) {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
+      this.speed *= this.friction;
+      this.x += Math.cos(this.angle) * this.speed;
+      this.y += Math.sin(this.angle) * this.speed + this.gravity;
+      this.alpha -= this.decay;
+
+      if (this.alpha <= this.decay) {
+        particles.splice(index, 1);
+      }
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+      ctx.lineTo(this.x, this.y);
+      ctx.strokeStyle = this.color;
+      ctx.globalAlpha = this.alpha;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function createParticles(x, y) {
+    let particleCount = 75;
+    while (particleCount--) {
+      particles.push(new Particle(x, y));
+    }
+  }
+
+  launchFireworkBurst = function(x, y) {
+    const startX = width / 2 + (Math.random() - 0.5) * 400;
+    const startY = height;
+    fireworks.push(new Firework(startX, startY, x, y));
+  };
+
+  // Launch ambient fireworks periodically
+  setInterval(() => {
+    if (Math.random() > 0.4) {
+      launchFireworkBurst(Math.random() * width, Math.random() * (height * 0.5) + 80);
+    }
+  }, 2200);
+
+  function loop() {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    ctx.fillRect(0, 0, width, height);
+    ctx.globalCompositeOperation = 'lighter';
+
+    let i = fireworks.length;
+    while (i--) {
+      fireworks[i].draw();
+      fireworks[i].update(i);
+    }
+
+    let j = particles.length;
+    while (j--) {
+      particles[j].draw();
+      particles[j].update(j);
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+/* --------------------------------------------------------------------------
+   3. Arcade Tabs Navigation Handler
    -------------------------------------------------------------------------- */
 function initArcadeTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -86,7 +258,7 @@ function initArcadeTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
+   4. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
    -------------------------------------------------------------------------- */
 function initScratchBlockBuilder() {
   const palette = document.getElementById('scratch-palette');
@@ -102,7 +274,6 @@ function initScratchBlockBuilder() {
   let currentStep = 0;
   palette.innerHTML = '';
 
-  // Render Palette Scratch Blocks
   blocksData.forEach((block, idx) => {
     const el = document.createElement('div');
     el.className = `scratch-block scratch-block-${block.type}`;
@@ -151,7 +322,6 @@ function initScratchBlockBuilder() {
       if (idx === currentStep) {
         if (placeholder) placeholder.style.display = 'none';
 
-        // Snap block into workspace stack
         const blockData = blocksData[idx];
         const stackedEl = document.createElement('div');
         stackedEl.className = `scratch-block scratch-block-${blockData.type} scratch-stacked-block`;
@@ -163,12 +333,13 @@ function initScratchBlockBuilder() {
         btn.classList.remove('target-highlight');
 
         triggerConfetti();
+        launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.4);
+
         currentStep++;
 
         if (currentStep < blocksData.length) {
           updateSarvanCursorPosition(currentStep);
         } else {
-          // Completed Scratch stack!
           if (instruction) instruction.style.display = 'none';
           if (rewardCard) rewardCard.classList.add('active');
           triggerMassiveHeartCascade();
@@ -179,7 +350,7 @@ function initScratchBlockBuilder() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
+   5. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
    -------------------------------------------------------------------------- */
 function initQuizGame() {
   const titleEl = document.getElementById('quiz-question-title');
@@ -216,6 +387,8 @@ function initQuizGame() {
         if (opt === q.correct) {
           btn.classList.add('correct');
           triggerConfetti();
+          launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.35);
+
           setTimeout(() => {
             currentQIndex++;
             renderQuestion(currentQIndex);
@@ -232,7 +405,6 @@ function initQuizGame() {
 
   renderQuestion(0);
 
-  // Question 5: Dream Location Buttons (Venice, Paris, Italy, Rome)
   locationBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const locKey = btn.getAttribute('data-loc');
@@ -244,13 +416,14 @@ function initQuizGame() {
         videoContainer.classList.add('active');
         videoPlayer.play().catch((err) => console.log('Video play error:', err));
         triggerConfetti();
+        launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.3);
       }
     });
   });
 }
 
 /* --------------------------------------------------------------------------
-   5. Game 3: Catch Sarvan's Heart Canvas Arcade
+   6. Game 3: Catch Sarvan's Heart Canvas Arcade
    -------------------------------------------------------------------------- */
 function initCatchGame() {
   const canvas = document.getElementById('catch-canvas');
@@ -296,18 +469,16 @@ function initCatchGame() {
   function loop() {
     ctx.clearRect(0, 0, width, height);
 
-    // Draw Basket
-    ctx.fillStyle = '#B87373';
+    ctx.fillStyle = '#E0A96D';
     ctx.beginPath();
     ctx.roundRect(basketX, height - 25, basketWidth, basketHeight, 8);
     ctx.fill();
 
-    // Draw & Update Hearts
     for (let i = hearts.length - 1; i >= 0; i--) {
       const h = hearts[i];
       h.y += h.speed;
 
-      ctx.fillStyle = '#ff4d6d';
+      ctx.fillStyle = '#FF758F';
       ctx.font = '16px sans-serif';
       ctx.fillText('💖', h.x, h.y);
 
@@ -334,7 +505,7 @@ function initCatchGame() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Game 4: Memory Match Card Game
+   7. Game 4: Memory Match Card Game
    -------------------------------------------------------------------------- */
 function initMemoryGame() {
   const grid = document.getElementById('memory-grid');
@@ -387,7 +558,7 @@ function initMemoryGame() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Three.js Real Photorealistic Rose Scroll Engine
+   8. Three.js Real Photorealistic Rose Scroll Engine
    -------------------------------------------------------------------------- */
 function initRealRoseScroll() {
   const canvas = document.getElementById('flower-canvas-3d');
@@ -512,7 +683,7 @@ function initRealRoseScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   8. Relationship Timers
+   9. Relationship Timers
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -571,7 +742,7 @@ function initNextChapterTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   9. Render Flip Cards, Envelopes & Coupons
+   10. Render Flip Cards, Envelopes & Coupons
    -------------------------------------------------------------------------- */
 function renderReasonsFlipCards() {
   const container = document.getElementById('reasons-flip-grid');
@@ -598,6 +769,7 @@ function renderReasonsFlipCards() {
     flipContainer.addEventListener('click', () => {
       flipContainer.classList.toggle('flipped');
       triggerConfetti();
+      launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.5);
     });
 
     container.appendChild(flipContainer);
@@ -621,6 +793,7 @@ function renderEnvelopes() {
 
     card.addEventListener('click', () => {
       triggerConfetti();
+      launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.4);
       openModal(env.icon, env.title, env.content);
     });
 
@@ -664,6 +837,7 @@ function renderCoupons() {
         btn.disabled = true;
         btn.textContent = 'Redeemed ✨';
         triggerConfetti();
+        launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.35);
         openModal(
           coupon.icon,
           'Coupon Redeemed! 🎉',
@@ -677,7 +851,7 @@ function renderCoupons() {
 }
 
 /* --------------------------------------------------------------------------
-   10. Proposal Interaction Handlers
+   11. Proposal Interaction Handlers
    -------------------------------------------------------------------------- */
 function setupProposalInteractions() {
   const btnYes = document.getElementById('btn-yes');
@@ -715,6 +889,10 @@ function setupProposalInteractions() {
 
   btnYes.addEventListener('click', () => {
     triggerMassiveHeartCascade();
+    launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.3);
+    launchFireworkBurst(window.innerWidth * 0.25, window.innerHeight * 0.4);
+    launchFireworkBurst(window.innerWidth * 0.75, window.innerHeight * 0.4);
+
     openModal(
       '💖',
       'YAY! You Said Yes, Shivi! 🎉',
@@ -724,7 +902,7 @@ function setupProposalInteractions() {
 }
 
 /* --------------------------------------------------------------------------
-   11. Particles & Modals
+   12. Particles & Modals
    -------------------------------------------------------------------------- */
 function initHeartParticles() {
   const canvas = document.getElementById('particle-canvas');
@@ -754,7 +932,7 @@ function initHeartParticles() {
       this.speedY = Math.random() * 1.0 + 0.3;
       this.speedX = Math.sin(Math.random() * Math.PI) * 0.5;
       this.opacity = Math.random() * 0.4 + 0.15;
-      this.color = Math.random() > 0.4 ? '#D4A5A5' : '#B87373';
+      this.color = Math.random() > 0.4 ? '#E0A96D' : '#FF758F';
       this.rotation = Math.random() * Math.PI * 2;
       this.rotSpeed = (Math.random() - 0.5) * 0.015;
     }
@@ -811,7 +989,7 @@ function triggerConfetti() {
       particleCount: 65,
       spread: 65,
       origin: { y: 0.6 },
-      colors: ['#D4A5A5', '#B87373', '#8C5252', '#F5E8E8']
+      colors: ['#E0A96D', '#FF758F', '#D4A5A5', '#FFF0F3']
     });
   }
 }
@@ -828,8 +1006,8 @@ function triggerMassiveHeartCascade() {
         return clearInterval(interval);
       }
       const particleCount = 50 * (timeLeft / duration);
-      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#D4A5A5', '#B87373', '#8C5252'] });
-      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#D4A5A5', '#B87373', '#F5E8E8'] });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#E0A96D', '#FF758F', '#D4A5A5'] });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#E0A96D', '#FF758F', '#FFF0F3'] });
     }, 250);
   }
 }

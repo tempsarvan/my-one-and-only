@@ -1,37 +1,32 @@
 /* ==========================================================================
-    MY ONE AND ONLY - APPLE HIG HUMAN-CRAFTED DESIGN SYSTEM (FOR SHIVI & SARVAN)
-   Features: Glassmorphism Translucent Materials, Polaroid Memory Cards with Tape,
-   Spring Micro-Interactions, Swift Playgrounds Scratch UI, Photorealistic Rose Parallax.
+   🎆 MY ONE AND ONLY - TOKYO HANABI NIGHT SKY DESIGN SYSTEM (FOR SHIVI & SARVAN)
+   Features: Tokyo Midnight Celestial Gradient, Translucent Midnight Glass,
+   Illuminated Sky Lanterns, Polaroid Scrapbooks, Fireworks Canvas Engine.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. Apple Design Tokens & Variables
-   -------------------------------------------------------------------------- */
 :root {
-  --bg-cream: #FDFBF7;
-  --bg-card: #FFFFFF;
-  --bg-card-soft: #F8F4EE;
+  --bg-sky-dark: #0A0E17;
+  --bg-sky-mid: #121829;
+  --bg-sky-blue: #1A1F36;
+  --glass-card: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(224, 169, 109, 0.35);
+  --gold-imperial: #E0A96D;
+  --sakura-pink: #FF758F;
   --rose-dusty: #D4A5A5;
-  --rose-accent: #B87373;
   --rose-dark: #8C5252;
-  --rose-soft: #F5E8E8;
-  --gold-warm: #E6B89C;
-  --text-espresso: #2B2A2A;
-  --text-muted: #736262;
-  --border-glass: rgba(212, 165, 165, 0.35);
-  --shadow-apple: 0 20px 45px rgba(140, 82, 82, 0.12);
-  --shadow-hover: 0 28px 55px rgba(140, 82, 82, 0.18);
+  --rose-soft: rgba(255, 117, 143, 0.15);
+  --text-moonlight: #FDFBF7;
+  --text-muted: #B0B7C3;
+  --shadow-tokyo: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 30px rgba(224, 169, 109, 0.3);
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --radius-apple: 28px;
+  --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
   --spring-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* --------------------------------------------------------------------------
-   2. Base Setup & Canvas Background
-   -------------------------------------------------------------------------- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -44,8 +39,9 @@ html {
 }
 
 body {
-  background-color: var(--bg-cream);
-  color: var(--text-espresso);
+  background: linear-gradient(180deg, var(--bg-sky-dark) 0%, var(--bg-sky-mid) 40%, var(--bg-sky-blue) 100%);
+  background-attachment: fixed;
+  color: var(--text-moonlight);
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
@@ -53,22 +49,24 @@ body {
   position: relative;
 }
 
-#particle-canvas {
+#particle-canvas, #fireworks-canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 1;
 }
+
+#particle-canvas { z-index: 1; }
+#fireworks-canvas { z-index: 2; }
 
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 section {
@@ -88,8 +86,9 @@ h1, h2, h3, .serif-font {
 
 .section-title h2 {
   font-size: 2.9rem;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   margin-bottom: 12px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .section-title p {
@@ -103,19 +102,19 @@ h1, h2, h3, .serif-font {
   gap: 8px;
   padding: 6px 20px;
   border-radius: 50px;
-  background: var(--rose-soft);
-  border: 1px solid var(--rose-dusty);
-  color: var(--rose-dark);
+  background: rgba(224, 169, 109, 0.15);
+  border: 1px solid var(--gold-imperial);
+  color: var(--gold-imperial);
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 16px;
-  box-shadow: 0 4px 14px rgba(212, 165, 165, 0.2);
+  box-shadow: var(--shadow-glow);
 }
 
 /* --------------------------------------------------------------------------
-   3. Apple Glassmorphism Control Center Bar (Top-Right)
+   Top-Right Spotify Player (Tokyo Night Glass Widget)
    -------------------------------------------------------------------------- */
 .spotify-widget-fixed {
   position: fixed;
@@ -123,12 +122,12 @@ h1, h2, h3, .serif-font {
   right: 20px;
   z-index: 1000;
   width: 320px;
-  background: rgba(255, 251, 247, 0.88);
+  background: rgba(18, 24, 41, 0.88);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border: 1px solid var(--border-glass);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-apple);
+  box-shadow: var(--shadow-tokyo);
   transition: var(--spring-bounce);
   overflow: hidden;
 }
@@ -138,8 +137,8 @@ h1, h2, h3, .serif-font {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(245, 232, 232, 0.5);
-  border-bottom: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--glass-border);
   cursor: pointer;
 }
 
@@ -154,13 +153,13 @@ h1, h2, h3, .serif-font {
   height: 34px;
   border-radius: 50%;
   background: radial-gradient(circle, #333 30%, #111 70%, #000 100%);
-  border: 2px solid var(--rose-dusty);
+  border: 2px solid var(--gold-imperial);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
   animation: spin-vinyl 4s linear infinite;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 12px rgba(224, 169, 109, 0.4);
 }
 
 @keyframes spin-vinyl {
@@ -171,7 +170,7 @@ h1, h2, h3, .serif-font {
 .spotify-artist {
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
 }
 
 .spotify-sub {
@@ -208,7 +207,7 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   4. Real Photorealistic Rose Scroll Viewport
+   Real Rose Scroll Viewport (Tokyo Celestial Backdrop)
    -------------------------------------------------------------------------- */
 .flower-scroll-container {
   position: relative;
@@ -224,7 +223,7 @@ h1, h2, h3, .serif-font {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 3;
 }
 
 #flower-canvas-3d {
@@ -241,7 +240,7 @@ h1, h2, h3, .serif-font {
   top: 8%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 4;
   text-align: center;
   max-width: 820px;
   width: 90%;
@@ -256,8 +255,8 @@ h1, h2, h3, .serif-font {
   position: relative;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 20px 45px rgba(184, 115, 115, 0.35);
-  border: 4px solid var(--rose-dusty);
+  box-shadow: 0 20px 50px rgba(255, 117, 143, 0.4);
+  border: 4px solid var(--gold-imperial);
   animation: float-real-rose 4s ease-in-out infinite;
 }
 
@@ -273,14 +272,15 @@ h1, h2, h3, .serif-font {
 }
 
 .flower-hero-title {
-  font-size: 3.5rem;
+  font-size: 3.6rem;
   line-height: 1.15;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   margin-bottom: 12px;
 }
 
 .flower-hero-title span {
-  color: var(--rose-accent);
+  color: var(--gold-imperial);
+  text-shadow: 0 0 20px rgba(224, 169, 109, 0.5);
 }
 
 .flower-hero-sub {
@@ -294,14 +294,14 @@ h1, h2, h3, .serif-font {
   align-items: center;
   gap: 10px;
   padding: 12px 28px;
-  background: rgba(253, 251, 247, 0.92);
+  background: rgba(18, 24, 41, 0.85);
   backdrop-filter: blur(14px);
-  border: 1px solid var(--rose-dusty);
+  border: 1px solid var(--gold-imperial);
   border-radius: 50px;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   font-size: 0.95rem;
   font-weight: 700;
-  box-shadow: var(--shadow-apple);
+  box-shadow: var(--shadow-glow);
   animation: bounce-slow 2s infinite;
 }
 
@@ -310,30 +310,30 @@ h1, h2, h3, .serif-font {
   50% { transform: translateY(8px); }
 }
 
-/* Apple Polaroid Scrapbook Tile Card Display Overlay */
+/* Tokyo Night Polaroid Card Overlay */
 .fallen-petal-card-display {
   position: absolute;
   bottom: 8%;
   left: 50%;
   transform: translateX(-50%) rotate(-1.5deg);
-  z-index: 4;
+  z-index: 5;
   width: 90%;
   max-width: 680px;
   background: #FFFFFF;
   border: 10px solid #FFFFFF;
-  border-bottom: 24px solid #FFFFFF;
+  border-bottom: 26px solid #FFFFFF;
   border-radius: var(--radius-md);
   padding: 20px;
-  box-shadow: 0 25px 60px rgba(140, 82, 82, 0.22);
+  box-shadow: var(--shadow-tokyo);
   display: flex;
   align-items: center;
   gap: 22px;
   transition: var(--spring-bounce);
   opacity: 0;
   pointer-events: none;
+  color: #2B2A2A;
 }
 
-/* Translucent Scotch Tape Accent */
 .fallen-petal-card-display::before {
   content: '';
   position: absolute;
@@ -341,11 +341,10 @@ h1, h2, h3, .serif-font {
   left: 40%;
   width: 110px;
   height: 28px;
-  background: rgba(245, 232, 232, 0.65);
+  background: rgba(224, 169, 109, 0.7);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(212, 165, 165, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   transform: rotate(-3deg);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .fallen-petal-card-display.active {
@@ -380,7 +379,7 @@ h1, h2, h3, .serif-font {
 
 .petal-card-title {
   font-size: 1.4rem;
-  color: var(--text-espresso);
+  color: #2B2A2A;
   margin-bottom: 4px;
 }
 
@@ -393,19 +392,20 @@ h1, h2, h3, .serif-font {
 
 .petal-card-text {
   font-size: 0.92rem;
-  color: var(--text-muted);
+  color: #555;
   line-height: 1.5;
 }
 
 /* --------------------------------------------------------------------------
-   5. Swift Playgrounds / Scratch Block Coding Interface (Game 1)
+   5-Game Arcade Hub (Tokyo Midnight Glass)
    -------------------------------------------------------------------------- */
 .arcade-container {
-  background: var(--bg-card);
-  border: 2px solid var(--rose-dusty);
-  border-radius: var(--radius-apple);
+  background: var(--glass-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   padding: 42px 32px;
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-tokyo);
   position: relative;
 }
 
@@ -415,13 +415,13 @@ h1, h2, h3, .serif-font {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--rose-dark), var(--rose-accent));
-  color: white;
+  background: linear-gradient(135deg, var(--gold-imperial), var(--sakura-pink));
+  color: #0A0E17;
   padding: 8px 18px;
   border-radius: 50px;
   font-size: 0.88rem;
-  font-weight: 700;
-  box-shadow: 0 10px 25px rgba(140, 82, 82, 0.45);
+  font-weight: 800;
+  box-shadow: var(--shadow-glow);
   pointer-events: none;
   transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
   display: none;
@@ -429,16 +429,6 @@ h1, h2, h3, .serif-font {
 
 .sarvan-cursor-badge.active {
   display: flex;
-}
-
-.sarvan-cursor-icon {
-  font-size: 1.05rem;
-  animation: pulse-cursor 1s infinite alternate;
-}
-
-@keyframes pulse-cursor {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.25); }
 }
 
 .arcade-tabs {
@@ -451,8 +441,8 @@ h1, h2, h3, .serif-font {
 }
 
 .tab-btn {
-  background: var(--bg-card-soft);
-  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
   color: var(--text-muted);
   padding: 12px 24px;
   border-radius: 50px;
@@ -463,10 +453,10 @@ h1, h2, h3, .serif-font {
 }
 
 .tab-btn:hover, .tab-btn.active {
-  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
-  color: white;
-  border-color: var(--rose-dark);
-  box-shadow: 0 8px 22px rgba(184, 115, 115, 0.35);
+  background: linear-gradient(135deg, var(--gold-imperial), var(--sakura-pink));
+  color: #0A0E17;
+  border-color: var(--gold-imperial);
+  box-shadow: var(--shadow-glow);
 }
 
 .arcade-game-view {
@@ -477,7 +467,7 @@ h1, h2, h3, .serif-font {
   display: block;
 }
 
-/* Scratch Block Coding Workspace Layout (Game 1) */
+/* Scratch Block Coding Workspace Layout */
 .scratch-ui-layout {
   display: flex;
   flex-direction: column;
@@ -492,9 +482,9 @@ h1, h2, h3, .serif-font {
   gap: 12px;
   justify-content: center;
   padding: 18px;
-  background: #F1F3F5;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: var(--radius-md);
-  border: 2px dashed #CED4DA;
+  border: 1px dashed var(--glass-border);
 }
 
 .scratch-block {
@@ -507,23 +497,13 @@ h1, h2, h3, .serif-font {
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
   transition: var(--spring-bounce);
   user-select: none;
 }
 
 .scratch-block:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
-
-.scratch-block.target-highlight {
-  animation: pulse-scratch 1s infinite alternate;
-}
-
-@keyframes pulse-scratch {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 151, 255, 0.6); }
-  100% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(76, 151, 255, 0); }
 }
 
 .scratch-block-event { background: #FFAB19; }
@@ -533,8 +513,8 @@ h1, h2, h3, .serif-font {
 
 .scratch-stack-workspace {
   min-height: 230px;
-  background: #E9ECEF;
-  border: 2px solid #ADB5BD;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 22px;
   display: flex;
@@ -543,7 +523,7 @@ h1, h2, h3, .serif-font {
 }
 
 .scratch-placeholder-text {
-  color: #868E96;
+  color: var(--text-muted);
   text-align: center;
   font-weight: 600;
   font-size: 0.98rem;
@@ -553,22 +533,17 @@ h1, h2, h3, .serif-font {
 .scratch-stacked-block {
   margin-left: 0;
   width: 100%;
-  animation: snap-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes snap-in {
-  0% { transform: scale(0.8) translateY(-10px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 .blooming-reward-card {
   display: none;
-  background: linear-gradient(135deg, var(--rose-soft), #FDFBF7);
-  border: 2px solid var(--rose-dusty);
-  border-radius: var(--radius-apple);
+  background: rgba(18, 24, 41, 0.9);
+  border: 2px solid var(--gold-imperial);
+  border-radius: var(--radius-lg);
   padding: 42px 24px;
   text-align: center;
   margin-top: 20px;
+  box-shadow: var(--shadow-glow);
 }
 
 .blooming-reward-card.active {
@@ -590,11 +565,11 @@ h1, h2, h3, .serif-font {
 .blooming-message {
   font-family: var(--font-serif);
   font-size: 2.3rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-top: 10px;
 }
 
-/* Game 2: Quiz & Dream Location Video */
+/* Quiz, Dreams, Catch & Memory Cards */
 .quiz-box {
   max-width: 620px;
   margin: 0 auto;
@@ -602,7 +577,7 @@ h1, h2, h3, .serif-font {
 
 .quiz-question-title {
   font-size: 1.55rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 26px;
   text-align: center;
 }
@@ -616,38 +591,38 @@ h1, h2, h3, .serif-font {
 
 .quiz-opt-btn {
   padding: 18px 22px;
-  background: var(--bg-card-soft);
-  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   cursor: pointer;
   transition: var(--spring-bounce);
 }
 
 .quiz-opt-btn:hover {
-  border-color: var(--rose-dusty);
-  background: var(--rose-soft);
+  border-color: var(--gold-imperial);
+  background: rgba(224, 169, 109, 0.15);
   transform: translateY(-2px);
 }
 
 .quiz-opt-btn.correct {
-  background: #E8F5E9;
+  background: rgba(76, 175, 80, 0.25);
   border-color: #4CAF50;
-  color: #2E7D32;
+  color: #A5D6A7;
 }
 
 .quiz-opt-btn.wrong {
-  background: #FFEBEE;
+  background: rgba(239, 83, 80, 0.25);
   border-color: #EF5350;
-  color: #C62828;
+  color: #EF9A9A;
 }
 
 .dream-location-box {
   display: none;
-  background: var(--bg-card-soft);
-  border: 2px solid var(--rose-dusty);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--gold-imperial);
   border-radius: var(--radius-md);
   padding: 32px 26px;
   text-align: center;
@@ -667,9 +642,9 @@ h1, h2, h3, .serif-font {
 
 .location-btn {
   padding: 13px 26px;
-  background: var(--bg-card);
-  border: 1px solid var(--rose-dusty);
-  color: var(--rose-dark);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--gold-imperial);
+  color: var(--gold-imperial);
   border-radius: 50px;
   font-weight: 700;
   font-size: 1rem;
@@ -678,10 +653,10 @@ h1, h2, h3, .serif-font {
 }
 
 .location-btn:hover {
-  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
-  color: white;
+  background: linear-gradient(135deg, var(--gold-imperial), var(--sakura-pink));
+  color: #0A0E17;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(184, 115, 115, 0.35);
+  box-shadow: var(--shadow-glow);
 }
 
 .location-video-container {
@@ -689,8 +664,7 @@ h1, h2, h3, .serif-font {
   margin-top: 26px;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 2px solid var(--rose-dusty);
-  box-shadow: var(--shadow-apple);
+  border: 2px solid var(--gold-imperial);
 }
 
 .location-video-container.active {
@@ -705,20 +679,19 @@ h1, h2, h3, .serif-font {
 
 .location-video-desc {
   padding: 18px;
-  background: var(--bg-card);
+  background: rgba(10, 14, 23, 0.9);
   font-size: 1.08rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   font-weight: 700;
 }
 
-/* Game 3: Catch Sarvan's Heart */
 .catch-game-box {
   text-align: center;
 }
 
 #catch-canvas {
-  background: var(--bg-card-soft);
-  border: 2px solid var(--rose-dusty);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--gold-imperial);
   border-radius: var(--radius-md);
   width: 100%;
   max-width: 500px;
@@ -729,11 +702,10 @@ h1, h2, h3, .serif-font {
 .score-badge {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 16px;
 }
 
-/* Game 4: Memory Match */
 .memory-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -744,8 +716,8 @@ h1, h2, h3, .serif-font {
 
 .memory-card {
   height: 100px;
-  background: var(--bg-card-soft);
-  border: 2px solid var(--rose-dusty);
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--glass-border);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -756,18 +728,17 @@ h1, h2, h3, .serif-font {
 }
 
 .memory-card.flipped {
-  background: var(--bg-card);
-  border-color: var(--rose-dark);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--gold-imperial);
 }
 
-/* Game 5: Love Certificate */
 .certificate-box {
-  background: #FFFDF9;
-  border: 6px double var(--rose-dusty);
-  border-radius: var(--radius-apple);
+  background: rgba(18, 24, 41, 0.92);
+  border: 6px double var(--gold-imperial);
+  border-radius: var(--radius-lg);
   padding: 44px 34px;
   text-align: center;
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-glow);
   max-width: 660px;
   margin: 0 auto;
 }
@@ -775,7 +746,7 @@ h1, h2, h3, .serif-font {
 .certificate-title {
   font-family: var(--font-serif);
   font-size: 2.5rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 8px;
 }
 
@@ -788,7 +759,7 @@ h1, h2, h3, .serif-font {
 .certificate-body {
   font-size: 1.18rem;
   line-height: 1.8;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   margin-bottom: 32px;
 }
 
@@ -797,7 +768,7 @@ h1, h2, h3, .serif-font {
   align-items: center;
   justify-content: space-around;
   margin-top: 32px;
-  border-top: 1px solid var(--border-glass);
+  border-top: 1px solid var(--glass-border);
   padding-top: 22px;
 }
 
@@ -808,7 +779,7 @@ h1, h2, h3, .serif-font {
 .sig-name {
   font-family: var(--font-serif);
   font-size: 1.45rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   font-weight: 700;
 }
 
@@ -856,30 +827,33 @@ h1, h2, h3, .serif-font {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-apple);
-  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-tokyo);
+  border: 1px solid var(--glass-border);
 }
 
 .flip-card-front {
-  background: var(--bg-card);
-  color: var(--text-espresso);
+  background: var(--glass-card);
+  backdrop-filter: blur(20px);
+  color: var(--text-moonlight);
 }
 
 .flip-card-back {
-  background: linear-gradient(135deg, var(--rose-soft), #FDFBF7);
-  color: var(--text-espresso);
+  background: rgba(18, 24, 41, 0.94);
+  backdrop-filter: blur(20px);
+  color: var(--text-moonlight);
   transform: rotateY(180deg);
-  border-color: var(--rose-dusty);
+  border-color: var(--gold-imperial);
   font-family: var(--font-serif);
   font-size: 1.1rem;
 }
 
 .timer-container {
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-apple);
+  background: var(--glass-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   padding: 38px 30px;
-  box-shadow: var(--shadow-apple);
+  box-shadow: var(--shadow-tokyo);
   margin-top: 24px;
 }
 
@@ -890,8 +864,8 @@ h1, h2, h3, .serif-font {
 }
 
 .timer-card {
-  background: var(--bg-card-soft);
-  border: 1px solid rgba(212, 165, 165, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(224, 169, 109, 0.2);
   border-radius: var(--radius-md);
   padding: 20px 12px;
   text-align: center;
@@ -901,7 +875,7 @@ h1, h2, h3, .serif-font {
   font-family: var(--font-serif);
   font-size: 2.8rem;
   font-weight: 700;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   line-height: 1;
 }
 
@@ -919,17 +893,18 @@ h1, h2, h3, .serif-font {
 .proposal-card {
   max-width: 680px;
   margin: 0 auto;
-  background: var(--bg-card);
-  border: 2px solid var(--rose-dusty);
-  border-radius: var(--radius-apple);
+  background: var(--glass-card);
+  backdrop-filter: blur(24px);
+  border: 2px solid var(--gold-imperial);
+  border-radius: var(--radius-lg);
   padding: 52px 38px;
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-tokyo);
   position: relative;
 }
 
 .proposal-title {
   font-size: 2.45rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 16px;
 }
 
@@ -949,15 +924,15 @@ h1, h2, h3, .serif-font {
 }
 
 .btn-yes {
-  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
-  color: white;
+  background: linear-gradient(135deg, var(--gold-imperial), var(--sakura-pink));
+  color: #0A0E17;
   border: none;
   padding: 18px 46px;
   font-size: 1.18rem;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 12px 28px rgba(184, 115, 115, 0.45);
+  box-shadow: var(--shadow-glow);
   transition: var(--spring-bounce);
 }
 
@@ -966,9 +941,9 @@ h1, h2, h3, .serif-font {
 }
 
 .btn-no {
-  background: var(--bg-card-soft);
+  background: rgba(255, 255, 255, 0.08);
   color: var(--text-muted);
-  border: 1px solid var(--border-glass);
+  border: 1px solid var(--glass-border);
   padding: 14px 34px;
   font-size: 1.05rem;
   font-weight: 600;
@@ -979,18 +954,19 @@ h1, h2, h3, .serif-font {
 }
 
 .next-chapter-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  border-radius: var(--radius-apple);
+  background: var(--glass-card);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
   padding: 42px 34px;
   text-align: center;
-  box-shadow: var(--shadow-apple);
+  box-shadow: var(--shadow-tokyo);
   margin-top: 20px;
 }
 
 .next-chapter-title {
   font-size: 2.25rem;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 8px;
 }
 
@@ -1007,8 +983,9 @@ h1, h2, h3, .serif-font {
 }
 
 .envelope-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-glass);
+  background: var(--glass-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   padding: 34px 26px;
   text-align: center;
@@ -1018,8 +995,8 @@ h1, h2, h3, .serif-font {
 
 .envelope-card:hover {
   transform: translateY(-8px);
-  border-color: var(--rose-dusty);
-  box-shadow: var(--shadow-hover);
+  border-color: var(--gold-imperial);
+  box-shadow: var(--shadow-glow);
 }
 
 .env-icon {
@@ -1029,7 +1006,7 @@ h1, h2, h3, .serif-font {
 
 .env-title {
   font-size: 1.18rem;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   margin-bottom: 6px;
 }
 
@@ -1045,8 +1022,9 @@ h1, h2, h3, .serif-font {
 }
 
 .coupon-card {
-  background: var(--bg-card);
-  border: 1px dashed var(--rose-dusty);
+  background: var(--glass-card);
+  backdrop-filter: blur(20px);
+  border: 1px dashed var(--gold-imperial);
   border-radius: var(--radius-md);
   padding: 28px 22px;
   display: flex;
@@ -1057,7 +1035,7 @@ h1, h2, h3, .serif-font {
 
 .coupon-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-glow);
 }
 
 .coupon-header {
@@ -1074,8 +1052,8 @@ h1, h2, h3, .serif-font {
 .coupon-tag {
   font-size: 0.75rem;
   background: var(--rose-soft);
-  color: var(--rose-dark);
-  border: 1px solid var(--rose-dusty);
+  color: var(--gold-imperial);
+  border: 1px solid var(--gold-imperial);
   padding: 3px 10px;
   border-radius: 50px;
   font-weight: 600;
@@ -1083,7 +1061,7 @@ h1, h2, h3, .serif-font {
 
 .coupon-title {
   font-size: 1.22rem;
-  color: var(--text-espresso);
+  color: var(--text-moonlight);
   margin-bottom: 6px;
 }
 
@@ -1096,19 +1074,19 @@ h1, h2, h3, .serif-font {
 .btn-redeem {
   width: 100%;
   padding: 13px;
-  background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold-imperial), var(--sakura-pink));
+  color: #0A0E17;
   border: none;
   border-radius: var(--radius-sm);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.95rem;
   cursor: pointer;
   transition: var(--spring-bounce);
 }
 
 .btn-redeem:disabled, .coupon-card.redeemed .btn-redeem {
-  background: #E5DCD6;
-  color: #A09088;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
@@ -1117,11 +1095,11 @@ footer {
   padding: 54px 0 32px;
   color: var(--text-muted);
   font-size: 0.98rem;
-  border-top: 1px solid var(--border-glass);
+  border-top: 1px solid var(--glass-border);
 }
 
 footer p span {
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   font-weight: 700;
 }
 
@@ -1131,8 +1109,8 @@ footer p span {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(43, 42, 42, 0.45);
-  backdrop-filter: blur(14px);
+  background: rgba(10, 14, 23, 0.7);
+  backdrop-filter: blur(16px);
   z-index: 1050;
   display: flex;
   align-items: center;
@@ -1149,17 +1127,17 @@ footer p span {
 }
 
 .modal-box {
-  background: #FDFBF7;
-  color: #2B2A2A;
+  background: #121829;
+  color: var(--text-moonlight);
   max-width: 550px;
   width: 100%;
-  border-radius: var(--radius-apple);
+  border-radius: var(--radius-lg);
   padding: 42px 34px;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+  box-shadow: var(--shadow-tokyo);
   transform: translateY(20px) scale(0.96);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  border: 2px solid var(--rose-dusty);
+  border: 2px solid var(--gold-imperial);
 }
 
 .modal-overlay.active .modal-box {
@@ -1187,7 +1165,7 @@ footer p span {
   font-family: var(--font-serif);
   font-size: 1.85rem;
   text-align: center;
-  color: var(--rose-dark);
+  color: var(--gold-imperial);
   margin-bottom: 18px;
 }
 

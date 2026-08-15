@@ -1,5 +1,5 @@
 /**
- * 💖 Apple HIG Anniversary Configuration - Shivi & Sarvan
+ * 💖 Tokyo Hanabi Night Sky Configuration - Shivi & Sarvan
  */
 
 const ANNIVERSARY_CONFIG = {
@@ -24,7 +24,7 @@ const ANNIVERSARY_CONFIG = {
 
   // Hero Titles
   heroTitle: "For Shivi, <br><span>My Favorite Chapter.</span>",
-  heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness with Sarvan",
+  heroSubtitle: "5 Months Under the Tokyo Sky with Sarvan",
 
   // Swift Playgrounds / Scratch Block Builder Definitions (Game 1)
   scratchBlocks: [
@@ -86,7 +86,7 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Personal Timeline Stories (Polaroid Memory Cards)
+  // Personal Timeline Stories (Tokyo Night Polaroid Memory Cards)
   timeline: [
     {
       monthNum: 1,
