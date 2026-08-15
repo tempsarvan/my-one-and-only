@@ -22,30 +22,30 @@ const ANNIVERSARY_CONFIG = {
     // --- The Weeknd (After Hours Full Album & Iconic Hits) ---
     {
       id: "ah-1",
+      title: "Die For You",
+      artist: "The Weeknd",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/2atA858UfqEofwVv54Ez6W?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/die_for_you.mp3",
+      cover: "🎵"
+    },
+    {
+      id: "ah-2",
       title: "Blinding Lights",
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
       spotifyUrl: "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
+      audioUrl: "./assets/audio/blinding_lights.mp3",
       cover: "🌆"
     },
     {
-      id: "ah-2",
+      id: "ah-3",
       title: "Save Your Tears",
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
       spotifyUrl: "https://open.spotify.com/embed/track/5Q0NhFRsPl19vWviXnL0uy?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=piano-romantic-love-10587.mp3",
+      audioUrl: "./assets/audio/save_your_tears.mp3",
       cover: "💧"
-    },
-    {
-      id: "ah-3",
-      title: "In Your Eyes",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/7szuecWAGEiv2Constraint?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-sunset-10332.mp3",
-      cover: "🎷"
     },
     {
       id: "ah-4",
@@ -53,71 +53,8 @@ const ANNIVERSARY_CONFIG = {
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
       spotifyUrl: "https://open.spotify.com/embed/track/2p8StY1WioV2R0W42YEjUt?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/10/audio_517452d76d.mp3?filename=slow-romantic-10874.mp3",
+      audioUrl: "./assets/audio/after_hours.mp3",
       cover: "🌃"
-    },
-    {
-      id: "ah-5",
-      title: "Heartless",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/60nZcImufyMA1MKQY3E5Z6?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9934148464.mp3?filename=romantic-ambient-1234.mp3",
-      cover: "🖤"
-    },
-    {
-      id: "ah-6",
-      title: "Hardest To Love",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/6szuecWAGEiv2Constraint?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/24/audio_34b7a1e0b5.mp3?filename=stargirl-vibes-11005.mp3",
-      cover: "💓"
-    },
-    {
-      id: "ah-7",
-      title: "Scared To Live",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/4io5vRj6XyD18v1x4s558A?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
-      cover: "🕊️"
-    },
-    {
-      id: "ah-8",
-      title: "Escape From LA",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/1waooa3L9FfWJ6u9rV4891?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=piano-romantic-love-10587.mp3",
-      cover: "🌴"
-    },
-    {
-      id: "ah-9",
-      title: "Faith",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-sunset-10332.mp3",
-      cover: "✨"
-    },
-    {
-      id: "ah-10",
-      title: "Until I Bleed Out",
-      artist: "The Weeknd (After Hours)",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/5Q0NhFRsPl19vWviXnL0uy?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/10/audio_517452d76d.mp3?filename=slow-romantic-10874.mp3",
-      cover: "🥀"
-    },
-    {
-      id: "ah-11",
-      title: "Die For You",
-      artist: "The Weeknd",
-      category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/2atA858UfqEofwVv54Ez6W?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
-      cover: "🎵"
     },
 
     // --- Lana Del Rey Hits ---
@@ -127,7 +64,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Lana Del Rey",
       category: "lana",
       spotifyUrl: "https://open.spotify.com/embed/track/2nLtzP3hE4ioR2PewmFVwZ?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=piano-romantic-love-10587.mp3",
+      audioUrl: "./assets/audio/young_and_beautiful.mp3",
       cover: "🌸"
     },
     {
@@ -136,7 +73,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Lana Del Rey",
       category: "lana",
       spotifyUrl: "https://open.spotify.com/embed/track/0U0ldo2QwSFiYf856N6oYg?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9934148464.mp3?filename=romantic-ambient-1234.mp3",
+      audioUrl: "./assets/audio/video_games.mp3",
       cover: "🎮"
     },
     {
@@ -145,25 +82,16 @@ const ANNIVERSARY_CONFIG = {
       artist: "Lana Del Rey & The Weeknd",
       category: "lana",
       spotifyUrl: "https://open.spotify.com/embed/track/07wM32z2sB0d0p2w4nJ54j?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-sunset-10332.mp3",
+      audioUrl: "./assets/audio/lust_for_life.mp3",
       cover: "✨"
     },
     {
       id: "ldr-4",
-      title: "Summertime Sadness",
-      artist: "Lana Del Rey",
-      category: "lana",
-      spotifyUrl: "https://open.spotify.com/embed/track/2nLtzP3hE4ioR2PewmFVwZ?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
-      cover: "☀️"
-    },
-    {
-      id: "ldr-5",
       title: "Stargirl Interlude",
       artist: "The Weeknd & Lana Del Rey",
       category: "lana",
       spotifyUrl: "https://open.spotify.com/embed/track/4io5vRj6XyD18v1x4s558A?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/24/audio_34b7a1e0b5.mp3?filename=stargirl-vibes-11005.mp3",
+      audioUrl: "./assets/audio/stargirl_interlude.mp3",
       cover: "🌌"
     },
 
@@ -174,7 +102,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Daniel Caesar",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/1mo2n2c0G2P2Z2n2Z2n2Z2?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
+      audioUrl: "./assets/audio/best_part.mp3",
       cover: "☕"
     },
     {
@@ -183,7 +111,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Arctic Monkeys",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/5u5vS2aS0aS0aS0aS0aS0a?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/10/audio_517452d76d.mp3?filename=slow-romantic-10874.mp3",
+      audioUrl: "./assets/audio/i_wanna_be_yours.mp3",
       cover: "🎸"
     },
     {
@@ -192,7 +120,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Frank Ocean",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/7n2a2n2a2n2a2n2a2n2a2n?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-sunset-10332.mp3",
+      audioUrl: "./assets/audio/thinkin_bout_you.mp3",
       cover: "☁️"
     },
     {
@@ -201,7 +129,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Coldplay",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/762n2a2n2a2n2a2n2a2n2a?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=piano-romantic-love-10587.mp3",
+      audioUrl: "./assets/audio/sparks.mp3",
       cover: "✨"
     },
     {
@@ -210,7 +138,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Chase Atlantic",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/3n2a2n2a2n2a2n2a2n2a2n?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9934148464.mp3?filename=romantic-ambient-1234.mp3",
+      audioUrl: "./assets/audio/swim.mp3",
       cover: "🌊"
     },
     {
@@ -219,7 +147,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "Taylor Swift",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/1n2a2n2a2n2a2n2a2n2a2n?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
+      audioUrl: "./assets/audio/lover.mp3",
       cover: "💌"
     },
     {
@@ -228,7 +156,7 @@ const ANNIVERSARY_CONFIG = {
       artist: "SZA",
       category: "classics",
       spotifyUrl: "https://open.spotify.com/embed/track/4n2a2n2a2n2a2n2a2n2a2n?utm_source=generator&theme=0",
-      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/24/audio_34b7a1e0b5.mp3?filename=stargirl-vibes-11005.mp3",
+      audioUrl: "./assets/audio/snooze.mp3",
       cover: "🌙"
     }
   ],
