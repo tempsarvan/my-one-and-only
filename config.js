@@ -1,10 +1,10 @@
 /**
- * 💖 Anniversary Web App Configuration - Chevy & Sarvan
+ * 💖 Anniversary Web App Configuration - Shivi & Sarvan
  */
 
 const ANNIVERSARY_CONFIG = {
   // Names
-  partnerName: "Chevy",
+  partnerName: "Shivi",
   yourName: "Sarvan",
 
   // Relationship Start Date (March 15, 2026 represents 5 months from August 15, 2026)
@@ -18,12 +18,8 @@ const ANNIVERSARY_CONFIG = {
   spotifyArtistName: "The Weeknd",
   spotifyTrackName: "The Weeknd Playlist",
 
-  // Real Rose Assets
-  realRoseImage: "./assets/real_rose.png",
-  realPetalImage: "./assets/real_petal.png",
-
   // Hero Titles
-  heroTitle: "For Chevy, <br><span>My Favorite Chapter.</span>",
+  heroTitle: "For Shivi, <br><span>My Favorite Chapter.</span>",
   heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness with Sarvan",
 
   // Quiz Questions & Answers
@@ -43,8 +39,8 @@ const ANNIVERSARY_CONFIG = {
     {
       id: "q3",
       question: "Who is Sarvan's absolute favorite person?",
-      options: ["Chevy 💕", "Chevy 💖", "Chevy ✨", "Chevy 🥰"],
-      correct: "Chevy 💕"
+      options: ["Shivi 💕", "Shivi 💖", "Shivi ✨", "Shivi 🥰"],
+      correct: "Shivi 💕"
     },
     {
       id: "q4",
@@ -78,47 +74,47 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Timeline Stories
+  // Personal Timeline Stories (Relatable & Sweet - No Landmarks!)
   timeline: [
     {
       monthNum: 1,
-      title: "Month 1: The Spark & First Conversations",
+      title: "Month 1: The Spark & Endless Conversations",
       date: "March 15 - April 15",
-      subtitle: "Butterflies, Late Night Chats & Coffee",
+      subtitle: "Butterflies, Late Night Chats & Warm Smiles",
       image: "./assets/month1.png",
-      story: "Everything felt so magical from the very first day. We started talking and couldn't stop. Every notification from you brought the biggest smile to my face, and long chats quickly became my favorite part of every single day."
+      story: "Everything felt so magical from the very first day we connected. We started talking and couldn't stop. Every notification from you brought the biggest smile to my face, and late-night calls quickly became the best part of my daily routine."
     },
     {
       monthNum: 2,
-      title: "Month 2: Stargazing & Inside Jokes",
+      title: "Month 2: Inside Jokes & Stargazing Calls",
       date: "April 15 - May 15",
-      subtitle: "Finding My Favorite Person",
+      subtitle: "Finding My Safest Space & Favorite Person",
       image: "./assets/month2.png",
-      story: "By month two, we had our inside jokes and secret code words. Staying up late just to talk under the night sky made me realize how rare and special you are. You became my safest space and my happiest thought."
+      story: "By month two, we developed our own secret inside jokes and code words that made us laugh until our cheeks hurt. Staying up late talking under the night sky made me realize how rare, special, and incredible you are to me."
     },
     {
       monthNum: 3,
-      title: "Month 3: Playlists & Shared Moments",
+      title: "Month 3: Playlists & Comforting Calls",
       date: "May 15 - June 15",
       subtitle: "The Soundtrack to Our Days",
       image: "./assets/month3.png",
-      story: "Sharing songs, recommending movies, and laughing until our stomachs hurt. Month three proved that no matter how busy or hard the days got, one call with you made everything peaceful and right again."
+      story: "Sharing songs, recommending movies, and talking about everything under the sun. Month three proved that no matter how busy or stressful the day got, one call with you made everything peaceful, warm, and right again."
     },
     {
       monthNum: 4,
-      title: "Month 4: Deep Conversations & Unconditional Care",
+      title: "Month 4: Deep Understanding & Caring Moments",
       date: "June 15 - July 15",
-      subtitle: "Growing Closer Every Day",
+      subtitle: "Growing Closer Every Single Day",
       image: "./assets/month4.png",
-      story: "We learned so much more about each other's dreams, fears, and little quirks. Being there for you through everything became second nature. I loved you more each day, knowing we can overcome anything together."
+      story: "We learned so much more about each other's dreams, fears, and little quirks. Being there for you through everything became second nature. I fell deeper in love with you each day, knowing we make the best team together."
     },
     {
       monthNum: 5,
-      title: "Month 5: Happy 5th Month Anniversary!",
+      title: "Month 5: Happy 5th Month Anniversary, Shivi!",
       date: "July 15 - August 15",
-      subtitle: "To Us & To Forever",
+      subtitle: "To Us & To All Our Future Chapters",
       image: "./assets/month5.png",
-      story: "Five wonderful months together, and my heart still skips a beat whenever I see your name on my phone screen. Thank you for being my comfort, my joy, and my favorite person. Here's to many more chapters together!"
+      story: "Five wonderful months together, and my heart still skips a beat whenever I see your name on my screen. Thank you for being my comfort, my joy, and my favorite person Shivi. Here's to many more chapters together!"
     }
   ],
 
@@ -142,7 +138,7 @@ const ANNIVERSARY_CONFIG = {
     {
       frontTitle: "Reason #4",
       frontSubtitle: "Your Warm Heart",
-      backNote: "How caring, empathetic, and kind you are to everyone around you. You inspire me every day. 🌸"
+      backNote: "How caring, empathetic, and kind you are to everyone around you. You inspire me every day Shivi. 🌸"
     },
     {
       frontTitle: "Reason #5",
@@ -163,21 +159,21 @@ const ANNIVERSARY_CONFIG = {
       title: "Open on Our 5-Month Anniversary",
       subtitle: "A special note for today ✨",
       icon: "🎉",
-      content: `Happy 5th Month Anniversary, Chevy!\n\nThese past 5 months with you have been the happiest months of my life. Thank you for your warmth, your smile, and for choosing to share your heart with me every single day.\n\nNo matter what obstacles come our way, I will always be right here holding your hand, listening to your stories, and making sure you feel loved and cherished.\n\nI love you more than words can express!\n\nForever yours,\nSarvan 💕`
+      content: `Happy 5th Month Anniversary, Shivi!\n\nThese past 5 months with you have been the happiest months of my life. Thank you for your warmth, your smile, and for choosing to share your heart with me every single day.\n\nNo matter what obstacles come our way, I will always be right here holding your hand, listening to your stories, and making sure you feel loved and cherished.\n\nI love you more than words can express!\n\nForever yours,\nSarvan 💕`
     },
     {
       id: "env-miss-me",
       title: "Open When You Miss Me",
       subtitle: "When distance feels a bit long 🥺",
       icon: "💌",
-      content: `If you're reading this, know that I'm probably thinking of you right now too.\n\nClose your eyes for 5 seconds and take a deep breath. Imagine me wrapping my arms tightly around you and kissing your forehead.\n\nDistance is only temporary, but my love for you is constant and permanent. Text me right now: "I miss you Sarvan!" and I'll call you as soon as I can! 💖`
+      content: `If you're reading this, know that I'm probably thinking of you right now too Shivi.\n\nClose your eyes for 5 seconds and take a deep breath. Imagine me wrapping my arms tightly around you and kissing your forehead.\n\nDistance is only temporary, but my love for you is constant and permanent. Text me right now: "I miss you Sarvan!" and I'll call you as soon as I can! 💖`
     },
     {
       id: "env-smile",
       title: "Open When You Need a Smile",
       subtitle: "Instant mood booster 🌸",
       icon: "😊",
-      content: `Remember Chevy: You are incredibly smart, beautiful, kind, and capable of amazing things!\n\nAlso remember that somewhere out there, there's a guy named Sarvan who falls in love with you all over again every single day.\n\nYour smile is my absolute favorite sight in the entire world, so please wear it proudly today! ✨`
+      content: `Remember Shivi: You are incredibly smart, beautiful, kind, and capable of amazing things!\n\nAlso remember that somewhere out there, there's a guy named Sarvan who falls in love with you all over again every single day.\n\nYour smile is my absolute favorite sight in the entire world, so please wear it proudly today! ✨`
     },
     {
       id: "env-sleep",

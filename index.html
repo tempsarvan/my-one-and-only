@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Chevy, My Favorite Chapter 💖</title>
-  <meta name="description" content="A romantic 5-game interactive web application built with love by Sarvan for Chevy.">
+  <title>For Shivi, My Favorite Chapter 💖</title>
+  <meta name="description" content="A romantic 3D web application built with love by Sarvan for Shivi.">
   
   <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
     </div>
   </div>
 
-  <!-- Real Rose Scroll-Driven Blooming & Falling Petal Track -->
+  <!-- Real Rose 3D Scroll-Driven Blooming & Falling Petal Track -->
   <div class="flower-scroll-container" id="flower-scroll-container">
     <div class="flower-sticky-viewport">
       <canvas id="flower-canvas-3d"></canvas>
@@ -52,8 +52,8 @@
           <img src="./assets/real_rose.png" alt="Real Photorealistic Rose" id="real-rose-img">
         </div>
         <div class="badge">✨ 5 Months of Happiness ✨</div>
-        <h1 class="flower-hero-title">For Chevy, <br><span>My Favorite Chapter.</span></h1>
-        <p class="flower-hero-sub">Scroll down to watch our real rose petals float down to reveal each chapter...</p>
+        <h1 class="flower-hero-title">For Shivi, <br><span>My Favorite Chapter.</span></h1>
+        <p class="flower-hero-sub">Scroll down to watch our 3D rose petals float down to reveal each chapter...</p>
         <div class="scroll-hint-badge">
           <span>🌹 Scroll down to reveal each falling petal chapter</span>
         </div>
@@ -97,129 +97,6 @@
 
   <div class="container">
 
-    <!-- 🎮 5-Game Interactive Arcade Hub Section -->
-    <section id="arcade-hub">
-      <div class="section-title">
-        <div class="badge">🎮 Sarvan & Chevy's Arcade</div>
-        <h2>5 Mini-Games Designed For You 💖</h2>
-        <p>Play through each game to unlock special rewards from Sarvan!</p>
-      </div>
-
-      <div class="arcade-container" id="arcade-container">
-        <!-- Floating Sarvan Cursor Badge -->
-        <div class="sarvan-cursor-badge" id="sarvan-cursor">
-          <span class="sarvan-cursor-icon">🖱️</span>
-          <span>Sarvan 💖</span>
-        </div>
-
-        <!-- Navigation Tabs for 5 Games -->
-        <div class="arcade-tabs">
-          <button class="tab-btn active" data-target="game-1">Game 1: Co-Op Builder 🛠️</button>
-          <button class="tab-btn" data-target="game-2">Game 2: Sarvan Quiz 🧠</button>
-          <button class="tab-btn" data-target="game-3">Game 3: Catch Hearts 🎈</button>
-          <button class="tab-btn" data-target="game-4">Game 4: Memory Match 🃏</button>
-          <button class="tab-btn" data-target="game-5">Game 5: Love Certificate 🏆</button>
-        </div>
-
-        <!-- Game 1: Co-Op Scratch Builder -->
-        <div class="arcade-game-view active" id="game-1">
-          <div class="coop-builder-box">
-            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Building Together with Sarvan 🛠️</h3>
-            <p class="coop-instruction" id="coop-instruction">Sarvan is pointing to block #1: Click to place our heart puzzle!</p>
-
-            <div class="coop-grid" id="coop-grid">
-              <div class="coop-cell target-highlight" data-index="0">❓</div>
-              <div class="coop-cell" data-index="1">❓</div>
-              <div class="coop-cell" data-index="2">❓</div>
-              <div class="coop-cell" data-index="3">❓</div>
-              <div class="coop-cell" data-index="4">❓</div>
-              <div class="coop-cell" data-index="5">❓</div>
-            </div>
-
-            <!-- Blooming Flower Message Reward -->
-            <div class="blooming-reward-card" id="blooming-reward-card">
-              <div class="blooming-flower-icon">🌸</div>
-              <div class="blooming-message">I love you from Sarvan 💖</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Game 2: How Well Do You Know Sarvan? Quiz -->
-        <div class="arcade-game-view" id="game-2">
-          <div class="quiz-box">
-            <h3 class="quiz-question-title" id="quiz-question-title">Question 1: Loading...</h3>
-            <div class="quiz-options-grid" id="quiz-options-grid">
-              <!-- Rendered dynamically -->
-            </div>
-
-            <!-- Question 5 Special Dream Location Box -->
-            <div class="dream-location-box" id="dream-location-box">
-              <h3 class="serif-font" style="font-size: 1.6rem; color: var(--rose-dark); margin-bottom: 8px;">Question 5: What is your dream location to live, Chevy? 🗺️</h3>
-              <p style="color: var(--text-muted);">Choose or type one of your dream locations below to unlock a cinematic reveal:</p>
-              
-              <div class="location-input-group">
-                <button class="location-btn" data-loc="venice">Venice 🚣</button>
-                <button class="location-btn" data-loc="paris">Paris 🗼</button>
-                <button class="location-btn" data-loc="italy">Italy 🌊</button>
-                <button class="location-btn" data-loc="rome">Rome 🏛️</button>
-              </div>
-
-              <!-- Location Cinematic Video Container -->
-              <div class="location-video-container" id="location-video-container">
-                <video id="location-video-player" controls autoplay loop muted playsinline></video>
-                <div class="location-video-desc" id="location-video-desc">Cinematic view...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Game 3: Catch Sarvan's Heart -->
-        <div class="arcade-game-view" id="game-3">
-          <div class="catch-game-box">
-            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Catch Sarvan's Falling Hearts 🎈</h3>
-            <div class="score-badge" id="catch-score-display">Score: 0 / 10 Hearts</div>
-            <canvas id="catch-canvas"></canvas>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Move your mouse / drag your finger to catch 10 hearts!</p>
-          </div>
-        </div>
-
-        <!-- Game 4: Memory Match -->
-        <div class="arcade-game-view" id="game-4">
-          <div style="text-align: center;">
-            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 16px;">Memory Match Card Game 🃏</h3>
-            <div class="memory-grid" id="memory-grid">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Game 5: Official Love Certificate -->
-        <div class="arcade-game-view" id="game-5">
-          <div class="certificate-box">
-            <div class="badge">📜 Official Anniversary Document</div>
-            <h3 class="certificate-title">Certificate of Endless Love</h3>
-            <p class="certificate-sub">Awarded to Chevy on our 5th Month Anniversary</p>
-            <div class="certificate-body">
-              This official document certifies that <strong>Chevy</strong> is officially recognized as <strong>Sarvan's Favorite Person</strong> forever and ever. 
-              <br><br>
-              Signed with endless warmth, affection, and promises for all our future chapters.
-            </div>
-            <div class="certificate-signatures">
-              <div class="sig-block">
-                <div class="sig-name">Sarvan 💖</div>
-                <div class="sig-label">Issued By</div>
-              </div>
-              <div class="sig-block">
-                <div class="sig-name">Chevy 💕</div>
-                <div class="sig-label">Awarded To</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- Reasons I Love You Cards (3D Flip Grid) -->
     <section id="reasons">
       <div class="section-title">
@@ -232,14 +109,14 @@
       </div>
     </section>
 
-    <!-- Interactive Proposal Section -->
+    <!-- Interactive Reveal / Proposal Section -->
     <section id="proposal" class="proposal-section">
       <div class="section-title">
         <div class="badge">❓ One Important Question</div>
         <h2>The Special Reveal 💌</h2>
       </div>
       <div class="proposal-card">
-        <h3 class="proposal-title">Will you keep being my favorite person?</h3>
+        <h3 class="proposal-title">Will you keep being my favorite person, Shivi?</h3>
         <p class="proposal-desc">Choose your answer carefully... 💖</p>
         <div class="proposal-buttons" id="proposal-btn-container">
           <button class="btn-yes" id="btn-yes">Yes, Always! 💖</button>
@@ -303,9 +180,132 @@
       </div>
     </section>
 
+    <!-- 🎮 5-Game Interactive Arcade Hub Section (Planted at the Very End!) -->
+    <section id="arcade-hub">
+      <div class="section-title">
+        <div class="badge">🎮 Sarvan & Shivi's Arcade</div>
+        <h2>5 Mini-Games Designed For You Shivi 💖</h2>
+        <p>Play through each game to unlock special rewards from Sarvan!</p>
+      </div>
+
+      <div class="arcade-container" id="arcade-container">
+        <!-- Floating Sarvan Cursor Badge -->
+        <div class="sarvan-cursor-badge" id="sarvan-cursor">
+          <span class="sarvan-cursor-icon">🖱️</span>
+          <span>Sarvan 💖</span>
+        </div>
+
+        <!-- Navigation Tabs for 5 Games -->
+        <div class="arcade-tabs">
+          <button class="tab-btn active" data-target="game-1">Game 1: Co-Op Builder 🛠️</button>
+          <button class="tab-btn" data-target="game-2">Game 2: Sarvan Quiz 🧠</button>
+          <button class="tab-btn" data-target="game-3">Game 3: Catch Hearts 🎈</button>
+          <button class="tab-btn" data-target="game-4">Game 4: Memory Match 🃏</button>
+          <button class="tab-btn" data-target="game-5">Game 5: Love Certificate 🏆</button>
+        </div>
+
+        <!-- Game 1: Co-Op Scratch Builder -->
+        <div class="arcade-game-view active" id="game-1">
+          <div class="coop-builder-box">
+            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Building Together with Sarvan 🛠️</h3>
+            <p class="coop-instruction" id="coop-instruction">Sarvan is pointing to block #1: Click to place our heart puzzle!</p>
+
+            <div class="coop-grid" id="coop-grid">
+              <div class="coop-cell target-highlight" data-index="0">❓</div>
+              <div class="coop-cell" data-index="1">❓</div>
+              <div class="coop-cell" data-index="2">❓</div>
+              <div class="coop-cell" data-index="3">❓</div>
+              <div class="coop-cell" data-index="4">❓</div>
+              <div class="coop-cell" data-index="5">❓</div>
+            </div>
+
+            <!-- Blooming Flower Message Reward -->
+            <div class="blooming-reward-card" id="blooming-reward-card">
+              <div class="blooming-flower-icon">🌸</div>
+              <div class="blooming-message">I love you from Sarvan 💖</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 2: How Well Do You Know Sarvan? Quiz -->
+        <div class="arcade-game-view" id="game-2">
+          <div class="quiz-box">
+            <h3 class="quiz-question-title" id="quiz-question-title">Question 1: Loading...</h3>
+            <div class="quiz-options-grid" id="quiz-options-grid">
+              <!-- Rendered dynamically -->
+            </div>
+
+            <!-- Question 5 Special Dream Location Box -->
+            <div class="dream-location-box" id="dream-location-box">
+              <h3 class="serif-font" style="font-size: 1.6rem; color: var(--rose-dark); margin-bottom: 8px;">Question 5: What is your dream location to live, Shivi? 🗺️</h3>
+              <p style="color: var(--text-muted);">Choose or type one of your dream locations below to unlock a cinematic reveal:</p>
+              
+              <div class="location-input-group">
+                <button class="location-btn" data-loc="venice">Venice 🚣</button>
+                <button class="location-btn" data-loc="paris">Paris 🗼</button>
+                <button class="location-btn" data-loc="italy">Italy 🌊</button>
+                <button class="location-btn" data-loc="rome">Rome 🏛️</button>
+              </div>
+
+              <!-- Location Cinematic Video Container -->
+              <div class="location-video-container" id="location-video-container">
+                <video id="location-video-player" controls autoplay loop muted playsinline></video>
+                <div class="location-video-desc" id="location-video-desc">Cinematic view...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 3: Catch Sarvan's Heart -->
+        <div class="arcade-game-view" id="game-3">
+          <div class="catch-game-box">
+            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Catch Sarvan's Falling Hearts 🎈</h3>
+            <div class="score-badge" id="catch-score-display">Score: 0 / 10 Hearts</div>
+            <canvas id="catch-canvas"></canvas>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Move your mouse / drag your finger to catch 10 hearts!</p>
+          </div>
+        </div>
+
+        <!-- Game 4: Memory Match -->
+        <div class="arcade-game-view" id="game-4">
+          <div style="text-align: center;">
+            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 16px;">Memory Match Card Game 🃏</h3>
+            <div class="memory-grid" id="memory-grid">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 5: Official Love Certificate -->
+        <div class="arcade-game-view" id="game-5">
+          <div class="certificate-box">
+            <div class="badge">📜 Official Anniversary Document</div>
+            <h3 class="certificate-title">Certificate of Endless Love</h3>
+            <p class="certificate-sub">Awarded to Shivi on our 5th Month Anniversary</p>
+            <div class="certificate-body">
+              This official document certifies that <strong>Shivi</strong> is officially recognized as <strong>Sarvan's Favorite Person</strong> forever and ever. 
+              <br><br>
+              Signed with endless warmth, affection, and promises for all our future chapters.
+            </div>
+            <div class="certificate-signatures">
+              <div class="sig-block">
+                <div class="sig-name">Sarvan 💖</div>
+                <div class="sig-label">Issued By</div>
+              </div>
+              <div class="sig-block">
+                <div class="sig-name">Shivi 💕</div>
+                <div class="sig-label">Awarded To</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer>
-      <p>Made with all my love for my <span>Favorite Person Chevy</span> • Happy 5th Month Anniversary! 🥂</p>
+      <p>Made with all my love for my <span>Favorite Person Shivi</span> • Happy 5th Month Anniversary! 🥂</p>
     </footer>
 
   </div>

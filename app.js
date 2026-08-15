@@ -1,5 +1,5 @@
 /**
- * 💖 MY ONE AND ONLY - CHEVY & SARVAN 5-GAME ARCADE & REAL ROSE SCROLL
+ * 💖 MY ONE AND ONLY - SHIVI & SARVAN 5-GAME ARCADE & REAL ROSE SCROLL
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -172,7 +172,6 @@ function initQuizGame() {
 
   function renderQuestion(index) {
     if (index >= quizData.length) {
-      // Transition to Question 5: Dream Location Box
       titleEl.style.display = 'none';
       gridEl.style.display = 'none';
       if (dreamBox) dreamBox.classList.add('active');
@@ -287,7 +286,6 @@ function initCatchGame() {
       ctx.font = '16px sans-serif';
       ctx.fillText('💖', h.x, h.y);
 
-      // Catch Collision
       if (h.y >= height - 35 && h.y <= height - 10 && h.x >= basketX - 10 && h.x <= basketX + basketWidth + 10) {
         hearts.splice(i, 1);
         score++;
@@ -318,7 +316,6 @@ function initMemoryGame() {
   if (!grid) return;
 
   const items = ['💖', '💖', '🌹', '🌹', '☕', '☕', '🎵', '🎵', '💌', '💌', '✨', '✨'];
-  // Shuffle
   items.sort(() => Math.random() - 0.5);
 
   let flippedCards = [];
@@ -326,7 +323,7 @@ function initMemoryGame() {
 
   grid.innerHTML = '';
 
-  items.forEach((item, idx) => {
+  items.forEach((item) => {
     const card = document.createElement('div');
     card.className = 'memory-card';
     card.setAttribute('data-val', item);
@@ -345,7 +342,7 @@ function initMemoryGame() {
             triggerConfetti();
             if (matchedCount === items.length) {
               triggerMassiveHeartCascade();
-              openModal('🏆', 'Memory Match Master!', 'You matched all our memory cards, Chevy! Sarvan loves you! 💕');
+              openModal('🏆', 'Memory Match Master!', 'You matched all our memory cards, Shivi! Sarvan loves you! 💕');
             }
           } else {
             setTimeout(() => {
@@ -695,7 +692,7 @@ function setupProposalInteractions() {
     triggerMassiveHeartCascade();
     openModal(
       '💖',
-      'YAY! You Said Yes, Chevy! 🎉',
+      'YAY! You Said Yes, Shivi! 🎉',
       `You are officially Sarvan's favorite person forever and ever!\n\nThank you for making these past 5 months so incredibly sweet, magical, and unforgettable.\n\nSarvan loves you with all his heart! 💕✨`
     );
   });
