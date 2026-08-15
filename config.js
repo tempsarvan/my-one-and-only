@@ -1,8 +1,12 @@
 /**
- * 💖 Anniversary Web App Configuration - Real Rose Experience
+ * 💖 Anniversary Web App Configuration - Chevy & Sarvan
  */
 
 const ANNIVERSARY_CONFIG = {
+  // Names
+  partnerName: "Chevy",
+  yourName: "Sarvan",
+
   // Relationship Start Date (March 15, 2026 represents 5 months from August 15, 2026)
   startDate: new Date(2026, 2, 15, 0, 0, 0),
 
@@ -18,12 +22,63 @@ const ANNIVERSARY_CONFIG = {
   realRoseImage: "./assets/real_rose.png",
   realPetalImage: "./assets/real_petal.png",
 
-  // Names & Hero Titles
-  partnerName: "My Favorite Person",
-  heroTitle: "For My Favorite Person, <br><span>My Favorite Chapter.</span>",
-  heroSubtitle: "Scroll down to watch our real rose bloom and reveal each falling petal chapter...",
+  // Hero Titles
+  heroTitle: "For Chevy, <br><span>My Favorite Chapter.</span>",
+  heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness with Sarvan",
 
-  // Timeline Stories (Displayed ON the falling real petals!)
+  // Quiz Questions & Answers
+  quiz: [
+    {
+      id: "q1",
+      question: "What is Sarvan's favorite drink?",
+      options: ["Coffee", "Monster", "Iced Tea", "Soda"],
+      correct: "Monster"
+    },
+    {
+      id: "q2",
+      question: "What is Sarvan's favorite food?",
+      options: ["Pizza", "Burger", "Shawarma", "Tacos"],
+      correct: "Shawarma"
+    },
+    {
+      id: "q3",
+      question: "Who is Sarvan's absolute favorite person?",
+      options: ["Chevy 💕", "Chevy 💖", "Chevy ✨", "Chevy 🥰"],
+      correct: "Chevy 💕"
+    },
+    {
+      id: "q4",
+      question: "What does Sarvan plan to become?",
+      options: ["Millionaire", "Billionaire 🚀", "Astronaut", "Rockstar"],
+      correct: "Billionaire 🚀"
+    }
+  ],
+
+  // Dream Location Videos (Venice, Paris, Italy, Rome)
+  locationVideos: {
+    "venice": {
+      name: "Venice, Italy 🚣",
+      videoUrl: "https://cdn.pixabay.com/video/2019/04/23/23011-332306797_large.mp4",
+      description: "Floating through romantic canals and ancient bridges under golden hour..."
+    },
+    "paris": {
+      name: "Paris, France 🗼",
+      videoUrl: "https://cdn.pixabay.com/video/2020/05/25/40149-424933906_large.mp4",
+      description: "Sparkling Eiffel Tower lights and romantic cobblestone streets..."
+    },
+    "italy": {
+      name: "Amalfi Coast, Italy 🌊",
+      videoUrl: "https://cdn.pixabay.com/video/2021/08/13/84931-587285149_large.mp4",
+      description: "Cliffside pastel villages over sparkling turquoise Mediterranean waters..."
+    },
+    "rome": {
+      name: "Rome, Italy 🏛️",
+      videoUrl: "https://cdn.pixabay.com/video/2017/11/02/12711-241673841_large.mp4",
+      description: "Ancient Colosseum sunset and Trevi Fountain wishes..."
+    }
+  },
+
+  // Timeline Stories
   timeline: [
     {
       monthNum: 1,
@@ -108,28 +163,28 @@ const ANNIVERSARY_CONFIG = {
       title: "Open on Our 5-Month Anniversary",
       subtitle: "A special note for today ✨",
       icon: "🎉",
-      content: `Happy 5th Month Anniversary, my love!\n\nThese past 5 months have been the happiest months of my life. Thank you for your warmth, your smile, and for choosing to share your heart with me every single day.\n\nNo matter what obstacles come our way, I will always be right here holding your hand, listening to your stories, and making sure you feel loved and cherished.\n\nI love you more than words can express! 💕`
+      content: `Happy 5th Month Anniversary, Chevy!\n\nThese past 5 months with you have been the happiest months of my life. Thank you for your warmth, your smile, and for choosing to share your heart with me every single day.\n\nNo matter what obstacles come our way, I will always be right here holding your hand, listening to your stories, and making sure you feel loved and cherished.\n\nI love you more than words can express!\n\nForever yours,\nSarvan 💕`
     },
     {
       id: "env-miss-me",
       title: "Open When You Miss Me",
       subtitle: "When distance feels a bit long 🥺",
       icon: "💌",
-      content: `If you're reading this, know that I'm probably thinking of you right now too.\n\nClose your eyes for 5 seconds and take a deep breath. Imagine me wrapping my arms tightly around you and kissing your forehead.\n\nDistance is only temporary, but my love for you is constant and permanent. Text me right now: "I miss you!" and I'll call you as soon as I can! 💖`
+      content: `If you're reading this, know that I'm probably thinking of you right now too.\n\nClose your eyes for 5 seconds and take a deep breath. Imagine me wrapping my arms tightly around you and kissing your forehead.\n\nDistance is only temporary, but my love for you is constant and permanent. Text me right now: "I miss you Sarvan!" and I'll call you as soon as I can! 💖`
     },
     {
       id: "env-smile",
       title: "Open When You Need a Smile",
       subtitle: "Instant mood booster 🌸",
       icon: "😊",
-      content: `Remember: You are incredibly smart, beautiful, kind, and capable of amazing things!\n\nAlso remember that somewhere out there, there's a guy (me!) who falls in love with you all over again every single day.\n\nYour smile is my absolute favorite sight in the entire world, so please wear it proudly today! ✨`
+      content: `Remember Chevy: You are incredibly smart, beautiful, kind, and capable of amazing things!\n\nAlso remember that somewhere out there, there's a guy named Sarvan who falls in love with you all over again every single day.\n\nYour smile is my absolute favorite sight in the entire world, so please wear it proudly today! ✨`
     },
     {
       id: "env-sleep",
       title: "Open When You Can't Sleep",
       subtitle: "Sweet dreams & warm thoughts 🌙",
       icon: "💤",
-      content: `Put your phone down, pull the blanket up cozy, and remember that you are safe and loved.\n\nLet go of all the thoughts of today. Sleep peacefully knowing that tomorrow morning, I'll be right here waiting to say good morning to you.\n\nGoodnight my sweet angel. Dreams of us! 🌌`
+      content: `Put your phone down, pull the blanket up cozy, and remember that you are safe and loved.\n\nLet go of all the thoughts of today. Sleep peacefully knowing that tomorrow morning, I'll be right here waiting to say good morning to you.\n\nGoodnight my sweet angel. Dreams of us!\n\nLove, Sarvan 🌌`
     }
   ],
 
@@ -139,7 +194,7 @@ const ANNIVERSARY_CONFIG = {
       id: "c-coffee",
       title: "1 Free Coffee & Treat Date",
       description: "Redeemable for your favorite coffee/tea & snack whenever you want!",
-      code: "LOVE-COFFEE-01",
+      code: "SARVAN-COFFEE-01",
       icon: "☕",
       tag: "Food & Drink"
     },
@@ -147,7 +202,7 @@ const ANNIVERSARY_CONFIG = {
       id: "c-call",
       title: "Late Night Call on Demand",
       description: "No matter how late or tired I am, I will stay up and talk to you.",
-      code: "LOVE-CALL-02",
+      code: "SARVAN-CALL-02",
       icon: "📞",
       tag: "Quality Time"
     },
@@ -155,7 +210,7 @@ const ANNIVERSARY_CONFIG = {
       id: "c-movie",
       title: "Movie Night Choice Veto",
       description: "You get total control to pick any movie/show without any debate!",
-      code: "LOVE-MOVIE-03",
+      code: "SARVAN-MOVIE-03",
       icon: "🍿",
       tag: "Entertainment"
     },
@@ -163,7 +218,7 @@ const ANNIVERSARY_CONFIG = {
       id: "c-comfort",
       title: "Unlimited Venting & Hug Session",
       description: "100% judgment-free listening, extra warm hugs, and all the pampering.",
-      code: "LOVE-HUG-04",
+      code: "SARVAN-HUG-04",
       icon: "🤗",
       tag: "Care & Warmth"
     }

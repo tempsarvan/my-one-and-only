@@ -1,7 +1,5 @@
 /**
- * 💖 MY ONE AND ONLY - REAL PHOTOGRAPHIC ROSE SCROLL EXPERIENCE
- * Features: Three.js WebGL Real Photorealistic Rose Petals Falling Animation,
- * Dynamic Fallen Petal Card Display Overlay, 3D Flip Cards, Playful Dodging No Button.
+ * 💖 MY ONE AND ONLY - CHEVY & SARVAN 5-GAME ARCADE & REAL ROSE SCROLL
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,12 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initLiveTimer();
   initNextChapterTimer();
 
-  // Render Content
+  // Arcade 5 Mini-Games Initializers
+  initArcadeTabs();
+  initCoopBuilder();
+  initQuizGame();
+  initCatchGame();
+  initMemoryGame();
+
+  // Core Renderers
   renderReasonsFlipCards();
   renderEnvelopes();
   renderCoupons();
 
-  // Interactive Handlers
+  // Proposal & Modal Handlers
   setupProposalInteractions();
   setupModalListeners();
 });
@@ -53,7 +58,314 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Three.js Real Photorealistic Rose Petal Scroll Engine
+   2. Arcade Tabs Navigation Handler
+   -------------------------------------------------------------------------- */
+function initArcadeTabs() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const gameViews = document.querySelectorAll('.arcade-game-view');
+  const sarvanCursor = document.getElementById('sarvan-cursor');
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+
+      tabBtns.forEach((b) => b.classList.remove('active'));
+      gameViews.forEach((v) => v.classList.remove('active'));
+
+      btn.classList.add('active');
+      const targetView = document.getElementById(targetId);
+      if (targetView) targetView.classList.add('active');
+
+      if (targetId === 'game-1' && sarvanCursor) {
+        sarvanCursor.classList.add('active');
+      } else if (sarvanCursor) {
+        sarvanCursor.classList.remove('active');
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   3. Game 1: Co-Op Scratch Builder with "Sarvan Cursor"
+   -------------------------------------------------------------------------- */
+function initCoopBuilder() {
+  const cells = document.querySelectorAll('.coop-cell');
+  const sarvanCursor = document.getElementById('sarvan-cursor');
+  const instruction = document.getElementById('coop-instruction');
+  const rewardCard = document.getElementById('blooming-reward-card');
+  const coopGrid = document.getElementById('coop-grid');
+
+  if (!cells.length || !sarvanCursor) return;
+
+  const heartIcons = ['💖', '💕', '🌸', '✨', '🌹', '💌'];
+  let currentStep = 0;
+
+  function updateSarvanCursorPosition(targetIndex) {
+    if (targetIndex >= cells.length) {
+      sarvanCursor.classList.remove('active');
+      return;
+    }
+
+    const targetCell = cells[targetIndex];
+    const rect = targetCell.getBoundingClientRect();
+    const containerRect = document.getElementById('arcade-container').getBoundingClientRect();
+
+    const topOffset = rect.top - containerRect.top + 15;
+    const leftOffset = rect.left - containerRect.left + rect.width / 2;
+
+    sarvanCursor.style.top = `${topOffset}px`;
+    sarvanCursor.style.left = `${leftOffset}px`;
+    sarvanCursor.classList.add('active');
+
+    cells.forEach((c) => c.classList.remove('target-highlight'));
+    targetCell.classList.add('target-highlight');
+
+    if (instruction) {
+      instruction.textContent = `Sarvan is pointing to block #${targetIndex + 1}: Click to place! 💖`;
+    }
+  }
+
+  // Initial positioning
+  setTimeout(() => {
+    updateSarvanCursorPosition(0);
+  }, 500);
+
+  cells.forEach((cell, idx) => {
+    cell.addEventListener('click', () => {
+      if (idx === currentStep) {
+        cell.textContent = heartIcons[idx];
+        cell.classList.add('placed');
+        triggerConfetti();
+
+        currentStep++;
+
+        if (currentStep < cells.length) {
+          updateSarvanCursorPosition(currentStep);
+        } else {
+          // Completed Co-Op Builder!
+          if (instruction) instruction.style.display = 'none';
+          if (coopGrid) coopGrid.style.display = 'none';
+          if (rewardCard) rewardCard.classList.add('active');
+          triggerMassiveHeartCascade();
+        }
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   4. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
+   -------------------------------------------------------------------------- */
+function initQuizGame() {
+  const titleEl = document.getElementById('quiz-question-title');
+  const gridEl = document.getElementById('quiz-options-grid');
+  const dreamBox = document.getElementById('dream-location-box');
+  const locationBtns = document.querySelectorAll('.location-btn');
+  const videoContainer = document.getElementById('location-video-container');
+  const videoPlayer = document.getElementById('location-video-player');
+  const videoDesc = document.getElementById('location-video-desc');
+
+  if (!titleEl || !gridEl || typeof ANNIVERSARY_CONFIG === 'undefined' || !ANNIVERSARY_CONFIG.quiz) return;
+
+  const quizData = ANNIVERSARY_CONFIG.quiz;
+  let currentQIndex = 0;
+
+  function renderQuestion(index) {
+    if (index >= quizData.length) {
+      // Transition to Question 5: Dream Location Box
+      titleEl.style.display = 'none';
+      gridEl.style.display = 'none';
+      if (dreamBox) dreamBox.classList.add('active');
+      return;
+    }
+
+    const q = quizData[index];
+    titleEl.textContent = `Question ${index + 1} of 4: ${q.question}`;
+    gridEl.innerHTML = '';
+
+    q.options.forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-opt-btn';
+      btn.textContent = opt;
+
+      btn.addEventListener('click', () => {
+        if (opt === q.correct) {
+          btn.classList.add('correct');
+          triggerConfetti();
+          setTimeout(() => {
+            currentQIndex++;
+            renderQuestion(currentQIndex);
+          }, 800);
+        } else {
+          btn.classList.add('wrong');
+          setTimeout(() => btn.classList.remove('wrong'), 600);
+        }
+      });
+
+      gridEl.appendChild(btn);
+    });
+  }
+
+  renderQuestion(0);
+
+  // Question 5: Dream Location Buttons (Venice, Paris, Italy, Rome)
+  locationBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const locKey = btn.getAttribute('data-loc');
+      const locData = ANNIVERSARY_CONFIG.locationVideos[locKey];
+
+      if (locData && videoPlayer && videoContainer && videoDesc) {
+        videoPlayer.src = locData.videoUrl;
+        videoDesc.textContent = `${locData.name} • ${locData.description}`;
+        videoContainer.classList.add('active');
+        videoPlayer.play().catch((err) => console.log('Video play error:', err));
+        triggerConfetti();
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   5. Game 3: Catch Sarvan's Heart Canvas Arcade
+   -------------------------------------------------------------------------- */
+function initCatchGame() {
+  const canvas = document.getElementById('catch-canvas');
+  const scoreDisplay = document.getElementById('catch-score-display');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width = (canvas.width = canvas.parentElement.clientWidth || 450);
+  let height = (canvas.height = 320);
+
+  let score = 0;
+  let basketX = width / 2 - 30;
+  const basketWidth = 60;
+  const basketHeight = 16;
+
+  const hearts = [];
+  let isGameOver = false;
+
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    basketX = e.clientX - rect.left - basketWidth / 2;
+  });
+
+  canvas.addEventListener('touchmove', (e) => {
+    if (e.touches[0]) {
+      const rect = canvas.getBoundingClientRect();
+      basketX = e.touches[0].clientX - rect.left - basketWidth / 2;
+    }
+  });
+
+  function spawnHeart() {
+    if (isGameOver) return;
+    hearts.push({
+      x: Math.random() * (width - 20) + 10,
+      y: -20,
+      speed: Math.random() * 1.8 + 1.2,
+      size: 14
+    });
+  }
+
+  setInterval(spawnHeart, 1200);
+
+  function loop() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw Basket
+    ctx.fillStyle = '#B87373';
+    ctx.beginPath();
+    ctx.roundRect(basketX, height - 25, basketWidth, basketHeight, 8);
+    ctx.fill();
+
+    // Draw & Update Hearts
+    for (let i = hearts.length - 1; i >= 0; i--) {
+      const h = hearts[i];
+      h.y += h.speed;
+
+      ctx.fillStyle = '#ff4d6d';
+      ctx.font = '16px sans-serif';
+      ctx.fillText('💖', h.x, h.y);
+
+      // Catch Collision
+      if (h.y >= height - 35 && h.y <= height - 10 && h.x >= basketX - 10 && h.x <= basketX + basketWidth + 10) {
+        hearts.splice(i, 1);
+        score++;
+        if (scoreDisplay) scoreDisplay.textContent = `Score: ${score} / 10 Hearts`;
+        triggerConfetti();
+
+        if (score >= 10 && !isGameOver) {
+          isGameOver = true;
+          if (scoreDisplay) scoreDisplay.textContent = `🎉 You caught all 10 hearts for Sarvan! 🎉`;
+          triggerMassiveHeartCascade();
+        }
+      } else if (h.y > height + 20) {
+        hearts.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
+
+/* --------------------------------------------------------------------------
+   6. Game 4: Memory Match Card Game
+   -------------------------------------------------------------------------- */
+function initMemoryGame() {
+  const grid = document.getElementById('memory-grid');
+  if (!grid) return;
+
+  const items = ['💖', '💖', '🌹', '🌹', '☕', '☕', '🎵', '🎵', '💌', '💌', '✨', '✨'];
+  // Shuffle
+  items.sort(() => Math.random() - 0.5);
+
+  let flippedCards = [];
+  let matchedCount = 0;
+
+  grid.innerHTML = '';
+
+  items.forEach((item, idx) => {
+    const card = document.createElement('div');
+    card.className = 'memory-card';
+    card.setAttribute('data-val', item);
+    card.textContent = '❓';
+
+    card.addEventListener('click', () => {
+      if (flippedCards.length < 2 && !card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        card.textContent = item;
+        flippedCards.push(card);
+
+        if (flippedCards.length === 2) {
+          if (flippedCards[0].getAttribute('data-val') === flippedCards[1].getAttribute('data-val')) {
+            matchedCount += 2;
+            flippedCards = [];
+            triggerConfetti();
+            if (matchedCount === items.length) {
+              triggerMassiveHeartCascade();
+              openModal('🏆', 'Memory Match Master!', 'You matched all our memory cards, Chevy! Sarvan loves you! 💕');
+            }
+          } else {
+            setTimeout(() => {
+              flippedCards.forEach((c) => {
+                c.classList.remove('flipped');
+                c.textContent = '❓';
+              });
+              flippedCards = [];
+            }, 800);
+          }
+        }
+      }
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   7. Three.js Real Rose Scroll Engine
    -------------------------------------------------------------------------- */
 function initRealRoseScroll() {
   const canvas = document.getElementById('flower-canvas-3d');
@@ -63,7 +375,6 @@ function initRealRoseScroll() {
 
   if (!canvas || !scrollContainer || typeof THREE === 'undefined') return;
 
-  // Scene, Camera, Renderer
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.position.set(0, 0, 10);
@@ -72,11 +383,9 @@ function initRealRoseScroll() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Ambient Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
   scene.add(ambientLight);
 
-  // Load Real Rose Petal Texture
   const textureLoader = new THREE.TextureLoader();
   const petalTextureUrl = (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.realPetalImage) ? ANNIVERSARY_CONFIG.realPetalImage : './assets/real_petal.png';
 
@@ -84,7 +393,6 @@ function initRealRoseScroll() {
     const petalCount = 5;
     const petals = [];
 
-    // Create 5 3D Planes with Real Rose Petal Texture
     const petalGeo = new THREE.PlaneGeometry(2.2, 2.2);
     const petalMat = new THREE.MeshBasicMaterial({
       map: texture,
@@ -94,11 +402,7 @@ function initRealRoseScroll() {
 
     for (let i = 0; i < petalCount; i++) {
       const mesh = new THREE.Mesh(petalGeo, petalMat);
-      mesh.position.set(
-        (Math.random() - 0.5) * 3,
-        2 + i * 0.5,
-        (Math.random() - 0.5) * 2
-      );
+      mesh.position.set((Math.random() - 0.5) * 3, 2 + i * 0.5, (Math.random() - 0.5) * 2);
       mesh.rotation.z = Math.random() * Math.PI * 2;
       scene.add(mesh);
 
@@ -109,7 +413,6 @@ function initRealRoseScroll() {
       });
     }
 
-    // Scroll listener
     let scrollProgress = 0;
 
     function updateScroll() {
@@ -120,13 +423,11 @@ function initRealRoseScroll() {
       const currentScroll = Math.max(0, -rect.top);
       scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
 
-      // Hero Overlay Fade Out
       if (heroOverlay) {
         const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
         heroOverlay.style.opacity = heroOpacity;
       }
 
-      // Sync active month card overlay with fallen petal scroll progress
       if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
         let activeMonthIndex = -1;
 
@@ -159,7 +460,6 @@ function initRealRoseScroll() {
     window.addEventListener('scroll', updateScroll);
     updateScroll();
 
-    // Render loop
     function animate() {
       requestAnimationFrame(animate);
 
@@ -190,7 +490,7 @@ function initRealRoseScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Live Relationship Timers
+   8. Relationship Timers
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -249,7 +549,7 @@ function initNextChapterTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Render 3D Flip Cards, Envelopes & Coupons
+   9. Render Flip Cards, Envelopes & Coupons
    -------------------------------------------------------------------------- */
 function renderReasonsFlipCards() {
   const container = document.getElementById('reasons-flip-grid');
@@ -345,7 +645,7 @@ function renderCoupons() {
         openModal(
           coupon.icon,
           'Coupon Redeemed! 🎉',
-          `You have redeemed: "${coupon.title}"!\n\nCoupon Code: ${coupon.code}\n\nTake a screenshot and send it to me anytime you want to claim this gift! 💕`
+          `You have redeemed: "${coupon.title}"!\n\nCoupon Code: ${coupon.code}\n\nTake a screenshot and send it to Sarvan anytime you want to claim this gift! 💕`
         );
       }
     });
@@ -355,7 +655,7 @@ function renderCoupons() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Playful Interactive Dodging "No" Button & "Yes" Explosion
+   10. Proposal Interaction Handlers
    -------------------------------------------------------------------------- */
 function setupProposalInteractions() {
   const btnYes = document.getElementById('btn-yes');
@@ -395,14 +695,14 @@ function setupProposalInteractions() {
     triggerMassiveHeartCascade();
     openModal(
       '💖',
-      'YAY! You Said Yes! 🎉',
-      `You are officially my favorite person forever and ever!\n\nThank you for making these past 5 months so incredibly sweet, magical, and unforgettable.\n\nI love you with all my heart! 💕✨`
+      'YAY! You Said Yes, Chevy! 🎉',
+      `You are officially Sarvan's favorite person forever and ever!\n\nThank you for making these past 5 months so incredibly sweet, magical, and unforgettable.\n\nSarvan loves you with all his heart! 💕✨`
     );
   });
 }
 
 /* --------------------------------------------------------------------------
-   6. Canvas Heart Background Particles & Confetti
+   11. Particles & Modals
    -------------------------------------------------------------------------- */
 function initHeartParticles() {
   const canvas = document.getElementById('particle-canvas');
@@ -516,9 +816,6 @@ function randomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-/* --------------------------------------------------------------------------
-   7. Modal Listeners
-   -------------------------------------------------------------------------- */
 function setupModalListeners() {
   const overlay = document.getElementById('modal-overlay');
   const closeBtn = document.getElementById('modal-close');
