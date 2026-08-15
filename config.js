@@ -22,15 +22,78 @@ const ANNIVERSARY_CONFIG = {
     // --- The Weeknd (After Hours Full Album & Iconic Hits) ---
     {
       id: "ah-1",
-      title: "Die For You",
-      artist: "The Weeknd",
+      title: "Alone Again",
+      artist: "The Weeknd (After Hours)",
       category: "after-hours",
-      spotifyUrl: "https://open.spotify.com/embed/track/2atA858UfqEofwVv54Ez6W?utm_source=generator&theme=0",
-      audioUrl: "./assets/audio/die_for_you.mp3",
-      cover: "🎵"
+      spotifyUrl: "https://open.spotify.com/embed/track/6szuecWAGEiv2Constraint?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/alone_again.mp3",
+      cover: "🌆"
     },
     {
       id: "ah-2",
+      title: "Too Late",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/6szuecWAGEiv2Constraint?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/too_late.mp3",
+      cover: "🌃"
+    },
+    {
+      id: "ah-3",
+      title: "Hardest To Love",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/6szuecWAGEiv2Constraint?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/hardest_to_love.mp3",
+      cover: "💓"
+    },
+    {
+      id: "ah-4",
+      title: "Scared To Live",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/4io5vRj6XyD18v1x4s558A?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/scared_to_live.mp3",
+      cover: "🕊️"
+    },
+    {
+      id: "ah-5",
+      title: "Snowchild",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/1waooa3L9FfWJ6u9rV4891?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/snowchild.mp3",
+      cover: "❄️"
+    },
+    {
+      id: "ah-6",
+      title: "Escape From LA",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/1waooa3L9FfWJ6u9rV4891?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/escape_from_la.mp3",
+      cover: "🌴"
+    },
+    {
+      id: "ah-7",
+      title: "Heartless",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/60nZcImufyMA1MKQY3E5Z6?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/heartless.mp3",
+      cover: "🖤"
+    },
+    {
+      id: "ah-8",
+      title: "Faith",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/faith.mp3",
+      cover: "✨"
+    },
+    {
+      id: "ah-9",
       title: "Blinding Lights",
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
@@ -39,7 +102,16 @@ const ANNIVERSARY_CONFIG = {
       cover: "🌆"
     },
     {
-      id: "ah-3",
+      id: "ah-10",
+      title: "In Your Eyes",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/7szuecWAGEiv2Constraint?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/in_your_eyes.mp3",
+      cover: "🎷"
+    },
+    {
+      id: "ah-11",
       title: "Save Your Tears",
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
@@ -48,13 +120,40 @@ const ANNIVERSARY_CONFIG = {
       cover: "💧"
     },
     {
-      id: "ah-4",
+      id: "ah-12",
+      title: "Repeat After Me (Interlude)",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/2p8StY1WioV2R0W42YEjUt?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/repeat_after_me.mp3",
+      cover: "🔄"
+    },
+    {
+      id: "ah-13",
       title: "After Hours",
       artist: "The Weeknd (After Hours)",
       category: "after-hours",
       spotifyUrl: "https://open.spotify.com/embed/track/2p8StY1WioV2R0W42YEjUt?utm_source=generator&theme=0",
       audioUrl: "./assets/audio/after_hours.mp3",
       cover: "🌃"
+    },
+    {
+      id: "ah-14",
+      title: "Until I Bleed Out",
+      artist: "The Weeknd (After Hours)",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/5Q0NhFRsPl19vWviXnL0uy?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/until_i_bleed_out.mp3",
+      cover: "🥀"
+    },
+    {
+      id: "ah-15",
+      title: "Die For You",
+      artist: "The Weeknd",
+      category: "after-hours",
+      spotifyUrl: "https://open.spotify.com/embed/track/2atA858UfqEofwVv54Ez6W?utm_source=generator&theme=0",
+      audioUrl: "./assets/audio/die_for_you.mp3",
+      cover: "🎵"
     },
 
     // --- Lana Del Rey Hits ---
@@ -205,27 +304,27 @@ const ANNIVERSARY_CONFIG = {
     }
   ],
 
-  // Dream Location Videos (Venice, Paris, Italy, Rome)
+  // Real Local Drone Shot Videos (Venice, Paris, Italy, Rome)
   locationVideos: {
     "venice": {
       name: "Venice, Italy 🚣",
-      videoUrl: "https://cdn.pixabay.com/video/2019/04/23/23011-332306797_large.mp4",
-      description: "Floating through romantic canals and ancient bridges under golden hour..."
+      videoUrl: "./assets/video/venice.mp4",
+      description: "Real HD drone shot: Floating through romantic canals and ancient bridges under golden hour..."
     },
     "paris": {
       name: "Paris, France 🗼",
-      videoUrl: "https://cdn.pixabay.com/video/2020/05/25/40149-424933906_large.mp4",
-      description: "Sparkling Eiffel Tower lights and romantic cobblestone streets..."
+      videoUrl: "./assets/video/paris.mp4",
+      description: "Real HD drone shot: Sparkling Eiffel Tower lights and romantic cobblestone streets..."
     },
     "italy": {
       name: "Amalfi Coast, Italy 🌊",
-      videoUrl: "https://cdn.pixabay.com/video/2021/08/13/84931-587285149_large.mp4",
-      description: "Cliffside pastel villages over sparkling turquoise Mediterranean waters..."
+      videoUrl: "./assets/video/italy.mp4",
+      description: "Real HD drone shot: Cliffside pastel villages over sparkling turquoise Mediterranean waters..."
     },
     "rome": {
       name: "Rome, Italy 🏛️",
-      videoUrl: "https://cdn.pixabay.com/video/2017/11/02/12711-241673841_large.mp4",
-      description: "Ancient Colosseum sunset and Trevi Fountain wishes..."
+      videoUrl: "./assets/video/rome.mp4",
+      description: "Real HD drone shot: Ancient Colosseum sunset and Trevi Fountain wishes..."
     }
   },
 
