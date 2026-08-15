@@ -156,12 +156,20 @@
 
   <div class="container">
 
-    <!-- 🎵 Lana Del Rey & The Weeknd Romantic Music Jukebox Section -->
+    <!-- 🎵 After Hours & Romantic Jukebox Section -->
     <section id="music-jukebox">
       <div class="section-title">
         <div class="badge">🎵 Our Soundtrack</div>
-        <h2>Lana Del Rey & The Weeknd Jukebox 📻</h2>
-        <p>Choose your favorite track to play while you explore our site</p>
+        <h2>After Hours & Romantic Hits Jukebox 📻</h2>
+        <p>Featuring The Weeknd's full After Hours album, Lana Del Rey, Frank Ocean, Arctic Monkeys & more</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="jukebox-categories">
+        <button class="cat-btn active" data-cat="all">All Songs ✨</button>
+        <button class="cat-btn" data-cat="after-hours">After Hours (The Weeknd) 🌆</button>
+        <button class="cat-btn" data-cat="lana">Lana Del Rey 🌸</button>
+        <button class="cat-btn" data-cat="classics">Romantic Vibe Classics ☕</button>
       </div>
       
       <div class="jukebox-container" id="jukebox-container">
@@ -169,8 +177,8 @@
           <div class="jukebox-now-playing">
             <div class="jukebox-icon" id="jukebox-icon">🎵</div>
             <div>
-              <h3 class="jukebox-track-title" id="jukebox-track-title">Die For You</h3>
-              <div class="jukebox-artist-name" id="jukebox-artist-name">The Weeknd</div>
+              <h3 class="jukebox-track-title" id="jukebox-track-title">Blinding Lights</h3>
+              <div class="jukebox-artist-name" id="jukebox-artist-name">The Weeknd (After Hours)</div>
             </div>
           </div>
           <audio id="jukebox-audio-player" controls preload="metadata"></audio>

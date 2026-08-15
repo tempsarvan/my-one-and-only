@@ -1,7 +1,7 @@
 /**
  * 💖 MY ONE AND ONLY - TOKYO HANABI NIGHT SKY & MUSIC JUKEBOX
- * Features: Lana Del Rey & The Weeknd Jukebox Engine, Clean 2D Animated Rose,
- * Canvas Fireworks Engine, Scratch Block Coding, 5 Arcade Games.
+ * Features: The Weeknd After Hours Full Album, Lana Del Rey & Diverse Romantic Tracks,
+ * Clean 2D Animated Rose, Canvas Fireworks Engine, Scratch Block Coding, 5 Arcade Games.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init2DRoseScroll();
 
   // Music Jukebox Engine
-  renderMusicJukebox();
+  renderMusicJukebox('all');
 
   // Timers
   initLiveTimer();
@@ -64,9 +64,9 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. 🎵 Lana Del Rey & The Weeknd Music Jukebox Engine
+   2. 🎵 After Hours & Romantic Music Jukebox Engine
    -------------------------------------------------------------------------- */
-function renderMusicJukebox() {
+function renderMusicJukebox(selectedCat = 'all') {
   const gridContainer = document.getElementById('music-tracks-grid');
   const trackTitleEl = document.getElementById('jukebox-track-title');
   const artistNameEl = document.getElementById('jukebox-artist-name');
@@ -75,13 +75,25 @@ function renderMusicJukebox() {
   const spotifyIframe = document.getElementById('spotify-iframe');
   const spotifyArtistLabel = document.getElementById('spotify-artist-label');
   const spotifyTrackLabel = document.getElementById('spotify-track-label');
+  const catBtns = document.querySelectorAll('.cat-btn');
 
   if (!gridContainer || typeof ANNIVERSARY_CONFIG === 'undefined' || !ANNIVERSARY_CONFIG.musicPlaylist) return;
 
-  const tracks = ANNIVERSARY_CONFIG.musicPlaylist;
+  catBtns.forEach((btn) => {
+    btn.onclick = () => {
+      catBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.getAttribute('data-cat');
+      renderMusicJukebox(cat);
+    };
+  });
+
+  const allTracks = ANNIVERSARY_CONFIG.musicPlaylist;
+  const filteredTracks = selectedCat === 'all' ? allTracks : allTracks.filter((t) => t.category === selectedCat);
+
   gridContainer.innerHTML = '';
 
-  tracks.forEach((track, idx) => {
+  filteredTracks.forEach((track, idx) => {
     const btn = document.createElement('button');
     btn.className = `track-card-btn ${idx === 0 ? 'active' : ''}`;
     btn.innerHTML = `
@@ -118,9 +130,8 @@ function renderMusicJukebox() {
     gridContainer.appendChild(btn);
   });
 
-  // Set initial default track
-  if (tracks.length > 0 && audioPlayer) {
-    audioPlayer.src = tracks[0].audioUrl;
+  if (filteredTracks.length > 0 && audioPlayer && selectedCat === 'all') {
+    audioPlayer.src = filteredTracks[0].audioUrl;
   }
 }
 
