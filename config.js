@@ -18,11 +18,23 @@ const ANNIVERSARY_CONFIG = {
   spotifyArtistName: "The Weeknd",
   spotifyTrackName: "The Weeknd Playlist",
 
+  // Real Photorealistic Rose Assets
+  realRoseImage: "./assets/real_rose.png",
+  realPetalImage: "./assets/real_petal.png",
+
   // Hero Titles
   heroTitle: "For Shivi, <br><span>My Favorite Chapter.</span>",
   heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness with Sarvan",
 
-  // Quiz Questions & Answers
+  // Scratch Block Builder Definitions (Game 1)
+  scratchBlocks: [
+    { id: "sb-1", type: "event", label: "when 🚩 clicked", color: "#FFAB19", icon: "🚩" },
+    { id: "sb-2", type: "motion", label: "build love heart 💖", color: "#4C97FF", icon: "💖" },
+    { id: "sb-3", type: "sound", label: "play The Weeknd playlist 🎵", color: "#9966FF", icon: "🎵" },
+    { id: "sb-4", type: "looks", label: "say [I love you from Sarvan 💖] for 5 secs", color: "#FF6680", icon: "🌸" }
+  ],
+
+  // Quiz Questions & Answers (Game 2)
   quiz: [
     {
       id: "q1",
@@ -74,7 +86,7 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Personal Timeline Stories (Relatable & Sweet - No Landmarks!)
+  // Personal Timeline Stories
   timeline: [
     {
       monthNum: 1,

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   💖 MY ONE AND ONLY - CHEVY & SARVAN 5-GAME ARCADE & SCROLL STYLESHEET
+   💖 MY ONE AND ONLY - SHIVI & SARVAN SCRATCH UI & SCROLL STYLESHEET
    ========================================================================== */
 
 :root {
@@ -10,7 +10,6 @@
   --rose-accent: #B87373;
   --rose-dark: #8C5252;
   --rose-soft: #F5E8E8;
-  --rose-glow: rgba(212, 165, 165, 0.4);
   --gold-warm: #E6B89C;
   --text-espresso: #2B2A2A;
   --text-muted: #736262;
@@ -372,7 +371,7 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   5-Game Arcade Hub Styles
+   5-Game Arcade Hub & Scratch Block Coding Interface
    -------------------------------------------------------------------------- */
 .arcade-container {
   background: var(--bg-card);
@@ -416,7 +415,6 @@ h1, h2, h3, .serif-font {
   100% { transform: scale(1.25); }
 }
 
-/* Arcade Tabs */
 .arcade-tabs {
   display: flex;
   align-items: center;
@@ -453,58 +451,91 @@ h1, h2, h3, .serif-font {
   display: block;
 }
 
-/* Game 1: Co-Op Scratch Builder */
-.coop-builder-box {
-  text-align: center;
-}
-
-.coop-instruction {
-  font-size: 1.15rem;
-  color: var(--rose-dark);
-  font-weight: 600;
-  margin-bottom: 24px;
-}
-
-.coop-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  max-width: 480px;
-  margin: 0 auto 30px;
-}
-
-.coop-cell {
-  height: 110px;
-  background: var(--bg-card-soft);
-  border: 2px dashed var(--rose-dusty);
-  border-radius: var(--radius-md);
+/* Scratch Block Coding Workspace Layout (Game 1) */
+.scratch-ui-layout {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.scratch-blocks-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
-  font-size: 2.5rem;
+  padding: 16px;
+  background: #F1F3F5;
+  border-radius: var(--radius-md);
+  border: 2px dashed #CED4DA;
+}
+
+.scratch-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.98rem;
   cursor: pointer;
-  transition: var(--transition-smooth);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
 }
 
-.coop-cell.target-highlight {
-  border-style: solid;
-  border-color: var(--rose-accent);
-  background: var(--rose-soft);
-  animation: pulse-border 1.2s infinite;
+.scratch-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-@keyframes pulse-border {
-  0%, 100% { border-color: var(--rose-accent); box-shadow: 0 0 0 0 rgba(184, 115, 115, 0.4); }
-  50% { border-color: var(--rose-dark); box-shadow: 0 0 0 10px rgba(184, 115, 115, 0); }
+.scratch-block.target-highlight {
+  animation: pulse-scratch 1s infinite alternate;
 }
 
-.coop-cell.placed {
-  border-style: solid;
-  background: var(--bg-card);
-  border-color: var(--rose-dark);
+@keyframes pulse-scratch {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 151, 255, 0.6); }
+  100% { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(76, 151, 255, 0); }
 }
 
-/* Blooming Flower Message Reward */
+.scratch-block-event { background: #FFAB19; }
+.scratch-block-motion { background: #4C97FF; }
+.scratch-block-sound { background: #9966FF; }
+.scratch-block-looks { background: #FF6680; }
+
+.scratch-stack-workspace {
+  min-height: 220px;
+  background: #E9ECEF;
+  border: 2px solid #ADB5BD;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.scratch-placeholder-text {
+  color: #868E96;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: auto 0;
+}
+
+.scratch-stacked-block {
+  margin-left: 0;
+  width: 100%;
+  animation: snap-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes snap-in {
+  0% { transform: scale(0.8) translateY(-10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Blooming Reward Card */
 .blooming-reward-card {
   display: none;
   background: linear-gradient(135deg, var(--rose-soft), #FDFBF7);
@@ -513,7 +544,6 @@ h1, h2, h3, .serif-font {
   padding: 40px 24px;
   text-align: center;
   margin-top: 20px;
-  animation: fade-in-up 0.6s ease;
 }
 
 .blooming-reward-card.active {
@@ -588,7 +618,6 @@ h1, h2, h3, .serif-font {
   color: #C62828;
 }
 
-/* Special Question 5: Dream Location Box & Video Reveal */
 .dream-location-box {
   display: none;
   background: var(--bg-card-soft);
@@ -625,7 +654,6 @@ h1, h2, h3, .serif-font {
 .location-btn:hover {
   background: linear-gradient(135deg, var(--rose-accent), var(--rose-dark));
   color: white;
-  box-shadow: 0 6px 16px rgba(184, 115, 115, 0.3);
 }
 
 .location-video-container {
@@ -634,7 +662,6 @@ h1, h2, h3, .serif-font {
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 2px solid var(--rose-dusty);
-  box-shadow: var(--shadow-hover);
 }
 
 .location-video-container.active {
@@ -697,7 +724,6 @@ h1, h2, h3, .serif-font {
   font-size: 2.2rem;
   cursor: pointer;
   transition: transform 0.4s;
-  transform-style: preserve-3d;
 }
 
 .memory-card.flipped {
@@ -763,7 +789,62 @@ h1, h2, h3, .serif-font {
   text-transform: uppercase;
 }
 
-/* Timer Grid */
+/* Flip Cards, Timers, Proposal, Envelopes & Coupons */
+.flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.flip-card-container {
+  perspective: 1000px;
+  height: 220px;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.flip-card-container.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-light);
+}
+
+.flip-card-front {
+  background: var(--bg-card);
+  color: var(--text-espresso);
+}
+
+.flip-card-back {
+  background: linear-gradient(135deg, var(--rose-soft), #FDFBF7);
+  color: var(--text-espresso);
+  transform: rotateY(180deg);
+  border-color: var(--rose-dusty);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
 .timer-container {
   background: var(--bg-card);
   border: 1px solid var(--border-light);

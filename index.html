@@ -53,7 +53,7 @@
         </div>
         <div class="badge">✨ 5 Months of Happiness ✨</div>
         <h1 class="flower-hero-title">For Shivi, <br><span>My Favorite Chapter.</span></h1>
-        <p class="flower-hero-sub">Scroll down to watch our 3D rose petals float down to reveal each chapter...</p>
+        <p class="flower-hero-sub">Scroll down to watch our real rose petals float down to reveal each chapter...</p>
         <div class="scroll-hint-badge">
           <span>🌹 Scroll down to reveal each falling petal chapter</span>
         </div>
@@ -197,26 +197,29 @@
 
         <!-- Navigation Tabs for 5 Games -->
         <div class="arcade-tabs">
-          <button class="tab-btn active" data-target="game-1">Game 1: Co-Op Builder 🛠️</button>
+          <button class="tab-btn active" data-target="game-1">Game 1: Scratch Coding 🧩</button>
           <button class="tab-btn" data-target="game-2">Game 2: Sarvan Quiz 🧠</button>
           <button class="tab-btn" data-target="game-3">Game 3: Catch Hearts 🎈</button>
           <button class="tab-btn" data-target="game-4">Game 4: Memory Match 🃏</button>
           <button class="tab-btn" data-target="game-5">Game 5: Love Certificate 🏆</button>
         </div>
 
-        <!-- Game 1: Co-Op Scratch Builder -->
+        <!-- Game 1: Scratch Block Coding Interface -->
         <div class="arcade-game-view active" id="game-1">
           <div class="coop-builder-box">
-            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Building Together with Sarvan 🛠️</h3>
-            <p class="coop-instruction" id="coop-instruction">Sarvan is pointing to block #1: Click to place our heart puzzle!</p>
+            <h3 class="serif-font" style="font-size: 1.8rem; color: var(--rose-dark); margin-bottom: 8px;">Scratch Block Coding with Sarvan 🧩</h3>
+            <p class="coop-instruction" id="scratch-instruction">Sarvan is pointing to block #1: Click to snap into your code!</p>
 
-            <div class="coop-grid" id="coop-grid">
-              <div class="coop-cell target-highlight" data-index="0">❓</div>
-              <div class="coop-cell" data-index="1">❓</div>
-              <div class="coop-cell" data-index="2">❓</div>
-              <div class="coop-cell" data-index="3">❓</div>
-              <div class="coop-cell" data-index="4">❓</div>
-              <div class="coop-cell" data-index="5">❓</div>
+            <div class="scratch-ui-layout">
+              <!-- Scratch Blocks Palette -->
+              <div class="scratch-blocks-palette" id="scratch-palette">
+                <!-- Rendered dynamically -->
+              </div>
+
+              <!-- Scratch Code Workspace Stack -->
+              <div class="scratch-stack-workspace" id="scratch-stack">
+                <div class="scratch-placeholder-text" id="scratch-placeholder">Snap blocks here to build our love code! 💖</div>
+              </div>
             </div>
 
             <!-- Blooming Flower Message Reward -->
