@@ -86,47 +86,47 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Personal Timeline Stories (Tokyo Night Polaroid Memory Cards)
+  // Personal Timeline Stories (Sarvan & Shivi's Real 5-Month Journey)
   timeline: [
     {
       monthNum: 1,
-      title: "Month 1: The Spark & Endless Conversations",
+      title: "Month 1: The Ring & Nervous Hearts 💍",
       date: "March 15 - April 15",
-      subtitle: "Butterflies, Late Night Chats & Warm Smiles",
+      subtitle: "I was terrified, but I knew you were the one",
       image: "./assets/month1.png",
-      story: "Everything felt so magical from the very first day we connected. We started talking and couldn't stop. Every notification from you brought the biggest smile to my face, and late-night calls quickly became the best part of my daily routine."
+      story: "The very first month we met, I was so scared and nervous, but my heart knew what it wanted. I gathered all my courage, proposed to you, and gave you that ring. Giving you that ring was the best decision of my life, Shivi."
     },
     {
       monthNum: 2,
-      title: "Month 2: Inside Jokes & Stargazing Calls",
+      title: "Month 2: Swimming Together & Growing Closer 🏊‍♂️",
       date: "April 15 - May 15",
-      subtitle: "Finding My Safest Space & Favorite Person",
+      subtitle: "Getting to know every detail of your soul",
       image: "./assets/month2.png",
-      story: "By month two, we developed our own secret inside jokes and code words that made us laugh until our cheeks hurt. Staying up late talking under the night sky made me realize how rare, special, and incredible you are to me."
+      story: "Month two was when we really started discovering everything about each other. Swimming together, laughing, sharing our secrets, and becoming more and more comfortable in each other's arms every single day."
     },
     {
       monthNum: 3,
-      title: "Month 3: Playlists & Comforting Calls",
+      title: "Month 3: Through & Through Support 🤝",
       date: "May 15 - June 15",
-      subtitle: "The Soundtrack to Our Days",
+      subtitle: "Being each other's strongest pillar",
       image: "./assets/month3.png",
-      story: "Sharing songs, recommending movies, and talking about everything under the sun. Month three proved that no matter how busy or stressful the day got, one call with you made everything peaceful, warm, and right again."
+      story: "By month three, we truly became each other's support system. We were there for each other through every challenge, helping each other through and through, and proving that we will always stand by each other's side."
     },
     {
       monthNum: 4,
-      title: "Month 4: Deep Understanding & Caring Moments",
+      title: "Month 4: Unbreakable Bond 🛡️",
       date: "June 15 - July 15",
-      subtitle: "Growing Closer Every Single Day",
+      subtitle: "Nothing in this world was ever gonna break us",
       image: "./assets/month4.png",
-      story: "We learned so much more about each other's dreams, fears, and little quirks. Being there for you through everything became second nature. I fell deeper in love with you each day, knowing we make the best team together."
+      story: "Month four was when you and I made a promise in our hearts. We decided that no matter what life throws at us, no obstacle, distance, or difficulty was ever gonna break what we built together."
     },
     {
       monthNum: 5,
-      title: "Month 5: Happy 5th Month Anniversary, Shivi!",
+      title: "Month 5: Forever & Always 💖",
       date: "July 15 - August 15",
-      subtitle: "To Us & To All Our Future Chapters",
+      subtitle: "I decided I want to spend the rest of my life with you",
       image: "./assets/month5.png",
-      story: "Five wonderful months together, and my heart still skips a beat whenever I see your name on my screen. Thank you for being my comfort, my joy, and my favorite person Shivi. Here's to many more chapters together!"
+      story: "Happy 5th Month Anniversary, Shivi! Month five is the month I realized with 100% certainty that I want to spend my entire life with you. Thank you for being my dream come true. Here's to forever, my favorite person!"
     }
   ],
 
