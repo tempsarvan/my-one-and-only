@@ -1,5 +1,5 @@
 /**
- * 💖 Anniversary Web App Configuration - Cream & Dusty Rose 3D Flower Theme
+ * 💖 Anniversary Web App Configuration - Real Rose Experience
  */
 
 const ANNIVERSARY_CONFIG = {
@@ -14,12 +14,16 @@ const ANNIVERSARY_CONFIG = {
   spotifyArtistName: "The Weeknd",
   spotifyTrackName: "The Weeknd Playlist",
 
+  // Real Rose Assets
+  realRoseImage: "./assets/real_rose.png",
+  realPetalImage: "./assets/real_petal.png",
+
   // Names & Hero Titles
   partnerName: "My Favorite Person",
   heroTitle: "For My Favorite Person, <br><span>My Favorite Chapter.</span>",
-  heroSubtitle: "Scroll to uncurl our 3D rose and reveal each falling petal chapter...",
+  heroSubtitle: "Scroll down to watch our real rose bloom and reveal each falling petal chapter...",
 
-  // Timeline Stories (Displayed ON the falling 3D petals themselves!)
+  // Timeline Stories (Displayed ON the falling real petals!)
   timeline: [
     {
       monthNum: 1,

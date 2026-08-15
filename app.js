@@ -1,13 +1,13 @@
 /**
- * 💖 MY ONE AND ONLY - 3D SCROLL FLOWER & FALLING PETAL TILE CARDS
- * Features: Three.js 3D Blooming Rose, Scroll-Driven Petal Unfurling & Falling,
+ * 💖 MY ONE AND ONLY - REAL PHOTOGRAPHIC ROSE SCROLL EXPERIENCE
+ * Features: Three.js WebGL Real Photorealistic Rose Petals Falling Animation,
  * Dynamic Fallen Petal Card Display Overlay, 3D Flip Cards, Playful Dodging No Button.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpotifyWidget();
   initHeartParticles();
-  init3DFlowerScroll();
+  initRealRoseScroll();
 
   // Timers
   initLiveTimer();
@@ -53,9 +53,9 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Three.js 3D Blooming Rose & Scroll-Driven Falling Petals
+   2. Three.js Real Photorealistic Rose Petal Scroll Engine
    -------------------------------------------------------------------------- */
-function init3DFlowerScroll() {
+function initRealRoseScroll() {
   const canvas = document.getElementById('flower-canvas-3d');
   const scrollContainer = document.getElementById('flower-scroll-container');
   const heroOverlay = document.getElementById('hero-overlay');
@@ -66,169 +66,127 @@ function init3DFlowerScroll() {
   // Scene, Camera, Renderer
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0.5, 11);
+  camera.position.set(0, 0, 10);
 
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Lighting Setup
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.75);
+  // Ambient Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
   scene.add(ambientLight);
 
-  const roseLight = new THREE.DirectionalLight(0xd4a5a5, 1.2);
-  roseLight.position.set(5, 8, 5);
-  scene.add(roseLight);
+  // Load Real Rose Petal Texture
+  const textureLoader = new THREE.TextureLoader();
+  const petalTextureUrl = (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.realPetalImage) ? ANNIVERSARY_CONFIG.realPetalImage : './assets/real_petal.png';
 
-  const goldLight = new THREE.PointLight(0xffe082, 1.4, 25);
-  goldLight.position.set(-5, -2, 4);
-  scene.add(goldLight);
+  textureLoader.load(petalTextureUrl, (texture) => {
+    const petalCount = 5;
+    const petals = [];
 
-  // Group for the 3D Flower
-  const flowerGroup = new THREE.Group();
-  scene.add(flowerGroup);
+    // Create 5 3D Planes with Real Rose Petal Texture
+    const petalGeo = new THREE.PlaneGeometry(2.2, 2.2);
+    const petalMat = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true,
+      side: THREE.DoubleSide
+    });
 
-  // Stem
-  const stemMat = new THREE.MeshStandardMaterial({ color: 0x4a5d4e, roughness: 0.6 });
-  const stemGeo = new THREE.CylinderGeometry(0.12, 0.15, 6, 16);
-  const stem = new THREE.Mesh(stemGeo, stemMat);
-  stem.position.y = -3.4;
-  flowerGroup.add(stem);
+    for (let i = 0; i < petalCount; i++) {
+      const mesh = new THREE.Mesh(petalGeo, petalMat);
+      mesh.position.set(
+        (Math.random() - 0.5) * 3,
+        2 + i * 0.5,
+        (Math.random() - 0.5) * 2
+      );
+      mesh.rotation.z = Math.random() * Math.PI * 2;
+      scene.add(mesh);
 
-  // Bud Center
-  const centerMat = new THREE.MeshStandardMaterial({ color: 0xe6b89c, roughness: 0.3, emissive: 0xd4a5a5, emissiveIntensity: 0.3 });
-  const centerGeo = new THREE.SphereGeometry(0.5, 32, 32);
-  const centerNode = new THREE.Mesh(centerGeo, centerMat);
-  centerNode.position.y = -0.2;
-  flowerGroup.add(centerNode);
+      petals.push({
+        mesh: mesh,
+        baseX: (i - 2) * 1.8,
+        monthIndex: i
+      });
+    }
 
-  // 5 Petals
-  const petals = [];
-  const petalCount = 5;
-  const petalMat = new THREE.MeshStandardMaterial({
-    color: 0xd4a5a5,
-    roughness: 0.35,
-    metalness: 0.1,
-    side: THREE.DoubleSide
+    // Scroll listener
+    let scrollProgress = 0;
+
+    function updateScroll() {
+      const rect = scrollContainer.getBoundingClientRect();
+      const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) return;
+
+      const currentScroll = Math.max(0, -rect.top);
+      scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
+
+      // Hero Overlay Fade Out
+      if (heroOverlay) {
+        const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
+        heroOverlay.style.opacity = heroOpacity;
+      }
+
+      // Sync active month card overlay with fallen petal scroll progress
+      if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
+        let activeMonthIndex = -1;
+
+        if (scrollProgress >= 0.2 && scrollProgress < 0.36) activeMonthIndex = 0;
+        else if (scrollProgress >= 0.36 && scrollProgress < 0.52) activeMonthIndex = 1;
+        else if (scrollProgress >= 0.52 && scrollProgress < 0.68) activeMonthIndex = 2;
+        else if (scrollProgress >= 0.68 && scrollProgress < 0.84) activeMonthIndex = 3;
+        else if (scrollProgress >= 0.84) activeMonthIndex = 4;
+
+        if (activeMonthIndex >= 0 && cardDisplay) {
+          const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
+          document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
+          document.getElementById('petal-card-title').textContent = data.title;
+          document.getElementById('petal-card-date').textContent = data.date;
+          document.getElementById('petal-card-text').textContent = data.story;
+          document.getElementById('petal-card-img').src = data.image;
+
+          cardDisplay.classList.add('active');
+
+          cardDisplay.onclick = () => {
+            triggerConfetti();
+            openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
+          };
+        } else if (cardDisplay) {
+          cardDisplay.classList.remove('active');
+        }
+      }
+    }
+
+    window.addEventListener('scroll', updateScroll);
+    updateScroll();
+
+    // Render loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      petals.forEach((p, i) => {
+        const petalStageStart = 0.2 + (i * 0.16);
+
+        if (scrollProgress >= petalStageStart) {
+          const fallFactor = (scrollProgress - petalStageStart) / 0.16;
+          p.mesh.position.y = 3 - (fallFactor * 6);
+          p.mesh.position.x = p.baseX + Math.sin(Date.now() * 0.002 + i) * 0.5;
+          p.mesh.rotation.z += 0.005;
+        } else {
+          p.mesh.position.y = 4 + i;
+        }
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
   });
 
-  function createPetalGeometry() {
-    const geom = new THREE.SphereGeometry(1.6, 24, 24, 0, Math.PI * 0.75, 0, Math.PI * 0.65);
-    geom.scale(1, 1.25, 0.35);
-    return geom;
-  }
-
-  for (let i = 0; i < petalCount; i++) {
-    const pivot = new THREE.Group();
-    pivot.position.set(0, -0.2, 0);
-
-    const petalMesh = new THREE.Mesh(createPetalGeometry(), petalMat);
-    petalMesh.position.set(0, 0.8, 0.5);
-
-    const angle = (i / petalCount) * Math.PI * 2;
-    pivot.rotation.y = angle;
-    pivot.rotation.x = 0.85; // closed bud initial state
-
-    pivot.add(petalMesh);
-    flowerGroup.add(pivot);
-
-    petals.push({
-      pivot: pivot,
-      mesh: petalMesh,
-      baseAngleY: angle,
-      monthIndex: i
-    });
-  }
-
-  flowerGroup.position.set(0, 0, 0);
-
-  // Resize Listener
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
-
-  // Scroll Progress Logic
-  let scrollProgress = 0;
-
-  function updateScroll() {
-    const rect = scrollContainer.getBoundingClientRect();
-    const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
-    if (totalScrollable <= 0) return;
-
-    const currentScroll = Math.max(0, -rect.top);
-    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
-
-    // 1. Hero Overlay Opacity
-    if (heroOverlay) {
-      const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
-      heroOverlay.style.opacity = heroOpacity;
-    }
-
-    // 2. Petal Unfurling & Falling Stages (0.2 to 1.0)
-    if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
-      let activeMonthIndex = -1;
-
-      if (scrollProgress >= 0.2 && scrollProgress < 0.36) activeMonthIndex = 0;
-      else if (scrollProgress >= 0.36 && scrollProgress < 0.52) activeMonthIndex = 1;
-      else if (scrollProgress >= 0.52 && scrollProgress < 0.68) activeMonthIndex = 2;
-      else if (scrollProgress >= 0.68 && scrollProgress < 0.84) activeMonthIndex = 3;
-      else if (scrollProgress >= 0.84) activeMonthIndex = 4;
-
-      if (activeMonthIndex >= 0 && cardDisplay) {
-        const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
-        document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
-        document.getElementById('petal-card-title').textContent = data.title;
-        document.getElementById('petal-card-date').textContent = data.date;
-        document.getElementById('petal-card-text').textContent = data.story;
-        document.getElementById('petal-card-img').src = data.image;
-
-        cardDisplay.classList.add('active');
-
-        // Click fallen petal card to open modal
-        cardDisplay.onclick = () => {
-          triggerConfetti();
-          openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
-        };
-      } else if (cardDisplay) {
-        cardDisplay.classList.remove('active');
-      }
-    }
-  }
-
-  window.addEventListener('scroll', updateScroll);
-  updateScroll();
-
-  // Animation Loop
-  function animate() {
-    requestAnimationFrame(animate);
-
-    // Idle rotation
-    flowerGroup.rotation.y += 0.003;
-
-    // Petal position mapping driven by scrollProgress
-    petals.forEach((p, i) => {
-      const petalStageStart = 0.2 + (i * 0.16);
-
-      if (scrollProgress < 0.2) {
-        // Phase 1: Uncurling from closed rosebud to bloom
-        const unfurlAngle = 0.85 - (scrollProgress * 4.25);
-        p.pivot.rotation.x = unfurlAngle;
-        p.pivot.position.set(0, -0.2, 0);
-      } else if (scrollProgress >= petalStageStart) {
-        // Phase 2: Petal i detaches and falls gracefully
-        const fallFactor = (scrollProgress - petalStageStart) / 0.16;
-        p.pivot.position.y = -0.2 - (fallFactor * 4);
-        p.pivot.position.x = Math.sin(Date.now() * 0.002 + i) * 0.6;
-        p.pivot.rotation.z = Math.cos(Date.now() * 0.0015 + i) * 0.3;
-      }
-    });
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
 }
 
 /* --------------------------------------------------------------------------

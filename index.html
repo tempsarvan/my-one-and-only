@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For My Favorite Person, My Favorite Chapter 💖</title>
-  <meta name="description" content="A 3D scroll-driven romantic experience with uncurling rose petals and interactive milestone cards.">
+  <meta name="description" content="A real rose photographic scroll-driven romantic experience with uncurling petals and interactive milestone cards.">
   
   <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
 </head>
 <body>
 
-  <!-- Floating Canvas Background -->
+  <!-- Floating Heart & Dust Canvas Background -->
   <canvas id="particle-canvas"></canvas>
 
   <!-- Top-Right Spotify Player Widget (The Weeknd Playlist) -->
@@ -41,18 +41,21 @@
     </div>
   </div>
 
-  <!-- 3D Scroll-Driven Blooming Rose & Falling Petal Track -->
+  <!-- Real Rose Scroll-Driven Blooming & Falling Petal Track -->
   <div class="flower-scroll-container" id="flower-scroll-container">
     <div class="flower-sticky-viewport">
       <canvas id="flower-canvas-3d"></canvas>
       
-      <!-- Initial Hero Text Overlay -->
+      <!-- Initial Hero Text Overlay with Real Photorealistic Rose -->
       <div class="flower-hero-overlay" id="hero-overlay">
+        <div class="real-rose-img-wrapper">
+          <img src="./assets/real_rose.png" alt="Real Photorealistic Rose" id="real-rose-img">
+        </div>
         <div class="badge">✨ 5 Months of Pure Happiness ✨</div>
         <h1 class="flower-hero-title">For My Favorite Person, <br><span>My Favorite Chapter.</span></h1>
-        <p class="flower-hero-sub">Scroll down to uncurl our 3D rose and watch its petals fall...</p>
+        <p class="flower-hero-sub">Scroll down to watch our real rose petals float down to reveal each chapter...</p>
         <div class="scroll-hint-badge">
-          <span>🌹 Scroll down to unravel our 3D flower</span>
+          <span>🌹 Scroll down to reveal each falling petal chapter</span>
         </div>
 
         <!-- Live Relationship Counter -->
@@ -82,7 +85,7 @@
       <div class="fallen-petal-card-display" id="fallen-petal-card-display">
         <img src="./assets/month1.png" alt="Petal Chapter" class="petal-card-img" id="petal-card-img">
         <div class="petal-card-content">
-          <span class="petal-card-badge" id="petal-card-badge">Fallen Petal #1 • Month 01</span>
+          <span class="petal-card-badge" id="petal-card-badge">Fallen Petal #01 • Month 01</span>
           <h3 class="petal-card-title" id="petal-card-title">Month 1: The Spark</h3>
           <div class="petal-card-date" id="petal-card-date">March 15 - April 15</div>
           <p class="petal-card-text" id="petal-card-text">Story note...</p>
@@ -196,7 +199,7 @@
     </div>
   </div>
 
-  <!-- Libraries: Three.js for 3D Flower & Canvas Confetti CDN -->
+  <!-- Libraries: Three.js for 3D Scene & Canvas Confetti CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   

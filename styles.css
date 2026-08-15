@@ -1,6 +1,6 @@
 /* ==========================================================================
-   💖 MY ONE AND ONLY - 3D SCROLL FLOWER & FALLING PETAL TILE CARDS STYLESHEET
-   Features: Three.js 3D Flower Unraveling, Falling 3D Petal Tile Cards,
+   💖 MY ONE AND ONLY - REAL PHOTOGRAPHIC ROSE SCROLL EXPERIENCE STYLESHEET
+   Features: Real Rose Photorealistic Bloom & Falling Real Petal Tile Cards,
    Soft Cream (#FDFBF7) & Dusty Rose (#D4A5A5) Aesthetic System.
    ========================================================================== */
 
@@ -210,11 +210,11 @@ h1, h2, h3, .serif-font {
 }
 
 /* --------------------------------------------------------------------------
-   4. 3D Scroll-Driven Blooming Flower Track & Fallen Petal Tile Cards
+   4. Real Photorealistic Rose Scroll Track & Fallen Petal Tile Cards
    -------------------------------------------------------------------------- */
 .flower-scroll-container {
   position: relative;
-  height: 350vh; /* Track length for 3D flower bloom & 5 falling petal cards */
+  height: 350vh; /* Scroll track for real rose bloom & falling real petals */
 }
 
 .flower-sticky-viewport {
@@ -240,7 +240,7 @@ h1, h2, h3, .serif-font {
 
 .flower-hero-overlay {
   position: absolute;
-  top: 10%;
+  top: 8%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -251,11 +251,34 @@ h1, h2, h3, .serif-font {
   transition: opacity 0.5s ease;
 }
 
+.real-rose-img-wrapper {
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 16px;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(184, 115, 115, 0.3);
+  border: 4px solid var(--rose-dusty);
+  animation: float-real-rose 4s ease-in-out infinite;
+}
+
+@keyframes float-real-rose {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.03); }
+}
+
+.real-rose-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .flower-hero-title {
-  font-size: 3.5rem;
+  font-size: 3.4rem;
   line-height: 1.15;
   color: var(--text-espresso);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .flower-hero-title span {
@@ -263,9 +286,9 @@ h1, h2, h3, .serif-font {
 }
 
 .flower-hero-sub {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--text-muted);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .scroll-hint-badge {
@@ -273,7 +296,7 @@ h1, h2, h3, .serif-font {
   align-items: center;
   gap: 10px;
   padding: 10px 24px;
-  background: rgba(253, 251, 247, 0.9);
+  background: rgba(253, 251, 247, 0.92);
   backdrop-filter: blur(10px);
   border: 1px solid var(--rose-dusty);
   border-radius: 50px;
@@ -289,7 +312,7 @@ h1, h2, h3, .serif-font {
   50% { transform: translateY(8px); }
 }
 
-/* Dynamic Floating HTML Card Overlay synced with 3D Fallen Petals */
+/* Dynamic Floating HTML Card Overlay synced with Fallen Real Petals */
 .fallen-petal-card-display {
   position: absolute;
   bottom: 8%;
@@ -297,16 +320,16 @@ h1, h2, h3, .serif-font {
   transform: translateX(-50%);
   z-index: 4;
   width: 90%;
-  max-width: 650px;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(18px);
   border: 2px solid var(--rose-dusty);
   border-radius: var(--radius-lg);
   padding: 24px;
-  box-shadow: 0 20px 45px rgba(140, 82, 82, 0.15);
+  box-shadow: 0 20px 45px rgba(140, 82, 82, 0.18);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
   pointer-events: none;
@@ -318,11 +341,12 @@ h1, h2, h3, .serif-font {
 }
 
 .petal-card-img {
-  width: 120px;
-  height: 120px;
+  width: 125px;
+  height: 125px;
   border-radius: var(--radius-md);
   object-fit: cover;
   border: 1px solid var(--rose-dusty);
+  box-shadow: var(--shadow-soft);
 }
 
 .petal-card-content {
@@ -331,11 +355,11 @@ h1, h2, h3, .serif-font {
 }
 
 .petal-card-badge {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   background: var(--rose-soft);
   color: var(--rose-dark);
   border: 1px solid var(--rose-dusty);
-  padding: 3px 10px;
+  padding: 3px 12px;
   border-radius: 50px;
   font-weight: 700;
   margin-bottom: 6px;
@@ -343,7 +367,7 @@ h1, h2, h3, .serif-font {
 }
 
 .petal-card-title {
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   color: var(--text-espresso);
   margin-bottom: 4px;
 }
@@ -356,7 +380,7 @@ h1, h2, h3, .serif-font {
 }
 
 .petal-card-text {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
   line-height: 1.5;
 }
@@ -801,7 +825,12 @@ footer p span {
 
 @media (max-width: 768px) {
   .flower-hero-title {
-    font-size: 2.4rem;
+    font-size: 2.3rem;
+  }
+
+  .real-rose-img-wrapper {
+    width: 160px;
+    height: 160px;
   }
 
   .fallen-petal-card-display {
