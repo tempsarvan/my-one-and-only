@@ -1,14 +1,14 @@
 /**
- * 💖 MY ONE AND ONLY - TOKYO HANABI NIGHT SKY & REAL ROSE SCROLL
- * Features: Interactive Canvas Fireworks Engine, Floating Sky Lanterns,
- * Scratch Block Builder, 3D Real Rose Scroll, 5 Arcade Games.
+ * 💖 MY ONE AND ONLY - CLEAN 2D ANIMATED VECTOR ROSE & TOKYO HANABI SKY
+ * Features: Clean 2D SVG Vector Animated Rose (5 Month Petals),
+ * Interactive Fireworks Engine, Scratch Block Coding, 5 Arcade Games.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initSpotifyWidget();
   initHeartParticles();
   initFireworksEngine();
-  initRealRoseScroll();
+  init2DRoseScroll();
 
   // Timers
   initLiveTimer();
@@ -61,7 +61,98 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Interactive Tokyo Fireworks Particle Engine (Hanabi Engine)
+   2. Clean 2D Animated Vector Rose Scroll Engine (5 Month Petals)
+   -------------------------------------------------------------------------- */
+function init2DRoseScroll() {
+  const scrollContainer = document.getElementById('flower-scroll-container');
+  const heroOverlay = document.getElementById('hero-overlay');
+  const cardDisplay = document.getElementById('fallen-petal-card-display');
+  const vectorRoseSvg = document.getElementById('vector-rose-svg');
+
+  const petalEls = [
+    document.getElementById('vector-petal-1'),
+    document.getElementById('vector-petal-2'),
+    document.getElementById('vector-petal-3'),
+    document.getElementById('vector-petal-4'),
+    document.getElementById('vector-petal-5')
+  ];
+
+  if (!scrollContainer || !vectorRoseSvg) return;
+
+  let scrollProgress = 0;
+
+  function updateScroll() {
+    const rect = scrollContainer.getBoundingClientRect();
+    const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    const currentScroll = Math.max(0, -rect.top);
+    scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
+
+    // Hero Overlay Fade Out
+    if (heroOverlay) {
+      const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.22));
+      heroOverlay.style.opacity = heroOpacity;
+    }
+
+    // Gentle Rose Scale & Rotation
+    vectorRoseSvg.style.transform = `scale(${1 + scrollProgress * 0.25}) rotate(${scrollProgress * 45}deg)`;
+
+    // Uncurl Each 2D Petal in Sequence & Sync Month Cards
+    const petalAngles = [-45, 45, -75, 75, 0];
+
+    petalEls.forEach((petal, i) => {
+      if (!petal) return;
+      const petalThreshold = 0.18 + (i * 0.16);
+
+      if (scrollProgress >= petalThreshold) {
+        const uncurlRatio = Math.min(1, (scrollProgress - petalThreshold) / 0.16);
+        const targetRotate = petalAngles[i] * (1 + uncurlRatio * 0.8);
+        const targetTranslateY = uncurlRatio * 35;
+        const targetScale = 1 + uncurlRatio * 0.15;
+
+        petal.style.transform = `translateY(${targetTranslateY}px) rotate(${targetRotate}deg) scale(${targetScale})`;
+      } else {
+        petal.style.transform = `rotate(0deg) scale(1)`;
+      }
+    });
+
+    // Sync Active Month Card Display (Month 1 to Month 5)
+    if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
+      let activeMonthIndex = -1;
+
+      if (scrollProgress >= 0.18 && scrollProgress < 0.34) activeMonthIndex = 0;
+      else if (scrollProgress >= 0.34 && scrollProgress < 0.50) activeMonthIndex = 1;
+      else if (scrollProgress >= 0.50 && scrollProgress < 0.66) activeMonthIndex = 2;
+      else if (scrollProgress >= 0.66 && scrollProgress < 0.82) activeMonthIndex = 3;
+      else if (scrollProgress >= 0.82) activeMonthIndex = 4;
+
+      if (activeMonthIndex >= 0 && cardDisplay) {
+        const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
+        document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
+        document.getElementById('petal-card-title').textContent = data.title;
+        document.getElementById('petal-card-date').textContent = data.date;
+        document.getElementById('petal-card-text').textContent = data.story;
+        document.getElementById('petal-card-img').src = data.image;
+
+        cardDisplay.classList.add('active');
+
+        cardDisplay.onclick = () => {
+          triggerConfetti();
+          openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
+        };
+      } else if (cardDisplay) {
+        cardDisplay.classList.remove('active');
+      }
+    }
+  }
+
+  window.addEventListener('scroll', updateScroll);
+  updateScroll();
+}
+
+/* --------------------------------------------------------------------------
+   3. Interactive Tokyo Fireworks Particle Engine (Hanabi Engine)
    -------------------------------------------------------------------------- */
 let launchFireworkBurst = function(x, y) {};
 
@@ -198,7 +289,6 @@ function initFireworksEngine() {
     fireworks.push(new Firework(startX, startY, x, y));
   };
 
-  // Launch ambient fireworks periodically
   setInterval(() => {
     if (Math.random() > 0.4) {
       launchFireworkBurst(Math.random() * width, Math.random() * (height * 0.5) + 80);
@@ -230,7 +320,7 @@ function initFireworksEngine() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Arcade Tabs Navigation Handler
+   4. Arcade Tabs Navigation Handler
    -------------------------------------------------------------------------- */
 function initArcadeTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -258,7 +348,7 @@ function initArcadeTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
+   5. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
    -------------------------------------------------------------------------- */
 function initScratchBlockBuilder() {
   const palette = document.getElementById('scratch-palette');
@@ -350,7 +440,7 @@ function initScratchBlockBuilder() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
+   6. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
    -------------------------------------------------------------------------- */
 function initQuizGame() {
   const titleEl = document.getElementById('quiz-question-title');
@@ -423,7 +513,7 @@ function initQuizGame() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Game 3: Catch Sarvan's Heart Canvas Arcade
+   7. Game 3: Catch Sarvan's Heart Canvas Arcade
    -------------------------------------------------------------------------- */
 function initCatchGame() {
   const canvas = document.getElementById('catch-canvas');
@@ -505,7 +595,7 @@ function initCatchGame() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Game 4: Memory Match Card Game
+   8. Game 4: Memory Match Card Game
    -------------------------------------------------------------------------- */
 function initMemoryGame() {
   const grid = document.getElementById('memory-grid');
@@ -554,131 +644,6 @@ function initMemoryGame() {
     });
 
     grid.appendChild(card);
-  });
-}
-
-/* --------------------------------------------------------------------------
-   8. Three.js Real Photorealistic Rose Scroll Engine
-   -------------------------------------------------------------------------- */
-function initRealRoseScroll() {
-  const canvas = document.getElementById('flower-canvas-3d');
-  const scrollContainer = document.getElementById('flower-scroll-container');
-  const heroOverlay = document.getElementById('hero-overlay');
-  const cardDisplay = document.getElementById('fallen-petal-card-display');
-
-  if (!canvas || !scrollContainer || typeof THREE === 'undefined') return;
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(0, 0, 10);
-
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
-  scene.add(ambientLight);
-
-  const textureLoader = new THREE.TextureLoader();
-  const petalTextureUrl = (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.realPetalImage) ? ANNIVERSARY_CONFIG.realPetalImage : './assets/real_petal.png';
-
-  textureLoader.load(petalTextureUrl, (texture) => {
-    const petalCount = 5;
-    const petals = [];
-
-    const petalGeo = new THREE.PlaneGeometry(2.2, 2.2);
-    const petalMat = new THREE.MeshBasicMaterial({
-      map: texture,
-      transparent: true,
-      side: THREE.DoubleSide
-    });
-
-    for (let i = 0; i < petalCount; i++) {
-      const mesh = new THREE.Mesh(petalGeo, petalMat);
-      mesh.position.set((Math.random() - 0.5) * 3, 2 + i * 0.5, (Math.random() - 0.5) * 2);
-      mesh.rotation.z = Math.random() * Math.PI * 2;
-      scene.add(mesh);
-
-      petals.push({
-        mesh: mesh,
-        baseX: (i - 2) * 1.8,
-        monthIndex: i
-      });
-    }
-
-    let scrollProgress = 0;
-
-    function updateScroll() {
-      const rect = scrollContainer.getBoundingClientRect();
-      const totalScrollable = scrollContainer.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) return;
-
-      const currentScroll = Math.max(0, -rect.top);
-      scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
-
-      if (heroOverlay) {
-        const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.25));
-        heroOverlay.style.opacity = heroOpacity;
-      }
-
-      if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
-        let activeMonthIndex = -1;
-
-        if (scrollProgress >= 0.2 && scrollProgress < 0.36) activeMonthIndex = 0;
-        else if (scrollProgress >= 0.36 && scrollProgress < 0.52) activeMonthIndex = 1;
-        else if (scrollProgress >= 0.52 && scrollProgress < 0.68) activeMonthIndex = 2;
-        else if (scrollProgress >= 0.68 && scrollProgress < 0.84) activeMonthIndex = 3;
-        else if (scrollProgress >= 0.84) activeMonthIndex = 4;
-
-        if (activeMonthIndex >= 0 && cardDisplay) {
-          const data = ANNIVERSARY_CONFIG.timeline[activeMonthIndex];
-          document.getElementById('petal-card-badge').textContent = `Fallen Petal #0${activeMonthIndex + 1} • Month 0${activeMonthIndex + 1}`;
-          document.getElementById('petal-card-title').textContent = data.title;
-          document.getElementById('petal-card-date').textContent = data.date;
-          document.getElementById('petal-card-text').textContent = data.story;
-          document.getElementById('petal-card-img').src = data.image;
-
-          cardDisplay.classList.add('active');
-
-          cardDisplay.onclick = () => {
-            triggerConfetti();
-            openModal('🌹', data.title, `${data.subtitle}\n(${data.date})\n\n${data.story}`);
-          };
-        } else if (cardDisplay) {
-          cardDisplay.classList.remove('active');
-        }
-      }
-    }
-
-    window.addEventListener('scroll', updateScroll);
-    updateScroll();
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      petals.forEach((p, i) => {
-        const petalStageStart = 0.2 + (i * 0.16);
-
-        if (scrollProgress >= petalStageStart) {
-          const fallFactor = (scrollProgress - petalStageStart) / 0.16;
-          p.mesh.position.y = 3 - (fallFactor * 6);
-          p.mesh.position.x = p.baseX + Math.sin(Date.now() * 0.002 + i) * 0.5;
-          p.mesh.rotation.z += 0.005;
-        } else {
-          p.mesh.position.y = 4 + i;
-        }
-      });
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  });
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
   });
 }
 

@@ -42,21 +42,79 @@
     </div>
   </div>
 
-  <!-- Real Rose 3D Scroll-Driven Blooming & Falling Petal Track -->
+  <!-- Clean 2D Animated Vector Rose Scroll Track -->
   <div class="flower-scroll-container" id="flower-scroll-container">
     <div class="flower-sticky-viewport">
-      <canvas id="flower-canvas-3d"></canvas>
       
-      <!-- Initial Hero Text Overlay with Real Photorealistic Rose -->
+      <!-- Clean 2D SVG Vector Rose Container -->
+      <div class="rose-2d-container" id="rose-2d-container">
+        <svg id="vector-rose-svg" viewBox="0 0 400 400" width="280" height="280">
+          <defs>
+            <radialGradient id="petalGradient1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FF4D6D"/>
+              <stop offset="70%" stop-color="#C9184A"/>
+              <stop offset="100%" stop-color="#800F2F"/>
+            </radialGradient>
+            <radialGradient id="petalGradient2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FF758F"/>
+              <stop offset="80%" stop-color="#D4A5A5"/>
+              <stop offset="100%" stop-color="#B87373"/>
+            </radialGradient>
+            <linearGradient id="stemGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#386641"/>
+              <stop offset="100%" stop-color="#1A4314"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Stem & Sepals -->
+          <path d="M 200,240 Q 205,320 195,390" stroke="url(#stemGradient)" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M 185,250 C 160,260 140,240 130,220 C 150,230 170,245 185,250 Z" fill="#2D5A27"/>
+          <path d="M 215,250 C 240,260 260,240 270,220 C 250,230 230,245 215,250 Z" fill="#2D5A27"/>
+
+          <!-- Central Core Bud -->
+          <circle cx="200" cy="180" r="32" fill="url(#petalGradient1)" stroke="#E0A96D" stroke-width="2"/>
+
+          <!-- 5 Month Petal Vector Layers (Each signifies 1 month!) -->
+          <!-- Petal 1 (Month 1) -->
+          <g class="rose-petal-2d" id="vector-petal-1">
+            <path d="M 200,180 C 140,110 100,160 140,230 C 170,260 200,220 200,180 Z" fill="url(#petalGradient2)" stroke="#E0A96D" stroke-width="2"/>
+            <text x="135" y="185" fill="#FFF" font-size="11" font-weight="bold">M1</text>
+          </g>
+
+          <!-- Petal 2 (Month 2) -->
+          <g class="rose-petal-2d" id="vector-petal-2">
+            <path d="M 200,180 C 260,110 300,160 260,230 C 230,260 200,220 200,180 Z" fill="url(#petalGradient1)" stroke="#E0A96D" stroke-width="2"/>
+            <text x="250" y="185" fill="#FFF" font-size="11" font-weight="bold">M2</text>
+          </g>
+
+          <!-- Petal 3 (Month 3) -->
+          <g class="rose-petal-2d" id="vector-petal-3">
+            <path d="M 200,180 C 130,200 140,280 200,270 C 220,250 200,210 200,180 Z" fill="url(#petalGradient2)" stroke="#E0A96D" stroke-width="2"/>
+            <text x="160" y="245" fill="#FFF" font-size="11" font-weight="bold">M3</text>
+          </g>
+
+          <!-- Petal 4 (Month 4) -->
+          <g class="rose-petal-2d" id="vector-petal-4">
+            <path d="M 200,180 C 270,200 260,280 200,270 C 180,250 200,210 200,180 Z" fill="url(#petalGradient1)" stroke="#E0A96D" stroke-width="2"/>
+            <text x="225" y="245" fill="#FFF" font-size="11" font-weight="bold">M4</text>
+          </g>
+
+          <!-- Petal 5 (Month 5) -->
+          <g class="rose-petal-2d" id="vector-petal-5">
+            <path d="M 200,180 C 150,90 250,90 200,180 Z" fill="url(#petalGradient2)" stroke="#E0A96D" stroke-width="2"/>
+            <text x="193" y="130" fill="#FFF" font-size="11" font-weight="bold">M5</text>
+          </g>
+
+        </svg>
+      </div>
+
+      <!-- Initial Hero Text Overlay -->
       <div class="flower-hero-overlay" id="hero-overlay">
-        <div class="real-rose-img-wrapper">
-          <img src="./assets/real_rose.png" alt="Real Photorealistic Rose" id="real-rose-img">
-        </div>
-        <div class="badge">✨ 5 Months Under Tokyo Stars ✨</div>
+        <div class="badge">✨ 5 Months • 5 Petals of Love ✨</div>
         <h1 class="flower-hero-title">For Shivi, <br><span>My Favorite Chapter.</span></h1>
-        <p class="flower-hero-sub">Scroll down to watch our real rose petals float down to reveal each chapter...</p>
+        <p class="flower-hero-sub">Scroll down to watch each of our 5 month petals uncurl and reveal our story...</p>
         <div class="scroll-hint-badge">
-          <span>🎆 Scroll down to reveal each falling petal chapter</span>
+          <span>🌹 Scroll down to uncurl each month petal</span>
         </div>
 
         <!-- Live Relationship Counter -->
@@ -87,7 +145,7 @@
         <img src="./assets/month1.png" alt="Petal Chapter" class="petal-card-img" id="petal-card-img">
         <div class="petal-card-content">
           <span class="petal-card-badge" id="petal-card-badge">Fallen Petal #01 • Month 01</span>
-          <h3 class="petal-card-title" id="petal-card-title">Month 1: The Spark</h3>
+          <h3 class="petal-card-title" id="petal-card-title">Month 1: The Ring & Nervous Hearts 💍</h3>
           <div class="petal-card-date" id="petal-card-date">March 15 - April 15</div>
           <p class="petal-card-text" id="petal-card-text">Story note...</p>
         </div>

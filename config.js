@@ -86,10 +86,11 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Personal Timeline Stories (Sarvan & Shivi's Real 5-Month Journey)
+  // Personal Timeline Stories (Each Petal Signifies One Month!)
   timeline: [
     {
       monthNum: 1,
+      petalLabel: "Petal #1: Month 1",
       title: "Month 1: The Ring & Nervous Hearts 💍",
       date: "March 15 - April 15",
       subtitle: "I was terrified, but I knew you were the one",
@@ -98,6 +99,7 @@ const ANNIVERSARY_CONFIG = {
     },
     {
       monthNum: 2,
+      petalLabel: "Petal #2: Month 2",
       title: "Month 2: Swimming Together & Growing Closer 🏊‍♂️",
       date: "April 15 - May 15",
       subtitle: "Getting to know every detail of your soul",
@@ -106,6 +108,7 @@ const ANNIVERSARY_CONFIG = {
     },
     {
       monthNum: 3,
+      petalLabel: "Petal #3: Month 3",
       title: "Month 3: Through & Through Support 🤝",
       date: "May 15 - June 15",
       subtitle: "Being each other's strongest pillar",
@@ -114,6 +117,7 @@ const ANNIVERSARY_CONFIG = {
     },
     {
       monthNum: 4,
+      petalLabel: "Petal #4: Month 4",
       title: "Month 4: Unbreakable Bond 🛡️",
       date: "June 15 - July 15",
       subtitle: "Nothing in this world was ever gonna break us",
@@ -122,6 +126,7 @@ const ANNIVERSARY_CONFIG = {
     },
     {
       monthNum: 5,
+      petalLabel: "Petal #5: Month 5",
       title: "Month 5: Forever & Always 💖",
       date: "July 15 - August 15",
       subtitle: "I decided I want to spend the rest of my life with you",
