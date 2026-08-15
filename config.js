@@ -13,10 +13,61 @@ const ANNIVERSARY_CONFIG = {
   // Next Milestone Date: September 15th, 2026
   nextChapterDate: new Date(2026, 8, 15, 0, 0, 0),
 
-  // Spotify Player Configuration (The Weeknd Playlist)
+  // Curated Lana Del Rey & The Weeknd Music Playlist
   spotifyPlaylistUrl: "https://open.spotify.com/embed/playlist/5gFyFkogxMCbcOOhsm54ME?utm_source=generator&theme=0",
-  spotifyArtistName: "The Weeknd",
-  spotifyTrackName: "The Weeknd Playlist",
+  spotifyArtistName: "The Weeknd & Lana Del Rey",
+  spotifyTrackName: "Romantic Night Playlist",
+
+  musicPlaylist: [
+    {
+      id: "track-1",
+      title: "Die For You",
+      artist: "The Weeknd",
+      spotifyUrl: "https://open.spotify.com/embed/track/2atA858UfqEofwVv54Ez6W?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-guitars-112349.mp3",
+      cover: "🎵"
+    },
+    {
+      id: "track-2",
+      title: "Young and Beautiful",
+      artist: "Lana Del Rey",
+      spotifyUrl: "https://open.spotify.com/embed/track/2nLtzP3hE4ioR2PewmFVwZ?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73b22.mp3?filename=piano-romantic-love-10587.mp3",
+      cover: "🌸"
+    },
+    {
+      id: "track-3",
+      title: "Lust for Life (feat. The Weeknd)",
+      artist: "Lana Del Rey & The Weeknd",
+      spotifyUrl: "https://open.spotify.com/embed/track/07wM32z2sB0d0p2w4nJ54j?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-sunset-10332.mp3",
+      cover: "✨"
+    },
+    {
+      id: "track-4",
+      title: "Earned It",
+      artist: "The Weeknd",
+      spotifyUrl: "https://open.spotify.com/embed/track/1waooa3L9FfWJ6u9rV4891?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/02/10/audio_517452d76d.mp3?filename=slow-romantic-10874.mp3",
+      cover: "🌙"
+    },
+    {
+      id: "track-5",
+      title: "Video Games",
+      artist: "Lana Del Rey",
+      spotifyUrl: "https://open.spotify.com/embed/track/0U0ldo2QwSFiYf856N6oYg?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/10/14/audio_9934148464.mp3?filename=romantic-ambient-1234.mp3",
+      cover: "💖"
+    },
+    {
+      id: "track-6",
+      title: "Stargirl Interlude",
+      artist: "The Weeknd & Lana Del Rey",
+      spotifyUrl: "https://open.spotify.com/embed/track/4io5vRj6XyD18v1x4s558A?utm_source=generator&theme=0",
+      audioUrl: "https://cdn.pixabay.com/download/audio/2022/03/24/audio_34b7a1e0b5.mp3?filename=stargirl-vibes-11005.mp3",
+      cover: "🌌"
+    }
+  ],
 
   // Real Photorealistic Rose Assets
   realRoseImage: "./assets/real_rose.png",
@@ -30,7 +81,7 @@ const ANNIVERSARY_CONFIG = {
   scratchBlocks: [
     { id: "sb-1", type: "event", label: "when 🚩 clicked", color: "#FFAB19", icon: "🚩" },
     { id: "sb-2", type: "motion", label: "build love heart 💖", color: "#4C97FF", icon: "💖" },
-    { id: "sb-3", type: "sound", label: "play The Weeknd playlist 🎵", color: "#9966FF", icon: "🎵" },
+    { id: "sb-3", type: "sound", label: "play The Weeknd & Lana Del Rey 🎵", color: "#9966FF", icon: "🎵" },
     { id: "sb-4", type: "looks", label: "say [I love you from Sarvan 💖] for 5 secs", color: "#FF6680", icon: "🌸" }
   ],
 

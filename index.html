@@ -26,8 +26,8 @@
       <div class="spotify-info">
         <div class="vinyl-disc">🎵</div>
         <div class="spotify-title-text">
-          <span class="spotify-artist" id="spotify-artist-label">The Weeknd</span>
-          <span class="spotify-sub" id="spotify-track-label">Anniversary Playlist</span>
+          <span class="spotify-artist" id="spotify-artist-label">The Weeknd & Lana Del Rey</span>
+          <span class="spotify-sub" id="spotify-track-label">Romantic Playlist</span>
         </div>
       </div>
       <button class="btn-toggle-spotify" aria-label="Toggle Spotify Player">▼</button>
@@ -155,6 +155,32 @@
   </div>
 
   <div class="container">
+
+    <!-- 🎵 Lana Del Rey & The Weeknd Romantic Music Jukebox Section -->
+    <section id="music-jukebox">
+      <div class="section-title">
+        <div class="badge">🎵 Our Soundtrack</div>
+        <h2>Lana Del Rey & The Weeknd Jukebox 📻</h2>
+        <p>Choose your favorite track to play while you explore our site</p>
+      </div>
+      
+      <div class="jukebox-container" id="jukebox-container">
+        <div class="jukebox-header">
+          <div class="jukebox-now-playing">
+            <div class="jukebox-icon" id="jukebox-icon">🎵</div>
+            <div>
+              <h3 class="jukebox-track-title" id="jukebox-track-title">Die For You</h3>
+              <div class="jukebox-artist-name" id="jukebox-artist-name">The Weeknd</div>
+            </div>
+          </div>
+          <audio id="jukebox-audio-player" controls preload="metadata"></audio>
+        </div>
+
+        <div class="music-tracks-grid" id="music-tracks-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </section>
 
     <!-- Reasons I Love You Cards (3D Flip Grid) -->
     <section id="reasons">

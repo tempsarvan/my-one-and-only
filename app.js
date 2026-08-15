@@ -1,7 +1,7 @@
 /**
- * 💖 MY ONE AND ONLY - CLEAN 2D ANIMATED VECTOR ROSE & TOKYO HANABI SKY
- * Features: Clean 2D SVG Vector Animated Rose (5 Month Petals),
- * Interactive Fireworks Engine, Scratch Block Coding, 5 Arcade Games.
+ * 💖 MY ONE AND ONLY - TOKYO HANABI NIGHT SKY & MUSIC JUKEBOX
+ * Features: Lana Del Rey & The Weeknd Jukebox Engine, Clean 2D Animated Rose,
+ * Canvas Fireworks Engine, Scratch Block Coding, 5 Arcade Games.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeartParticles();
   initFireworksEngine();
   init2DRoseScroll();
+
+  // Music Jukebox Engine
+  renderMusicJukebox();
 
   // Timers
   initLiveTimer();
@@ -61,7 +64,68 @@ function initSpotifyWidget() {
 }
 
 /* --------------------------------------------------------------------------
-   2. Clean 2D Animated Vector Rose Scroll Engine (5 Month Petals)
+   2. 🎵 Lana Del Rey & The Weeknd Music Jukebox Engine
+   -------------------------------------------------------------------------- */
+function renderMusicJukebox() {
+  const gridContainer = document.getElementById('music-tracks-grid');
+  const trackTitleEl = document.getElementById('jukebox-track-title');
+  const artistNameEl = document.getElementById('jukebox-artist-name');
+  const iconEl = document.getElementById('jukebox-icon');
+  const audioPlayer = document.getElementById('jukebox-audio-player');
+  const spotifyIframe = document.getElementById('spotify-iframe');
+  const spotifyArtistLabel = document.getElementById('spotify-artist-label');
+  const spotifyTrackLabel = document.getElementById('spotify-track-label');
+
+  if (!gridContainer || typeof ANNIVERSARY_CONFIG === 'undefined' || !ANNIVERSARY_CONFIG.musicPlaylist) return;
+
+  const tracks = ANNIVERSARY_CONFIG.musicPlaylist;
+  gridContainer.innerHTML = '';
+
+  tracks.forEach((track, idx) => {
+    const btn = document.createElement('button');
+    btn.className = `track-card-btn ${idx === 0 ? 'active' : ''}`;
+    btn.innerHTML = `
+      <span class="track-cover">${track.cover}</span>
+      <div>
+        <div class="track-name">${track.title}</div>
+        <div class="track-artist">${track.artist}</div>
+      </div>
+    `;
+
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.track-card-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (trackTitleEl) trackTitleEl.textContent = track.title;
+      if (artistNameEl) artistNameEl.textContent = track.artist;
+      if (iconEl) iconEl.textContent = track.cover;
+
+      if (audioPlayer) {
+        audioPlayer.src = track.audioUrl;
+        audioPlayer.play().catch((e) => console.log('Audio autoplay prevented:', e));
+      }
+
+      if (spotifyIframe && track.spotifyUrl) {
+        spotifyIframe.src = track.spotifyUrl;
+      }
+      if (spotifyArtistLabel) spotifyArtistLabel.textContent = track.artist;
+      if (spotifyTrackLabel) spotifyTrackLabel.textContent = track.title;
+
+      triggerConfetti();
+      launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.4);
+    });
+
+    gridContainer.appendChild(btn);
+  });
+
+  // Set initial default track
+  if (tracks.length > 0 && audioPlayer) {
+    audioPlayer.src = tracks[0].audioUrl;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Clean 2D Animated Vector Rose Scroll Engine (5 Month Petals)
    -------------------------------------------------------------------------- */
 function init2DRoseScroll() {
   const scrollContainer = document.getElementById('flower-scroll-container');
@@ -89,16 +153,13 @@ function init2DRoseScroll() {
     const currentScroll = Math.max(0, -rect.top);
     scrollProgress = Math.min(1, Math.max(0, currentScroll / totalScrollable));
 
-    // Hero Overlay Fade Out
     if (heroOverlay) {
       const heroOpacity = Math.max(0, 1 - (scrollProgress / 0.22));
       heroOverlay.style.opacity = heroOpacity;
     }
 
-    // Gentle Rose Scale & Rotation
     vectorRoseSvg.style.transform = `scale(${1 + scrollProgress * 0.25}) rotate(${scrollProgress * 45}deg)`;
 
-    // Uncurl Each 2D Petal in Sequence & Sync Month Cards
     const petalAngles = [-45, 45, -75, 75, 0];
 
     petalEls.forEach((petal, i) => {
@@ -117,7 +178,6 @@ function init2DRoseScroll() {
       }
     });
 
-    // Sync Active Month Card Display (Month 1 to Month 5)
     if (typeof ANNIVERSARY_CONFIG !== 'undefined' && ANNIVERSARY_CONFIG.timeline) {
       let activeMonthIndex = -1;
 
@@ -152,7 +212,7 @@ function init2DRoseScroll() {
 }
 
 /* --------------------------------------------------------------------------
-   3. Interactive Tokyo Fireworks Particle Engine (Hanabi Engine)
+   4. Interactive Tokyo Fireworks Particle Engine (Hanabi Engine)
    -------------------------------------------------------------------------- */
 let launchFireworkBurst = function(x, y) {};
 
@@ -320,7 +380,7 @@ function initFireworksEngine() {
 }
 
 /* --------------------------------------------------------------------------
-   4. Arcade Tabs Navigation Handler
+   5. Arcade Tabs Navigation Handler
    -------------------------------------------------------------------------- */
 function initArcadeTabs() {
   const tabBtns = document.querySelectorAll('.tab-btn');
@@ -348,7 +408,7 @@ function initArcadeTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   5. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
+   6. Game 1: Scratch Block Coding Engine with "Sarvan Cursor"
    -------------------------------------------------------------------------- */
 function initScratchBlockBuilder() {
   const palette = document.getElementById('scratch-palette');
@@ -440,7 +500,7 @@ function initScratchBlockBuilder() {
 }
 
 /* --------------------------------------------------------------------------
-   6. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
+   7. Game 2: How Well Do You Know Sarvan? Quiz & Dream Location Video
    -------------------------------------------------------------------------- */
 function initQuizGame() {
   const titleEl = document.getElementById('quiz-question-title');
@@ -513,7 +573,7 @@ function initQuizGame() {
 }
 
 /* --------------------------------------------------------------------------
-   7. Game 3: Catch Sarvan's Heart Canvas Arcade
+   8. Game 3: Catch Sarvan's Heart Canvas Arcade
    -------------------------------------------------------------------------- */
 function initCatchGame() {
   const canvas = document.getElementById('catch-canvas');
@@ -522,7 +582,7 @@ function initCatchGame() {
 
   const ctx = canvas.getContext('2d');
   let width = (canvas.width = canvas.parentElement.clientWidth || 450);
-  let height = (canvas.height = 320);
+  let height = (canvas.height = 300);
 
   let score = 0;
   let basketX = width / 2 - 30;
@@ -595,7 +655,7 @@ function initCatchGame() {
 }
 
 /* --------------------------------------------------------------------------
-   8. Game 4: Memory Match Card Game
+   9. Game 4: Memory Match Card Game
    -------------------------------------------------------------------------- */
 function initMemoryGame() {
   const grid = document.getElementById('memory-grid');
@@ -648,7 +708,7 @@ function initMemoryGame() {
 }
 
 /* --------------------------------------------------------------------------
-   9. Relationship Timers
+   10. Relationship Timers
    -------------------------------------------------------------------------- */
 function initLiveTimer() {
   const daysEl = document.getElementById('timer-days');
@@ -707,7 +767,7 @@ function initNextChapterTimer() {
 }
 
 /* --------------------------------------------------------------------------
-   10. Render Flip Cards, Envelopes & Coupons
+   11. Render Flip Cards, Envelopes & Coupons
    -------------------------------------------------------------------------- */
 function renderReasonsFlipCards() {
   const container = document.getElementById('reasons-flip-grid');
@@ -816,7 +876,7 @@ function renderCoupons() {
 }
 
 /* --------------------------------------------------------------------------
-   11. Proposal Interaction Handlers
+   12. Proposal Interaction Handlers
    -------------------------------------------------------------------------- */
 function setupProposalInteractions() {
   const btnYes = document.getElementById('btn-yes');
@@ -867,7 +927,7 @@ function setupProposalInteractions() {
 }
 
 /* --------------------------------------------------------------------------
-   12. Particles & Modals
+   13. Particles & Modals
    -------------------------------------------------------------------------- */
 function initHeartParticles() {
   const canvas = document.getElementById('particle-canvas');
