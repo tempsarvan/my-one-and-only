@@ -114,7 +114,8 @@ function renderMusicJukebox(selectedCat = 'all') {
 
       if (audioPlayer) {
         audioPlayer.src = track.audioUrl;
-        audioPlayer.play().catch((e) => console.log('Audio autoplay prevented:', e));
+        audioPlayer.load();
+        audioPlayer.play().catch((e) => console.log('Audio play error:', e));
       }
 
       if (spotifyIframe && track.spotifyUrl) {
@@ -573,9 +574,19 @@ function initQuizGame() {
 
       if (locData && videoPlayer && videoContainer && videoDesc) {
         videoPlayer.src = locData.videoUrl;
+        videoPlayer.load();
         videoDesc.textContent = `${locData.name} • ${locData.description}`;
         videoContainer.classList.add('active');
-        videoPlayer.play().catch((err) => console.log('Video play error:', err));
+
+        const playPromise = videoPlayer.play();
+        if (playPromise !== undefined) {
+          playPromise.catch((err) => {
+            console.log('Autoplay prevented, playing muted:', err);
+            videoPlayer.muted = true;
+            videoPlayer.play();
+          });
+        }
+
         triggerConfetti();
         launchFireworkBurst(window.innerWidth / 2, window.innerHeight * 0.3);
       }
