@@ -1,5 +1,5 @@
 /**
- * 💖 Anniversary Web App Configuration - Shivi & Sarvan
+ * 💖 Apple HIG Anniversary Configuration - Shivi & Sarvan
  */
 
 const ANNIVERSARY_CONFIG = {
@@ -26,7 +26,7 @@ const ANNIVERSARY_CONFIG = {
   heroTitle: "For Shivi, <br><span>My Favorite Chapter.</span>",
   heroSubtitle: "5 Months of Laughs, Late Night Calls & Endless Happiness with Sarvan",
 
-  // Scratch Block Builder Definitions (Game 1)
+  // Swift Playgrounds / Scratch Block Builder Definitions (Game 1)
   scratchBlocks: [
     { id: "sb-1", type: "event", label: "when 🚩 clicked", color: "#FFAB19", icon: "🚩" },
     { id: "sb-2", type: "motion", label: "build love heart 💖", color: "#4C97FF", icon: "💖" },
@@ -86,7 +86,7 @@ const ANNIVERSARY_CONFIG = {
     }
   },
 
-  // Personal Timeline Stories
+  // Personal Timeline Stories (Polaroid Memory Cards)
   timeline: [
     {
       monthNum: 1,
